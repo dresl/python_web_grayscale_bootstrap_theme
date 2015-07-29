@@ -49,7 +49,7 @@ def HelloworldView(request):
 
 def WelcomeView(request):
     sidebar = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-    blogs = Blog.objects.all().order_by('-pub_date')[:1]
+    blogs = Blog.objects.all().order_by('-pub_date')[:2]
     brigades = Brigade.objects.all().order_by('-pub_date')[:5]
     if request.user.is_authenticated():
         return render(request,'polls/welcome.html', {'sidebar': sidebar,
