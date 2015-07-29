@@ -130,20 +130,23 @@
 					<li><a class="page-scroll" href="#contact">Contact</a></li>
 
 				{% endblock menu %}
-                </ul>
+                </ul>				
+            </div>
+            <div>
 
-				{% block authentication %}
+            	{% block authentication %}
 
 				{% if not user.is_authenticated %}
-				<div style="margin-top: 30px" class="col-md-2"><a href="/accounts/login/">login</a> | <a href="/accounts/register/">register</a></div>
-	    		{% endif %}
+				<a href="/accounts/login/">login</a> | <a href="/accounts/register/">register</a>
+				{% endif %}
 				{% if user.is_authenticated %}
-				<div style="margin-top: 30px" class="col-md-2"><a href="{% url 'userprofile:profile' %}" title="{{ full_name }}">{{ username }}</a> <span class="">|</span> <a href="/accounts/logout/">logout</a></div>
-	    		{% endif %}
+				<a href="{% url 'userprofile:profile' %}" title="{{ full_name }}">{{ username }}</a> <span class="">|</span> <a href="/accounts/logout/">logout</a></div>
+				{% endif %}
 
-	    		{% endblock authentication %}
-				
-            </div>
+				{% endblock authentication %}
+
+			</div>
+	    		
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
