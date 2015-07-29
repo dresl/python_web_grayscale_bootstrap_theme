@@ -34,7 +34,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-TEMPLATE_DIRS = ('/root/python_web/templates')
+TEMPLATE_DIRS = ('/root/python_web_grayscale_bootstrap_theme/templates')
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
@@ -102,7 +102,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-MEDIA_ROOT = '/root/python_web/static/'
+MEDIA_ROOT = '/root/python_web_grayscale_bootstrap_theme/static/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
@@ -120,5 +120,5 @@ STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    ('', '/root/python_web/static')
+    ('', '/root/python_web_grayscale_bootstrap_theme/static')
 )
