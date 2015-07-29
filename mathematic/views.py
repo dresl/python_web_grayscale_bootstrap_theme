@@ -122,7 +122,7 @@ def DetailView(request, pk):
 			return render(request, 'math/brigade_index_error.html')
 	
 	else:
-		brigade = Day.objects.order_by('pub_date')
+		brigade = Day.objects.filter(brigade__pk=pk).order_by('pub_date')
 		def sum_hours(hours):
 			total = 0
 			for item in hours:
