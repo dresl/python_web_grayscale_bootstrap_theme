@@ -109,7 +109,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="192.168.0.106/#page-top">
+                <a class="navbar-brand page-scroll" href="{% url 'welcome' %}">
                     <i class="fa fa-play-circle"></i>  <span class="light">Django</span> SITE
                 </a>
 
@@ -123,7 +123,7 @@
                 <ul class="nav navbar-nav">
                 {% block menu %}
 
-                    <li><a class="page-scroll" href="192.168.0.106/#page-top">Welcome</a></li>
+                    <li><a class="page-scroll" href="{% url 'welcome' %}">Welcome</a></li>
 					<li><a class="page-scroll" href="#polls">Polls</a></li>
 					<li><a class="page-scroll" href="#blog">Blog</a></li>
 					<li><a class="page-scroll" href="#brigades">Brigades</a></li>
