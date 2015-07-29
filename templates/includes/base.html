@@ -198,12 +198,18 @@
     <section id="brigades" class="content-section text-center">
         <div class="download-section">
             <div class="container">
-       		{% for brigade in brigades %}
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h2>{{ brigade.brigade_title }}</h2>
-                    <a href="{% url 'blog:detailb' blog.id %}" class="btn btn-default btn-lg">View brigade</a>
-                </div>
-            {% endfor %}
+
+                {% for blog in blogs %}
+					<a href="{% url 'blog:detailb' blog.id %}">
+					<div class="col-lg-8 col-lg-offset-2">
+				    	<h3>{{ blog.title }} <b style="font-weight: normal">(likes: {{blog.likes}} )</b></h3>
+				    	{{ blog.body|truncatewords:"15" }}
+				    <hr>
+				    </div>
+					</a>
+				{% endfor %}
+				
+				</div>
             </div>
         </div>
     </section>
