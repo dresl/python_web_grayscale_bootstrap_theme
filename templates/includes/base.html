@@ -201,7 +201,6 @@
        		{% for brigade in brigades %}
                 <div class="col-lg-8 col-lg-offset-2">
                     <h2>{{ brigade.brigade_title }}</h2>
-                    <p>Days: {{ days.count }}</p>
                     <a href="{% url 'blog:detailb' blog.id %}" class="btn btn-default btn-lg">View brigade</a>
                 </div>
             {% endfor %}

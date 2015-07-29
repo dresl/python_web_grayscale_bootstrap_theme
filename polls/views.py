@@ -24,16 +24,14 @@ def db(request):
     else: 
         return render(request, 'polls/dbnew.html', {'sidebar': sidebar})
 
-def basehtml(request, pk):
+def basehtml(request):
     blogs = Blog.objects.all().order_by('-pub_date')[:3]
     sidebar = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
     brigades = Brigade.objects.all().order_by('-pub_date')[:5]
-    days = Day.objects.filter(pk=pk)
     now = timezone.now()
     if request.user.is_authenticated():
         return render(request, 'includes/base.html',{'blogs': blogs,
                                                      'sidebar': sidebar,
-                                                     'days': days,
                                                      'now': now,
                                                      'username': request.user.username,
                                                      'full_name': request.user.first_name + ' ' + request.user.last_name})
