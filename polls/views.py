@@ -50,13 +50,15 @@ def HelloworldView(request):
 def WelcomeView(request):
     sidebar = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
     blogs = Blog.objects.all().order_by('-pub_date')[:1]
+    brigades = Brigade.objects.all().order_by('-pub_date')[:5]
     if request.user.is_authenticated():
         return render(request,'polls/welcome.html', {'sidebar': sidebar,
                                                      'blogs': blogs,
+                                                     'brigades': brigades,
                                                      'username': request.user.username,
                                                      'full_name': request.user.first_name + ' ' + request.user.last_name})
     else:
-        return render(request, 'polls/welcome.html', {'sidebar': sidebar, 'blogs': blogs,})
+        return render(request, 'polls/welcome.html', {'sidebar': sidebar, 'brigades': brigades, 'blogs': blogs})
 
 #################### GREETINGS VIEW ##########################################
 

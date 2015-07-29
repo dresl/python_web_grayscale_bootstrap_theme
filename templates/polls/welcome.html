@@ -34,8 +34,8 @@
             <div class="container">
             {% for blog in blogs %}
                 <div class="col-lg-8 col-lg-offset-2">
-                    <h2>{{ blog.title }}</h2>
-                    <p>{{ blog.body }}</p>
+                    <h2>{{ blog.title }}(likes: <b style="font-weight: normal">{{blog.likes}})</b></h2>
+                    <p>{{ blog.body|truncatewords:"15" }}</p>
                     <a href="{% url 'blog:detailb' blog.id %}" class="btn btn-default btn-lg">Read more</a>
                 </div>
             {% endfor %}
@@ -49,14 +49,12 @@
         <div class="download-section">
             <div class="container">
 
-                {% for blog in blogs %}
-                    <a href="{% url 'blog:detailb' blog.id %}">
+                {% for brigade in brigades %}
                     <div class="col-lg-8 col-lg-offset-2">
-                        <h3>{{ blog.title }} <b style="font-weight: normal">(likes: {{blog.likes}} )</b></h3>
-                        {{ blog.body|truncatewords:"15" }}
-                    <hr>
+                        <h3>{{ brigade.title }} </h3>
+                        <a class="btn btn-default btn-lg" href="{% url 'blog:detailb' blog.id %}">View brigade</a>
                     </div>
-                    </a>
+                    <hr>
                 {% endfor %}
 
                 </div>
