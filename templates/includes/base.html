@@ -99,7 +99,6 @@
 	<title>{% block title %}Django site {{ greeting.title }} {{ question.question_text }}{% endblock %}</title>
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-	<div id="pagetop"></div>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -153,7 +152,7 @@
     {% block content %}{% endblock content %}
 
     {% block to_top %}
-    <div><a href="#pagetop" class="topbuttonnone"><img class="sipka_nahoru" src="{% static 'uploaded_files/sipka_nahoru.png' %}"/></a></div>
+    <div><a href="#page-top" class="topbuttonnone"><img class="sipka_nahoru" src="{% static 'uploaded_files/sipka_nahoru.png' %}"/></a></div>
     {% endblock to_top %}
 
     {% block footer %}
