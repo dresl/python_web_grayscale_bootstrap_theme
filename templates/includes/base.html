@@ -51,29 +51,29 @@
 		});
 	</script>
 	<script type="text/javascript">
-	// window.onbeforeunload = function () {
-	// var scrollPos;
-	// if (typeof window.pageYOffset != 'undefined') {
-	// scrollPos = window.pageYOffset;
-	// }
-	// else if (typeof document.compatMode != 'undefined' &&
-	// document.compatMode != 'BackCompat') {
-	// scrollPos = document.documentElement.scrollTop;
-	// }
-	// else if (typeof document.body != 'undefined') {
-	// scrollPos = document.body.scrollTop;
-	// }
-	// document.cookie = "scrollTop=" + scrollPos; //存储滚动条位置到cookies中
-	// }
+	window.onbeforeunload = function () {
+	var scrollPos;
+	if (typeof window.pageYOffset != 'undefined') {
+	scrollPos = window.pageYOffset;
+	}
+	else if (typeof document.compatMode != 'undefined' &&
+	document.compatMode != 'BackCompat') {
+	scrollPos = document.documentElement.scrollTop;
+	}
+	else if (typeof document.body != 'undefined') {
+	scrollPos = document.body.scrollTop;
+	}
+	document.cookie = "scrollTop=" + scrollPos; //存储滚动条位置到cookies中
+	}
 
-	// window.onload = function () {
-	// if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
-	// var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
-	// document.documentElement.scrollTop = parseInt(arr[1]);
-	// document.body.scrollTop = parseInt(arr[1]);
-	// }
-	// }
-	// </script>
+	window.onload = function () {
+	if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
+	var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+	document.documentElement.scrollTop = parseInt(arr[1]);
+	document.body.scrollTop = parseInt(arr[1]);
+	}
+	}
+	</script>
 	<script type="text/javascript">
 	var timeOut;
 	function scrollToTop() {
@@ -109,7 +109,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="{% url 'welcome' %}#page-top">
+                <a class="navbar-brand page-scroll" href="{% url 'welcome' %}">
                     <i class="fa fa-life-ring"></i>  <span class="light">Django</span> SITE
                 </a>
 
