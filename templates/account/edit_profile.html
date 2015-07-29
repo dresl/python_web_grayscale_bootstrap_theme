@@ -1,0 +1,19 @@
+{% extends "includes/base.html" %}
+
+{% block sidebar %}
+	<ul>
+		<li><a href="{% url 'userprofile:profile' %}">Cancel</a></li>
+	</ul>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6">
+	<form action="{% url 'userprofile:edit_profile' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<ul class="create_greeting">
+	{{ form.as_p }}
+	</ul>
+
+	<input type="submit" name="submit" value="Uložit" />
+	</form>
+</div>
+{% endblock %}

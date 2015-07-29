@@ -1,0 +1,23 @@
+{% extends 'hello/base.html' %}
+{% block menu %}
+			<ul>
+				<li><a href="{% url 'welcome'%}">Welcome</a></li>
+				<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+				<li class="active">{% block active %}<a href="{% url 'greeting:all'%}">Greeting</a>{% endblock %}</li>
+			</ul>
+{% endblock %}
+{% block sidebar %}
+
+<ul>
+	<li><a href="/greeting/">Greetings</a></li>
+</ul>
+
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ greeting.title }} <a style="font-size: 15px; text-decoration: none;" href="/admin/hello/greeting/{{ greeting.id }}"> [edit]</a></h2>
+<p>{{ greeting.body }}</p>
+<p>likes: {{ greeting.likes }}</p>
+
+{% endblock %}

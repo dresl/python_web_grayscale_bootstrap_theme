@@ -1,0 +1,54 @@
+{% extends "includes/base.html" %}
+
+{% block menu %}
+	<li class="active"><a href="{% url 'welcome'%}">Welcome</a></li>
+	<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
+	<li><a href="{% url 'math:brigade_index' %}">Brigades</a></li>
+	<li><a href="{% url 'contact'%}">Contact</a></li>
+{% endblock menu %}
+
+{% block page_title %}
+
+{% endblock page_title %}
+
+{% block content %}
+<div class="col-md-5">
+    <img class="img-responsive img-rounded" src="http://placehold.it/900x350" alt="">
+</div>
+<!-- /.col-md-8 -->
+<div class="col-md-4">
+    <h1>Business Name or Tagline</h1>
+    <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+    <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+</div>
+
+{% endblock content %}
+
+{% block extends_content %}
+
+<hr>
+<!-- Call to Action Well -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well text-center">
+            You can send me an <a href="{% url 'contact' %}">e-mail</a>.
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<!-- Content Row -->
+<div class="row">
+
+	{% for blog in blogs %}
+	<div class="col-md-4">
+    <h2>{{ blog.title }}</h2>
+    <p>{{ blog.body|truncatewords:"15" }}</p>
+    <a class="btn btn-default" href="{% url 'blog:detailb' blog.id %}">More Info</a>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock extends_content %}

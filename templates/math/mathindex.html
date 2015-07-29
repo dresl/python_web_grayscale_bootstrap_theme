@@ -1,0 +1,34 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Math{% endblock %}
+
+{% block menu %}
+	<li><a href="{% url 'welcome'%}">Welcome</a></li>
+	<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
+	<li class="active"><a href="{% url 'math:brigade_index' %}">Brigades</a></li>
+	<li><a href="{% url 'contact'%}">Contact</a></li>
+{% endblock menu %}
+
+{% block page_title %}
+
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="col-md-6">
+<form action="{% url 'math:count' %}" method="post"/>{% csrf_token %}
+	<p>prvni cislo: <input type="text" name="cislo1" /></p>
+	<p>druhy cislo: <input type="text" name="cislo2" /></p>
+	<input type="submit" value="Spočítej">
+</form>
+
+{% if error_message %}
+
+	<p style="color: red;">{{ error_message }}</p>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Brigade{% endblock %}
+
+{% block menu %}
+	<li><a href="{% url 'welcome'%}">Welcome</a></li>
+	<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+	<li class="active"><a href="{% url 'blog:indexb'%}">Blog</a></li>
+	<li><a href="{% url 'math:brigade_index' %}">Brigades</a></li>
+	<li><a href="{% url 'contact'%}">Contact</a></li>
+{% endblock menu %}
+
+{% block page_title %}
+
+{% endblock page_title %}
+
+{% block content %}
+<div style="padding: 5px 10px;">
+	<form action="{% url 'blog:createb' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<ul class="create_greeting">
+	{{ form.as_p }}
+	</ul>
+
+	<input type="submit" name="submit" value="Create blog" />
+	</form>
+</div>
+{% endblock %}

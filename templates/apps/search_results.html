@@ -1,0 +1,22 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Search results{% endblock %}
+
+{% block content %}
+
+<p>You searched for: <strong>{{ query }}</strong></p>
+
+{% if books %}
+    <p>Found {{ books|length }} book{{ books|pluralize }}.</p>
+    <ul>
+        {% for book in books %}
+        <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No books matched your search criteria.</p>
+{% endif %}
+
+<p><a href="{% url 'search_form' %}">Search again?</a></p>
+
+{% endblock %}

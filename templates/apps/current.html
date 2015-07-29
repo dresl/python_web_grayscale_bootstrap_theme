@@ -1,0 +1,8 @@
+{% extends "includes/base.html" %}
+
+{% block title %}The current time{% endblock %}
+
+{% block content %}
+<p>It is now {{ current_date }}. And you are in {{ path }}</p>
+<p>You're using {{ your_browser }}</p>
+{% endblock %}

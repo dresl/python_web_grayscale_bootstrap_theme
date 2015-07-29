@@ -1,0 +1,30 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Brigade{% endblock %}
+
+{% block menu %}
+	<li><a href="{% url 'welcome'%}">Welcome</a></li>
+	<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
+	<li class="active"><a href="{% url 'math:brigade_index' %}">Brigades</a></li>
+	<li><a href="{% url 'contact'%}">Contact</a></li>
+{% endblock menu %}
+
+{% block page_title %}
+
+{% endblock page_title %}
+
+{% block content %}
+<div class="col-md-6">
+	<form action="{% url 'math:createb' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<ul class="create_greeting">
+	{{ form.as_p }}
+	</ul>
+
+	<input type="submit" name="submit" value="Přidat den" />
+	</form>
+	{% for item in brigade %}
+	<p style="text-align: right; font-size: 14px;">Poslední den: <b>{{ item.number_of_day }}</b></p>
+	{% endfor %}
+</div>
+{% endblock %}

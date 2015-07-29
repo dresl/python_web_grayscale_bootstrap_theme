@@ -1,0 +1,45 @@
+{% extends "includes/base.html" %}
+{% block sidebar %}
+
+	<ul>
+		<li><a href="{% url 'hello' %}">Hello world</a></li>
+		<li><a href="{% url 'math:index' %}">Math</a> &raquo; <a href="{% url 'math:brigade_index' %}">Brigades</a></li>
+		<li><a href="{% url 'basehtml' %}">Base html</a></li>
+		<li><a href="{% url 'db' %}">db</a></li>
+		<li><a href="{% url 'test' %}">Test</a></li>
+		<li><a href="/admin/">Admin</a></li>
+		<li><a href="{% url 'greeting:createg' %}">Create greeting</a></li>
+	</ul>
+	<hr class="hrlow" />
+
+{% endblock %}
+{% block menu %}
+			<ul>
+				<li><a href="{% url 'welcome'%}">Welcome</a></li>
+				<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+				<li class="active"><a href="{% url 'greeting:indexg'%}">Greetings</a></li>
+				<li><a href="{% url 'contact'%}">Contact</a></li>
+			</ul>
+{% endblock %}
+{% block content %}
+<a class="routing" href="{% url 'greeting:indexg' %}">Greetings >></a>
+{% if greetings.count > 0 %}
+
+{% for greeting in greetings %}
+    <a class="titlegreeting" href="{% url 'greeting:detailg' greeting.id %}">
+	<div class="titleg">
+		<h3>{{ greeting.title }} <b style="font-weight: normal">(likes: {{greeting.likes}} )</b></h3>{{ greeting.body|truncatewords:"15" }}
+	</div>
+	</a>
+	<hr class="hrlarge">
+{% endfor %}
+
+{% else %}
+
+<p>No greetings are available.</p>
+
+{% endif %}
+
+<p style="font-size: 10px; text-align: right;">Language is: <b>{{language}}</b> and session language is: <b>{{session_language}}</b></p>
+
+{% endblock %}

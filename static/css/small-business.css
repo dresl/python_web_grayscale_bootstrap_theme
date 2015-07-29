@@ -1,0 +1,121 @@
+/*!
+ * Start Bootstrap - Small Business HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+    overflow: scroll;
+}
+
+* {
+    transition: border-color 0.5s ease;
+}
+
+.navbar-fixed-top .nav {
+    padding: 15px 155px;
+}
+
+.left_sidebar{
+    width: 20%;
+    float: left;
+}
+
+.search {
+    text-align: center;
+}
+
+.navbar-fixed-top .navbar-brand {
+    padding: 0 15px;
+}
+
+footer {
+    padding: 30px 0;
+}
+
+@media(min-width:768px) {
+    body {
+        padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+    }
+
+    .navbar-fixed-top .navbar-brand {
+        padding: 15px 0;
+    }
+}
+
+.topbuttonnone {
+  visibility: hidden;
+}
+
+.topbutton {
+  position: fixed;
+  overflow: hidden;
+  text-align: center;
+  z-index: 99999999;
+  background: none repeat scroll 0% 0% rgba(119, 119, 119, 0.2);
+  color: black;
+  width: 40px;
+  height: 40px;
+  line-height: 43px;
+  right: 70px;
+  bottom: 25px;
+  padding-top: 2px;
+  border-radius: 6px;
+  transition: all 0.5s ease-in-out;
+  visibility: visible;
+}
+
+.topbutton:hover {
+  color: #545454;
+  background: none repeat scroll 0% 0% rgba(65, 212, 20, 0.2);
+}
+
+.account_buttons {
+  margin-left: 80%;
+  margin-top: 10px;
+}
+
+.sipka_nahoru {
+    width: 25px;
+    margin-top: -8px;
+}
+
+.sidebarbody {
+    padding: 10px;
+    text-align: center;
+    margin-top: -20px;
+    font-size: 12px;
+    color: #333;
+}
+
+#pagetop {
+    margin-top: -150px;
+    position: absolute;
+}
+
+.footer {
+    background-color: #000;
+    text-align: center;
+    padding: 15px 5px;
+    color: white;
+}
+
+.profile_picture img {
+  box-shadow: 1px 1px 5px 1px #837777;
+  border: 1px solid black;
+  width: 150px;
+}
+
+.title_object {
+  padding: 5px 10px;
+}
+
+.title_object:hover {
+  background-color: #F7F7F7;
+}
+
+.title_list_object {
+  text-decoration: none;
+  color: black;
+}

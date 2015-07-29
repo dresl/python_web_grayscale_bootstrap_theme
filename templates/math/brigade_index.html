@@ -1,0 +1,34 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Brigade{% endblock %}
+
+{% block menu %}
+	<li><a href="{% url 'welcome'%}">Welcome</a></li>
+	<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
+	<li class="active"><a href="{% url 'math:brigade_index' %}">Brigades</a></li>
+	<li><a href="{% url 'contact'%}">Contact</a></li>
+{% endblock menu %}
+
+{% block page_title %}
+
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="col-md-6">
+
+{% if latest_brigade_list %}
+    {% for brigade in latest_brigade_list %}
+        <a class="title_list_object" href="{% url 'math:detailb' brigade.id %}">
+		<div class="title_object">
+			<h3>{{ brigade.brigade_title }}</h3>
+		</div>
+		</a>
+		<hr>
+    {% endfor %}
+{% else %}
+    <p>No brigades are available.</p>
+{% endif %}
+
+{% endblock %}

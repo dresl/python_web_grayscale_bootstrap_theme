@@ -1,0 +1,11 @@
+{% if greetings.count %}
+
+{% for greeting in greetings %}
+	<li><a href="/greeting/{{ greeting.id }}/">{{ greeting.title }}</a></li>
+{% endfor %}
+
+{% else %}
+
+	<li>None to show!</li>
+
+{% endif %}

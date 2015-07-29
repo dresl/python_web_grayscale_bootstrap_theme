@@ -1,0 +1,53 @@
+body {
+	text-align: center;
+}
+
+.active a {
+	border-bottom: 2px solid black;
+	color: black;
+}
+
+.mainlogo {
+	width: 150px;
+	margin-right: 620px;
+	margin-bottom: -54px;
+}
+
+#page {
+	width: 960px;
+	text-align: left;
+	margin: 10px auto 20px auto;
+	display: block;
+}
+
+#menu {
+	text-align: center;
+	border: 1px solid red;
+	width: 822px;
+}
+
+#menu ul li {
+	display: inline-block;
+	margin-right: 35px;
+}
+
+#menu ul li a {
+	text-decoration: none;
+}
+
+#menu ul li a:hover {
+	color: black;
+}
+
+#sidebar {
+	float: left;
+	width: 200px;
+	border: 1px solid red;
+}
+
+#content {
+	float: left;
+	width: 600px;
+	border: 1px solid black;
+	padding: 10px;
+}

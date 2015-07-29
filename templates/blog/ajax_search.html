@@ -1,0 +1,11 @@
+{% if blogs.count %}
+
+{% for blog in blogs %}
+	<li><a href="/blog/{{ blog.id }}/">{{ blog.title }}</a></li>
+{% endfor %}
+
+{% else %}
+
+	<li>None to show!</li>
+
+{% endif %}

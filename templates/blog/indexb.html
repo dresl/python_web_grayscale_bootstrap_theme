@@ -1,0 +1,40 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Blog{% endblock %}
+
+{% block menu %}
+	<li><a href="{% url 'welcome'%}">Welcome</a></li>
+	<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+	<li class="active"><a href="{% url 'blog:indexb'%}">Blog</a></li>
+	<li><a href="{% url 'math:brigade_index' %}">Brigades</a></li>
+	<li><a href="{% url 'contact'%}">Contact</a></li>
+{% endblock menu %}
+
+{% block page_title %}
+<h2>BLOG</h2>
+{% endblock page_title %}
+{% block content %}
+
+<div class="col-md-6">
+
+{% if blogs.count > 0 %}
+
+{% for blog in blogs %}
+	<a href="{% url 'blog:detailb' blog.id %}">
+	<div class="#">
+    	<h3>{{ blog.title }} <b style="font-weight: normal">(likes: {{blog.likes}} )</b></h3>
+    	{{ blog.body|truncatewords:"15" }}
+    <hr>
+    </div>
+	</a>
+{% endfor %}
+
+{% else %}
+
+<p>No blogs are available.</p>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

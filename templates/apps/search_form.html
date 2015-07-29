@@ -1,0 +1,27 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+{% if errors %}
+
+	{% for error in errors %}
+	<p style="color: red; font-size: 15px;">{{ error }}</p>
+	{% endfor %}
+
+<form action="/search/" method="get">
+    <input class="error_input" type="text" name="q">
+    <input type="submit" value="Search">
+</form>
+
+{% else %}
+
+<form action="/search/" method="get">
+    <input class="input" type="text" name="q">
+    <input type="submit" value="Search">
+</form>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Contact us{% endblock %}
+
+{% block menu %}
+	<li><a href="{% url 'welcome'%}">Welcome</a></li>
+	<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
+	<li><a href="{% url 'math:brigade_index' %}">Brigades</a></li>
+	<li class="active"><a href="{% url 'contact'%}">Contact</a></li>
+{% endblock menu %}
+
+{% block page_title %}
+
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="col-md-6"> 
+<h1>Thank you</h1>
+
+<p>Your email has been sent successfully.</p>
+</div>
+
+{% endblock %}

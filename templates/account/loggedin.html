@@ -1,0 +1,12 @@
+{% extends "includes/base.html" %}
+
+{% block content %}
+<div class="col-md-6">
+{% if user.is_authenticated %}
+	<h2>Hi {{ username }}, you are now logged in!</h2>
+	<p>Click <a href="/accounts/logout/">here</a> to logout.</p>
+{% else %}
+<p>To see this page you must be login! Click here to <a href="/accounts/login/">login</a> and if you haven't got an account, register <a href="/accounts/register/">here</a></p>
+{% endif %}
+</div>
+{% endblock %}

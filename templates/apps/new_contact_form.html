@@ -1,0 +1,24 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Contact us again{% endblock %}
+
+{% block content %}
+
+<h1>Contact us again</h1>
+
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="/send_email/" method="post">{% csrf_token %}
+        <p>Subject: <input type="text" name="subject" ></p>
+        <p>Your e-mail (optional): <input type="text" name="from_email"></p>
+        <p>Message: <textarea name="message" rows="10" cols="50"></textarea></p>
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Brigade{% endblock %}
+
+{% block menu %}
+	<li><a href="{% url 'welcome'%}">Welcome</a></li>
+	<li><a href="{% url 'polls:indexq'%}">Polls</a></li>
+	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
+	<li class="active"><a href="{% url 'math:brigade_index' %}">Brigades</a></li>
+	<li><a href="{% url 'contact'%}">Contact</a></li>
+{% endblock menu %}
+
+{% block page_title %}
+
+{% endblock page_title %}
+
+
+{% block content %}
+
+<div class="col-md-6">
+
+<div style="overflow: auto; height: 250px;box-shadow: 2px 2px 8px 1px #ADADAD;">
+	<table border="2px" cellpadding="5px" cellspacing="0" bordercolor="black" style="width: 450px; margin: 10px auto">
+		<caption>{{ title_brigade }}</caption>
+		<tr>
+			<th width="33%">Den</th>
+			<th width="33%">Datum</th>
+			<th width="33%">Počet hodin</th>
+		</tr>
+		{% for item in brigade %}
+		<tr>
+			<td width="33%">{{ item.number_of_day }}</td>
+			<td width="33%">{{ item.pub_date.day }}.{{ item.pub_date.month }}. {{ item.pub_date.year }}</td>
+			<td width="33%">{{ item.hours_per_day }}</td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<th width="33%"></th><th width="33%"></th><th width="33%">celkem: {{ sum_hours }}</th>
+		</tr>
+	</table>
+</div>
+&nbsp;
+<hr style="border-bottom: 1px solid #838282; border-top: 0px solid #E9E9E9; width: 550px">
+&nbsp;
+<table border="2px" cellpadding="5px" cellspacing="0" bordercolor="black" style="width: 450px; margin: 0 auto">
+	<caption>Celkový součet</caption>
+	<tr>
+		<th width="50%">Počet hodin:</th>
+		<td width="50%">{{ sum_hours }}</td>
+	</tr>
+	<tr>
+		<td width="50%">Průměrný počet hodin denně:</td>
+		<td width="50%">{{ average_hours }}</td>
+	</tr>
+	<tr>
+		<th width="50%">Zisk:</th>
+		<td width="50%">{{ sum_price }}</td>
+	</tr>
+	<tr>
+		<td width="50%">Průměrný zisk denně:</td>
+		<td width="50%">{{ average_price }}</td>
+	</tr>
+</table>
+
+<a href="{% url 'math:createb' %}"><button style="margin-top: 20px;">Přidat další den</button></a>
+
+</div>
+
+{% endblock %}
