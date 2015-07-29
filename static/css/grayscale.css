@@ -447,3 +447,9 @@ body {
   text-decoration: none;
   color: black;
 }
+
+.authentication {
+    float: left;
+    padding: 0px 115px;
+    margin-top: 13px;
+}
