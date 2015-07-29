@@ -51,10 +51,10 @@
 
                 {% for brigade in brigades %}
                     <div class="col-lg-8 col-lg-offset-2">
-                        <h3>{{ brigade.title }} </h3>
+                        <h3>{{ brigade.brigade_title }} </h3>
                         <a class="btn btn-default btn-lg" href="{% url 'math:detailb' brigade.id %}">View brigade</a>
-                    </div>
-                    <hr>
+                        <hr>
+                    </div>  
                 {% endfor %}
 
                 </div>
