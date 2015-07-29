@@ -151,94 +151,9 @@
         <!-- /.container -->
     </nav>
 
-    <!-- Intro Header -->
-    <header class="intro">
-        <div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Django site</h1>
-                        <p class="intro-text">Welcome to Django site. <br>View on <a href="https://github.com/dresl/python_web_grayscale_bootstrap_theme">GitHub.</a></p>
-                        <a href="#polls" class="btn btn-circle page-scroll">
-                            <i class="fa fa-angle-double-down animated"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    {% block content %}
 
-    <!-- Polls Section -->
-    <section id="polls" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>Polls app</h2>
-                <p>View all polls.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section id="blog" class="content-section text-center">
-        <div class="download-section">
-            <div class="container">
-            {% for blog in blogs %}
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h2>{{ blog.title }}</h2>
-                    <p>{{ blog.body }}</p>
-                    <a href="{% url 'blog:detailb' blog.id %}" class="btn btn-default btn-lg">Read more</a>
-                </div>
-            {% endfor %}
-            </div>
-        	<a href="{% url 'blog:indexb' %}" class="btn btn-default btn-lg"><span class="network-name">View all blogs</span></a>
-        </div>
-    </section>
-
-    <!-- Brigade Section -->
-    <section id="brigades" class="content-section text-center">
-        <div class="download-section">
-            <div class="container">
-
-                {% for blog in blogs %}
-					<a href="{% url 'blog:detailb' blog.id %}">
-					<div class="col-lg-8 col-lg-offset-2">
-				    	<h3>{{ blog.title }} <b style="font-weight: normal">(likes: {{blog.likes}} )</b></h3>
-				    	{{ blog.body|truncatewords:"15" }}
-				    <hr>
-				    </div>
-					</a>
-				{% endfor %}
-				
-				</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>Contact us</h2>
-                <ul class="list-inline banner-social-buttons">
-                    <li>
-                        <a href="https://github.com/dresl" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                    </li>
-                    <li>
-                        <a href="https://plus.google.com/u/0/117285854149387365510/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/dominik.resl.9" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
-                    </li>
-                </ul>
-                <form action="/contact/" method="post">{% csrf_token %}
-			        <p>Subject: <input type="text" name="subject" value="">{% if subject_error %}<b style="color: red; font-weight: normal">{{ subject_error }}</b>{% endif %}</p>
-			        <p>Your e-mail (optional): <input type="text" name="email" value="">{% if email_error %}<b style="color: red; font-weight: normal">{{ email_error }}</b>{% endif %}</p>
-			        <p>Message: <textarea name="message" rows="10" cols="50"></textarea></p>{% if message_error %}<b style="color: red; font-weight: normal">{{ message_error }}</b>{% endif %}
-		        <input type="submit" value="Send email">
-    			</form>
-            </div>
-        </div>
-    </section>
+    {% endblock content %}
 
     <footer>
         <div class="container text-center">
