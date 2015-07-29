@@ -52,12 +52,13 @@
                 {% for brigade in brigades %}
                     <div class="col-lg-8 col-lg-offset-2">
                         <h3>{{ brigade.title }} </h3>
-                        <a class="btn btn-default btn-lg" href="{% url 'blog:detailb' blog.id %}">View brigade</a>
+                        <a class="btn btn-default btn-lg" href="{% url 'math:detailb' brigade.id %}">View brigade</a>
                     </div>
                     <hr>
                 {% endfor %}
 
                 </div>
+                <a href="{% url 'math:brigade_index' %}" class="btn btn-default btn-lg"><span class="network-name">View all brigades</span></a>
             </div>
         </div>
     </section>
