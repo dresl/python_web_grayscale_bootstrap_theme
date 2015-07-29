@@ -50,12 +50,12 @@
     <section id="brigades" class="content-section text-center">
         <div class="download-section">
             <h2>Brigades</h2>
+            <hr>
             <div class="container">
 
                 {% for brigade in brigades %}
                     <div class="col-lg-8 col-lg-offset-2">
-                        <h3>{{ brigade.brigade_title }} </h3>
-                        <a class="btn btn-default" href="{% url 'math:detailb' brigade.id %}">View brigade</a>
+                        <h3>{{ brigade.brigade_title }} <i class="fa fa-hand-o-right"></i><a class="btn btn-default" href="{% url 'math:detailb' brigade.id %}">View brigade</a></h3>
                         <hr>
                     </div>  
                 {% endfor %}
