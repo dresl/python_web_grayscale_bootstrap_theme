@@ -10,7 +10,6 @@ body {
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
     background-color: #000;
-    overflow: scroll;
 }
 
 html {
@@ -370,30 +369,7 @@ img::-moz-selection {
 }
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-    overflow: scroll;
-}
-
-* {
-    transition: border-color 0.5s ease;
     webkit-tap-highlight-color: rgba(255,255,255,.2);
-}
-
-.navbar-fixed-top .nav {
-    padding: 15px 155px;
-}
-
-.left_sidebar{
-    width: 20%;
-    float: left;
-}
-
-.search {
-    text-align: center;
-}
-
-.navbar-fixed-top .navbar-brand {
-    padding: 0 15px;
 }
 
 .topbuttonnone {
