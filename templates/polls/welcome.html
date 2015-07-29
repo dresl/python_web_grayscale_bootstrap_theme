@@ -28,7 +28,7 @@
         </div>
     </section>
 
-    <!-- Download Section -->
+    <!-- Blog Section -->
     <section id="blog" class="content-section text-center">
         <div class="download-section">
             <div class="container">
@@ -49,12 +49,13 @@
     <!-- Brigade Section -->
     <section id="brigades" class="content-section text-center">
         <div class="download-section">
+            <h2>Brigades</h2>
             <div class="container">
 
                 {% for brigade in brigades %}
                     <div class="col-lg-8 col-lg-offset-2">
                         <h3>{{ brigade.brigade_title }} </h3>
-                        <a class="btn btn-default btn-lg" href="{% url 'math:detailb' brigade.id %}">View brigade</a>
+                        <a class="btn btn-default" href="{% url 'math:detailb' brigade.id %}">View brigade</a>
                         <hr>
                     </div>  
                 {% endfor %}
