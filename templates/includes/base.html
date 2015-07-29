@@ -25,7 +25,6 @@
     
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery.easing.min.js' %}"></script>
-	<script src="{% static 'js/jquery-2.0.0.min.js' %}"></script>
 	<script src="{% static 'js/ajax.js' %}"></script>
 	<script language="javascript" type="text/javascript"></script>
 	<script type="text/javascript">
@@ -151,14 +150,18 @@
         <!-- /.container -->
     </nav>
 
-    {% block content %}
+    {% block content %}{% endblock content %}
 
-    {% endblock content %}
+    {% block to_top %}
+    <div><a href="#pagetop" class="topbuttonnone"><img class="sipka_nahoru" src="{% static 'uploaded_files/sipka_nahoru.png' %}"/></a></div>
+    {% endblock to_top %}
 
+    {% block footer %}
     <footer>
         <div class="container text-center">
             <p>Copyright &copy; Django site {{ now.year }}</p>
         </div>
     </footer>
+    {% endblock footer %}
 </body>
 </html>
