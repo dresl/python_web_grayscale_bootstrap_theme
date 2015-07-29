@@ -36,7 +36,7 @@ def basehtml(request):
                                                      'username': request.user.username,
                                                      'full_name': request.user.first_name + ' ' + request.user.last_name})
     else:
-        return render(request, 'includes/base.html', {'sidebar': sidebar, 'brigades': brigades, 'days': days})
+        return render(request, 'includes/base.html', {'sidebar': sidebar, 'brigades': brigades})
 
 def HelloworldView(request):
     sidebar = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
