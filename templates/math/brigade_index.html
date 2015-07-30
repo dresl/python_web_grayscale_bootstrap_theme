@@ -12,11 +12,8 @@
 
 {% block content %}
 
-<section id="contact" class="container content-section text-center" style="padding: 150px 0px 0px">
-    <div class="row">
-    	<div class="col-lg-8 col-lg-offset-2">
-        	<h2>Brigades</h2>
-	        <hr>
+
+        	{% block page_title %}Brigades{% endblock page_title %}
 
             {% if latest_brigade_list %}
 			    {% for brigade in latest_brigade_list %}
@@ -31,9 +28,6 @@
 			    <p>No brigades are available.</p>
 			{% endif %}
 
-	        <a href="{% url 'math:brigade_index' %}" class="btn btn-default btn-lg"><span class="network-name">View all brigades</span></a>
-        </div>
-    </div>
-</section>
+
 
 {% endblock %}

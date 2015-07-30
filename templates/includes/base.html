@@ -140,8 +140,20 @@
     </nav>
 
     {% block welcome_content %}{% endblock welcome_content %}
+    
+    <section id="page_content" class="container content-section text-center" style="padding: 150px 0px 0px">
+	    <div class="row">
+	    	<div class="col-lg-8 col-lg-offset-2">
 
-    {% block content %}{% endblock content %}
+	    		<h2>{% block page_title %}{% endblock page_title %}</h2>
+	    		{% block hr_ %}<hr>{% endblock hr_ %}
+
+	    		{% block content %}
+	    		
+	    		{% endblock content %}
+	        </div>
+	    </div>
+	</section>
 
     {% block to_top %}
     <div><a href="#page-top" class="topbuttonnone"><i style="color: #0AC53A; font-size: 25px;" class="fa fa-arrow-up"></i></a></div>
