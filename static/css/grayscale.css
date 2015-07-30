@@ -460,3 +460,7 @@ body {
 .authentication a:hover {
     color: #42DCA3;
 }
+
+.hr_low {
+    width: 50%;
+}
