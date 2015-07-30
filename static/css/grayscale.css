@@ -116,7 +116,7 @@ a:focus {
 }
 
 .navbar-custom .nav li.active a {
-    background-color: rgba(255,255,255,.3);
+    color: #42DCA3;
 }
 
 .navbar-custom .nav li.active a:hover {
