@@ -398,8 +398,8 @@ body {
 }
 
 .topbutton:hover {
-  color: #545454;
-  background: none repeat scroll 0% 0% rgba(65, 212, 20, 0.2);
+  color: #42DCA3;
+  background: none repeat scroll 0% 0% rgba(78, 78, 78, 0.2)
 }
 
 .account_buttons {
