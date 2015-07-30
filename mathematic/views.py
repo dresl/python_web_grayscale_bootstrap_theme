@@ -170,6 +170,7 @@ def DetailView(request, pk):
 			return render(request, 'math/brigade_detail.html', {'brigade': brigade,
 														   'sum_hours': sum_hours,
 														   'average_hours': average_hours,
+														   'title_brigade': title_brigade,
 														   'sum_price': sum_price,
 														   'average_price': average_price,
 														   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],})
