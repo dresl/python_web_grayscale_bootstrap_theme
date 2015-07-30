@@ -140,7 +140,11 @@
     </nav>
 
     {% block welcome_content %}{% endblock welcome_content %}
+
+    <div style="margin-top: 250px" class="col-md-6">
+    <div class="page_title">{% block page_title %}{% endblock page_title %}</div>
     {% block content %}{% endblock content %}
+    </div>
 
     {% block to_top %}
     <div><a href="#page-top" class="topbuttonnone"><i style="color: #0AC53A; font-size: 25px;" class="fa fa-arrow-up"></i></a></div>
