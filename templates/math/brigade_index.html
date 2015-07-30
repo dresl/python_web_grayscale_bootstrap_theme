@@ -10,10 +10,9 @@
 	<li><a href="{% url 'welcome' %}#contact">Contact</a></li>
 {% endblock menu %}
 
+{% block page_title %}Brigades{% endblock page_title %}
+
 {% block content %}
-
-
-        	{% block page_title %}Brigades{% endblock page_title %}
 
             {% if latest_brigade_list %}
 			    {% for brigade in latest_brigade_list %}
@@ -27,7 +26,5 @@
 			{% else %}
 			    <p>No brigades are available.</p>
 			{% endif %}
-
-
 
 {% endblock %}
