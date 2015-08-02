@@ -12,8 +12,9 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
 <div style="text-align:left">
+{% if user.is_authenticated %}
+
 {% if profile_picture %}
 <p class="profile_picture"><img src="/static/{{ profile_picture }}" /></p>
 {% endif %}
