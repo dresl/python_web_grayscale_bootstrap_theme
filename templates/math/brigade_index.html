@@ -14,20 +14,20 @@
 
 {% block content %}
 
-            {% if latest_brigade_list %}
-			    {% for brigade in latest_brigade_list %}
-			        <a class="title_list_object" href="{% url 'math:detailb' brigade.id %}">
-					<div class="title_object">
-						<h3>{{ brigade.brigade_title }}</h3>
-						{% for day in brigade.day_set.all %}
-						<p>{{ day.count }}</p>
-						{% endfor %}
-					</div>
-					</a>
-					<hr class="hr_low">
-			    {% endfor %}
-			{% else %}
-			    <p>No brigades are available.</p>
-			{% endif %}
+    {% if latest_brigade_list %}
+	    {% for brigade in latest_brigade_list %}
+	        <a class="title_list_object" href="{% url 'math:detailb' brigade.id %}">
+			<div class="title_object">
+				<h3>{{ brigade.brigade_title }}</h3>
+				{% for day in brigade.day_set.all %}
+				<p>{{ day.count }}</p>
+				{% endfor %}
+			</div>
+			</a>
+			<hr class="hr_low">
+	    {% endfor %}
+	{% else %}
+	    <p>No brigades are available.</p>
+	{% endif %}
 
 {% endblock content %}
