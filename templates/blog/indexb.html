@@ -16,8 +16,8 @@
 {% if blogs.count > 0 %}
 
 {% for blog in blogs %}
-	<a href="{% url 'blog:detailb' blog.id %}">
-	<div class="#">
+	<a class="title_list_object" href="{% url 'blog:detailb' blog.id %}">
+	<div class="title_object">
     	<h3>{{ blog.title }} <span class="likes">(likes: {{blog.likes}})</span></h3>
     	{{ blog.body|truncatewords:"15" }}
     <hr class="hr_low">
