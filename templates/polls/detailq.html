@@ -1,23 +1,16 @@
 {% extends "includes/base.html" %}
 
 {% block menu %}
-	<li><a href="{% url 'welcome'%}">Welcome</a></li>
-	<li class="active"><a href="{% url 'polls:indexq'%}">Polls</a></li>
-	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
-	<li><a href="{% url 'math:brigade_index' %}">Brigades</a></li>
-	<li><a href="{% url 'contact'%}">Contact</a></li>
+    <li><a href="{% url 'welcome' %}#page-top">Welcome</a></li>
+    <li class="active"><a href="{% url 'welcome' %}#polls">Polls</a></li>
+    <li><a href="{% url 'blog:indexb'%}">>Blog</a></li>
+    <li><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
+    <li><a href="{% url 'welcome' %}#contact">Contact</a></li>
 {% endblock menu %}
 
-{% block page_title %}
-
-{% endblock page_title %}
+{% block page_title %}{{ question.question_text }}{% endblock page_title %}
 
 {% block content %}
-
-<a class="routing" href="{% url 'polls:indexq' %}">Polls >></a><b><a class="routing" href="{% url 'polls:detailq' question.id %}">{{ question.question_text }}</a></b>
-<div class="col-md-6">
-<h3><a class="titledetailg" href="{% url 'polls:infoq' question.id %}">{{ question.question_text }}</a><a style="font-size: 15px; text-decoration: none;" href="/admin/polls/question/{{ question.id }}/"> [edit]</a></h3>
-
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -31,6 +24,5 @@
 {% endfor %}
 <input style="margin-top: 10px;" type="submit" value="Vote" /> | <a class="viewresults" href="{% url 'polls:resultsq' question.id %}"> display results</a>
 </form>
-</div>
 
 {% endblock content %}

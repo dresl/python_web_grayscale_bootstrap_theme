@@ -1,17 +1,25 @@
 {% extends "includes/base.html" %}
 
+{% block menu %}
+	<li><a href="{% url 'welcome' %}#page-top">Welcome</a></li>
+	<li><a href="{% url 'welcome' %}#polls">Polls</a></li>
+	<li><a href="{% url 'blog:indexb'%}">>Blog</a></li>
+	<li><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
+	<li><a href="{% url 'welcome' %}#contact">Contact</a></li>
+{% endblock menu %}
+
 {% block content %}
-<div class="col-md-6">
-	{% if form.errors %}
-		<p class="error">Sorry, that's not a valid username or password</p>
-	{% endif %}
 
-	<form action="/accounts/auth/" method="post">{% csrf_token %}
-		<p>Username: <input type="text" name="username" value="" id="username" placeholder="your username"></p>
-		<p>Password: <input type="password" name="password" value="" placeholder="your password" id="password"></p>
+{% if form.errors %}
+	<p class="error">Sorry, that's not a valid username or password</p>
+{% endif %}
 
-		<input type="submit" value="login" />
+<form action="/accounts/auth/" method="post">{% csrf_token %}
+	<p>Username: <input type="text" name="username" value="" id="username" placeholder="your username"></p>
+	<p>Password: <input type="password" name="password" value="" placeholder="your password" id="password"></p>
 
-	</form>
-</div>
+	<input type="submit" value="login" />
+
+</form>
+
 {% endblock %}

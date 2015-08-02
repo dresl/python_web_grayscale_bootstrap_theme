@@ -1,13 +1,15 @@
 {% extends "includes/base.html" %}
 
-{% block sidebar %}
-	<ul>
-		<li><a href="{% url 'userprofile:profile' %}">Cancel</a></li>
-	</ul>
-{% endblock %}
+{% block menu %}
+	<li><a href="{% url 'welcome' %}#page-top">Welcome</a></li>
+	<li><a href="{% url 'welcome' %}#polls">Polls</a></li>
+	<li><a href="{% url 'blog:indexb'%}">>Blog</a></li>
+	<li><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
+	<li><a href="{% url 'welcome' %}#contact">Contact</a></li>
+{% endblock menu %}
 
 {% block content %}
-<div class="col-md-6">
+
 	<form action="{% url 'userprofile:edit_profile' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
 	<ul class="create_greeting">
 	{{ form.as_p }}
@@ -15,5 +17,5 @@
 
 	<input type="submit" name="submit" value="Uložit" />
 	</form>
-</div>
+
 {% endblock %}
