@@ -20,9 +20,9 @@
 	<div class="title_object">
     	<h3>{{ blog.title }} <span class="likes">(likes: {{blog.likes}})</span></h3>
     	{{ blog.body|truncatewords:"15" }}
-    <hr class="hr_low">
     </div>
 	</a>
+	<hr class="hr_low">
 {% endfor %}
 
 {% else %}
