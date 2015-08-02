@@ -39,7 +39,7 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <h3>{{ blog.title }} <b style="font-weight: normal">(likes: {{blog.likes}})</b></h3>
                     {{ blog.body|truncatewords:"15" }}
-                <hr>
+                <hr class="hr_low">
                 </div>
                 </a>
             {% endfor %}
@@ -58,7 +58,7 @@
                 {% for brigade in brigades %}
                     <div class="col-lg-8 col-lg-offset-2">
                         <h3>{{ brigade.brigade_title }} <i class="fa fa-hand-o-right"></i> <a class="btn btn-default" href="{% url 'math:detailb' brigade.id %}">View brigade</a></h3>
-                        <hr>
+                        <hr class="hr_low">
                     </div>  
                 {% endfor %}
 
