@@ -18,7 +18,7 @@
 {% for blog in blogs %}
 	<a href="{% url 'blog:detailb' blog.id %}">
 	<div class="#">
-    	<h3>{{ blog.title }} <span class="likes">(likes: {{blog.likes}} )</span></h3>
+    	<h3>{{ blog.title }} <span class="likes">(likes: {{blog.likes}})</span></h3>
     	{{ blog.body|truncatewords:"15" }}
     <hr class="hr_low">
     </div>
