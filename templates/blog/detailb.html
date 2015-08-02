@@ -47,19 +47,24 @@
 <a style="font-size: 15px; text-decoration: none;" href="/admin/blog/blog/{{ blog.id }}/">[edit]</a>
 {% endif %}
 <p>{{ blog.body }}</p>
+<div>
 {% if blog.thumbnail %}
 <p><img style="border: 1px solid black" src="/static/{{ blog.thumbnail }}" width="350px"/></p>
 {% endif %}
 <p>likes: {{ blog.likes }}</p>
 <p><a href="{% url 'blog:like' blog.id %}">Like</a></p>
+</div>
 
 {% else %}
 
 <p>{{ blog.body }}</p>
+<div>
 {% if blog.thumbnail %}
 <p><img style="border: 1px solid black" src="/static/{{ blog.thumbnail }}" width="350px"/></p>
 {% endif %}
 <p>likes: {{ blog.likes }} <span style="font-size: 10px;"> (You must register to like this blog.)</span></p>
+
+</div>
 
 {% endif %}
 
