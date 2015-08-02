@@ -439,22 +439,25 @@ body {
 }
 
 .profile_picture img {
-  box-shadow: 1px 1px 5px 1px #837777;
-  border: 1px solid black;
-  width: 150px;
+    box-shadow: 1px 1px 5px 1px #837777;
+    border: 1px solid black;
+    width: 150px;
 }
 
 .title_object {
-  padding: 5px 10px;
+    padding: 5px 10px;
+    background-color: #141414;
+    box-shadow: 0px 0px 10px 10px #141414;
 }
 
 .title_object:hover {
-  background-color: #F7F7F7;
+    background-color: #F7F7F7;
+    box-shadow: 0px 0px 10px 10px #F7F7F7;
 }
 
 .title_list_object {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: #B1E3CE;
 }
 
 .authentication {
