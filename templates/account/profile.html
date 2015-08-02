@@ -13,11 +13,12 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-
+<div style="text-align:left">
 {% if profile_picture %}
 <p class="profile_picture"><img src="/static/{{ profile_picture }}" /></p>
 {% endif %}
 <p>Hobbies: {{ hobbies }}</p>
+</div>
 <!-- <a href="{% url 'userprofile:edit_profile' %}">upravit profil</a> -->
 {% else %}
 <p>To see your profile you must be login! Click here to <a href="/accounts/login/">login</a> and if you haven't got an account, register <a href="/accounts/register/">here</a></p>
