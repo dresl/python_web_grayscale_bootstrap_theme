@@ -482,3 +482,32 @@ body {
 .text_left {
     text-align: left;
 }
+
+.choices {
+    border: 1px solid #BFBBBB;
+    background-color: #EDFFE7;
+    padding: 2px;
+    margin-top: 10px;
+    width: 150px;
+    display: inline-flex;
+    border-radius: 2px;
+}
+
+.choices:hover {
+    background-color: white;
+}
+
+.viewresults {
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #919990;
+    padding: 2px 4px;
+    border-radius: 2px;
+    background-color: #FFF;
+    font-size: 13px;
+}
+
+.viewresults:hover {
+    color: #17480E;
+    background-color: #EDFFE7; 
+}
