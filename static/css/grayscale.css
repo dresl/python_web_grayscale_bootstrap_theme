@@ -476,5 +476,5 @@ body {
 }
 
 .likes {
-    font-size: normal;
+    font-size: normal!important;
 }
