@@ -485,12 +485,13 @@ body {
 
 .choices {
     border: 1px solid #BFBBBB;
-    background-color: #EDFFE7;
+    background-color: #C2D1CA;
     padding: 2px;
     margin-top: 10px;
     width: 150px;
     display: inline-flex;
     border-radius: 2px;
+    color: black;
 }
 
 .choices:hover {
