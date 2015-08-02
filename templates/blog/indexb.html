@@ -10,19 +10,15 @@
 	<li><a href="{% url 'contact'%}">Contact</a></li>
 {% endblock menu %}
 
-{% block page_title %}
-<h2>BLOG</h2>
-{% endblock page_title %}
+{% block page_title %}Blog{% endblock page_title %}
 {% block content %}
-
-<div class="col-md-6">
 
 {% if blogs.count > 0 %}
 
 {% for blog in blogs %}
 	<a href="{% url 'blog:detailb' blog.id %}">
 	<div class="#">
-    	<h3>{{ blog.title }} <b style="font-weight: normal">(likes: {{blog.likes}} )</b></h3>
+    	<h3>{{ blog.title }} <span class="likes">(likes: {{blog.likes}} )</span></h3>
     	{{ blog.body|truncatewords:"15" }}
     <hr class="hr_low">
     </div>
@@ -34,7 +30,5 @@
 <p>No blogs are available.</p>
 
 {% endif %}
-
-</div>
 
 {% endblock %}

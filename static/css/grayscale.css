@@ -474,3 +474,7 @@ body {
     width: 50%;
     border-color: #5F5E5E;
 }
+
+.likes {
+    font-size: normal;
+}
