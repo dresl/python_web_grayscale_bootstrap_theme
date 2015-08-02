@@ -23,6 +23,7 @@
 </div>    
 {% endfor %}
 <input style="margin-top: 10px;" type="submit" value="Vote" /> | <a class="viewresults" href="{% url 'polls:resultsq' question.id %}"> display results</a>
-</form>
+</form><br>
+<a href="{% url 'polls:indexq'%}">Back</a>
 
 {% endblock content %}
