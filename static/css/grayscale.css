@@ -478,3 +478,7 @@ body {
 .likes {
     font-size: 12px !important;
 }
+
+.text_left {
+    text-align: left;
+}

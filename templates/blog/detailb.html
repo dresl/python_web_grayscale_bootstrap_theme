@@ -47,7 +47,7 @@
 <a style="font-size: 15px; text-decoration: none;" href="/admin/blog/blog/{{ blog.id }}/">[edit]</a>
 {% endif %}
 <p>{{ blog.body }}</p>
-<div>
+<div class="text_left">
 {% if blog.thumbnail %}
 <p><img style="border: 1px solid black" src="/static/{{ blog.thumbnail }}" width="350px"/></p>
 {% endif %}
@@ -58,7 +58,8 @@
 {% else %}
 
 <p>{{ blog.body }}</p>
-<div style="text-align:left">
+
+<div class="text_left">
 {% if blog.thumbnail %}
 <p><img style="border: 1px solid black" src="/static/{{ blog.thumbnail }}" width="350px"/></p>
 {% endif %}
