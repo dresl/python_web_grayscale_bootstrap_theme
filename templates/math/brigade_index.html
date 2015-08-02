@@ -27,8 +27,4 @@
 	    <p>No brigades are available.</p>
 	{% endif %}
 
-{% for day in brigade.day_set.all %}
-<p>{{ day.count }}</p>
-{% endfor %}
-
 {% endblock content %}
