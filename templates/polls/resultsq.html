@@ -18,7 +18,6 @@
 {% endfor %}
 </ul>
 
-<a style="font-size: 14px; color: #025909;" href="{% url 'polls:detailq' question.id %}">Vote?</a>
-<a href="{% url 'polls:indexq'%}">Back</a>
+<a class="viewresults" style="font-size: 14px; color: #025909;" href="{% url 'polls:detailq' question.id %}">Vote again?</a> | <a class="viewresults" href="{% url 'polls:indexq'%}">Back</a>
 
 {% endblock %}
