@@ -4,7 +4,9 @@
 <div class="col-md-6">
 {% if user.is_authenticated %}
 <h3>{{ full_name }} <b style='font-weight: normal; font-size: 14px;'>({{username}})</b></h3>
+{% if profile_picture %}
 <p class="profile_picture"><img src="/static/{{ profile_picture }}" /></p>
+{% endif %}
 <p>Hobbies: {{ hobbies }}</p>
 <!-- <a href="{% url 'userprofile:edit_profile' %}">upravit profil</a> -->
 {% else %}

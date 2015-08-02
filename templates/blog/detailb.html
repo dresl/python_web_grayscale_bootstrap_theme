@@ -1,5 +1,13 @@
 {% extends "includes/base.html" %}
 
+{% block menu %}
+	<li><a href="{% url 'welcome' %}#page-top">Welcome</a></li>
+	<li><a href="{% url 'welcome' %}#polls">Polls</a></li>
+	<li class="active"><a href="{% url 'welcome' %}#blog">Blog</a></li>
+	<li><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
+	<li><a href="{% url 'welcome' %}#contact">Contact</a></li>
+{% endblock menu %}
+
 {% block title %}Blog | {{ blog.title }}{% endblock %}
 
 {% block script_fixed_scroll %}
@@ -37,12 +45,9 @@
 	<li><a href="{% url 'contact'%}">Contact</a></li>
 {% endblock menu %}
 
-{% block page_title %}{% endblock page_title %}
+{% block page_title %}{{ blog.title }}{% endblock page_title %}
 
 {% block content %}
-<a class="routing" href="{% url 'blog:indexb' %}">Blog >> </a><b><a class="routing" href="#">{{ blog.title }}</a></b>
-<div class="col-md-8">
-<h2>{{ blog.title }}</h2> 
 
 {% if user.is_authenticated %}
 
@@ -65,7 +70,5 @@
 <p>likes: {{ blog.likes }} <span style="font-size: 10px;"> (You must register to like this blog.)</span></p>
 
 {% endif %}
-
-</div>
 
 {% endblock %}
