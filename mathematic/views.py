@@ -52,6 +52,7 @@ def create(request):
         return render(request, 'math/brigade_create.html', args)
 
 class BrigadeIndexView(generic.ListView):
+	model = Brigade
     template_name = 'math/brigade_index.html'
     context_object_name = 'latest_brigade_list'
 
