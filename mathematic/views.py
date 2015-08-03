@@ -74,7 +74,6 @@ def DetailView(request, pk):
     args = {}
     args.update(csrf(request))
     args['form'] = form
-
 	title_brigade = Brigade.objects.filter(pk=pk)
 	if request.user.is_authenticated():
 		brigade = Day.objects.filter(brigade__pk=pk).order_by('pub_date')
