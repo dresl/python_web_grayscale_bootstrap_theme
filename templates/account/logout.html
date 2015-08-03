@@ -1,16 +1,17 @@
 {% extends "includes/base.html" %}
 
 {% block menu %}
-	<li><a href="{% url 'welcome' %}#page-top">Welcome</a></li>
+	<li><a href="{% url 'welcome' %}">Welcome</a></li>
 	<li><a href="{% url 'welcome' %}#polls">Polls</a></li>
 	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
 	<li><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
 	<li><a href="{% url 'welcome' %}#contact">Contact</a></li>
 {% endblock menu %}
 
+{% block page_title %}Logged Out!{% endblock page_title %}
+
 {% block content %}
-<div class="col-md-6">
-	<h2>Logged Out!!</h2>
+
 	<p>Click <a href="/accounts/login/">here</a> to login again.</p>
-</div>
+
 {% endblock %}
