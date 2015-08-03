@@ -62,20 +62,20 @@ class BrigadeIndexView(generic.ListView):
         return Brigade.objects.filter(pub_date__lte=timezone.now())
 
 def DetailView(request, pk):
-	if request.POST:
-        form = BrigadeForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-
-            return HttpResponseRedirect('/math/brigade/')
-    else:
-        form = BrigadeForm()
-
-    args = {}
-    args.update(csrf(request))
-    args['form'] = form
 	title_brigade = Brigade.objects.filter(pk=pk)
 	if request.user.is_authenticated():
+		if request.POST:
+        	form = BrigadeForm(request.POST, request.FILES)
+        	if form.is_valid():
+            	form.save()
+
+				return HttpResponseRedirect('/math/brigade/')
+    	else:
+        	form = BrigadeForm()
+
+    	args = {}
+    	args.update(csrf(request))
+    	args['form'] = form
 		brigade = Day.objects.filter(brigade__pk=pk).order_by('pub_date')
 		def sum_hours(hours):
 			total = 0
