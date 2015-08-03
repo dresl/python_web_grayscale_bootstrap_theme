@@ -13,30 +13,16 @@
 {% block page_title %}Přidat den{% endblock page_title %}
 
 {% block content %}
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          	<form action="{% url 'math:createb' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-				<ul class="create_greeting">
-				{{ form.as_p }}
-				</ul>
+	<form action="{% url 'math:createb' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<ul class="create_greeting">
+	{{ form.as_p }}
+	</ul>
 
-				<input type="submit" name="submit" value="Přidat den" />
-			</form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-</div>
+	<input type="submit" name="submit" value="Přidat den" />
+	</form>
+	{% for item in brigade %}
+	<p style="text-align: right; font-size: 14px;">Poslední den: <b>{{ item.number_of_day }}</b></p>
+	{% endfor %}
+
 {% endblock %}
