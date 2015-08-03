@@ -111,7 +111,6 @@ def DetailView(request, pk):
 			
 			return render(request, 'math/brigade_detail.html', {'brigade': brigade,
 														   'sum_hours': sum_hours,
-														   'form': args['form'],
 														   'title_brigade': title_brigade,
 														   'average_hours': average_hours,
 														   'sum_price': sum_price,
@@ -170,7 +169,6 @@ def DetailView(request, pk):
 
 			return render(request, 'math/brigade_detail.html', {'brigade': brigade,
 														   'sum_hours': sum_hours,
-														   'form': args['form'],
 														   'average_hours': average_hours,
 														   'title_brigade': title_brigade,
 														   'sum_price': sum_price,
