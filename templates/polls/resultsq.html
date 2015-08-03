@@ -8,7 +8,7 @@
     <li><a href="{% url 'welcome' %}#contact">Contact</a></li>
 {% endblock menu %}
 
-{% block page_title %}{{ question.question_text }}{% endblock page_title %}
+{% block page_title %}<i class="fa fa-bullhorn page_icon"></i>{{ question.question_text }}{% endblock page_title %}
 
 {% block content %}
 

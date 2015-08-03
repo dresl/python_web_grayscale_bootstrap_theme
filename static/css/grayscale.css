@@ -516,3 +516,7 @@ body {
 .result_item {
     font-size: 18px;
 }
+
+.page_icon {
+    color: #CCC;
+}

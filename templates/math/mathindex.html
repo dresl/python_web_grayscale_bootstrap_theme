@@ -10,13 +10,10 @@
 	<li><a href="{% url 'contact'%}">Contact</a></li>
 {% endblock menu %}
 
-{% block page_title %}
-
-{% endblock page_title %}
+{% block page_title %}<i class="fa fa-cubes page_icon"></i>{% endblock page_title %}
 
 {% block content %}
 
-<div class="col-md-6">
 <form action="{% url 'math:count' %}" method="post"/>{% csrf_token %}
 	<p>prvni cislo: <input type="text" name="cislo1" /></p>
 	<p>druhy cislo: <input type="text" name="cislo2" /></p>
@@ -28,7 +25,5 @@
 	<p style="color: red;">{{ error_message }}</p>
 
 {% endif %}
-
-</div>
 
 {% endblock %}
