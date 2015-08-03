@@ -108,6 +108,15 @@ def DetailView(request, pk):
 				total = total / float(average)
 				return round(total, 2)
 			average_price = average_price(brigade)
+
+			if request.POST:
+		        form = BrigadeForm(request.POST, request.FILES)
+		        if form.is_valid():
+		            form.save()
+
+		            return HttpResponseRedirect('/math/brigade/')
+		    else:
+		        form = BrigadeForm()
 			
 			return render(request, 'math/brigade_detail.html', {'brigade': brigade,
 														   'sum_hours': sum_hours,
