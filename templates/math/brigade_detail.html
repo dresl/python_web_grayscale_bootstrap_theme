@@ -69,7 +69,13 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          	<form action="{% url 'math:createb' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+				<ul class="create_greeting">
+				{{ form.as_p }}
+				</ul>
+
+				<input type="submit" name="submit" value="Přidat den" />
+			</form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
