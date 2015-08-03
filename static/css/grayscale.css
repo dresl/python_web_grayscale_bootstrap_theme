@@ -518,5 +518,6 @@ body {
 }
 
 .page_icon {
-    color: #CCC;
+    color: #383838;
+    padding-right: 15px;
 }
