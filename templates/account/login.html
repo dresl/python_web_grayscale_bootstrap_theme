@@ -15,8 +15,8 @@
 {% endif %}
 
 <form action="/accounts/auth/" method="post">{% csrf_token %}
-	<p>Username: <input type="text" name="username" value="" id="username" placeholder="your username"></p>
-	<p>Password: <input type="password" name="password" value="" placeholder="your password" id="password"></p>
+	<p>Username: <input data-toggle="tooltip" data-placement="right" title="enter your username" type="text" name="username" value="" id="username" placeholder="your username"></p>
+	<p>Password: <input data-toggle="tooltip" data-placement="right" title="enter your password" type="password" name="password" value="" placeholder="your password" id="password"></p>
 
 	<input type="submit" value="login" />
 
