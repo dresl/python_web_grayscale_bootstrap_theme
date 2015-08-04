@@ -40,13 +40,6 @@
 	    $('[data-toggle="tooltip"]').tooltip();   
 	});
 	</script>
-	<script>
-	$(document).ready(function(){
-	    $("#myBtn").click(function(){
-	        $("#modalLogin").modal();
-	    });
-	});
-	</script>
 	<script type="text/javascript">
 		function textClear(element)
 		{
@@ -140,7 +133,7 @@
 
 				{% if not user.is_authenticated %}
 				<button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button> | <a href="/accounts/register/">register</a>
-				<div class="modal fade" id="modalLogin" role="dialog">
+				<div class="modal fade" id="myModal" role="dialog">
 				    <div class="modal-dialog">
 				    
 				      <!-- Modal content-->
@@ -173,6 +166,13 @@
 				      </div>
 				    </div>
 				</div>
+				<script>
+				$(document).ready(function(){
+				    $("#myBtn").click(function(){
+				        $("#myModal").modal();
+				    });
+				});
+				</script>
 				{% endif %}
 				{% if user.is_authenticated %}
 				<a href="{% url 'userprofile:profile' %}" title="{{ full_name }}">{{ username }}</a> <span class="">|</span> <a href="/accounts/logout/">logout</a></div>
