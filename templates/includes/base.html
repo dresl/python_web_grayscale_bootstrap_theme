@@ -40,6 +40,13 @@
 	    $('[data-toggle="tooltip"]').tooltip();   
 	});
 	</script>
+	<script>
+	$(document).ready(function(){
+	    $("#myBtn").click(function(){
+	        $("#myModal").modal();
+	    });
+	});
+</script>
 	<script type="text/javascript">
 		function textClear(element)
 		{
@@ -132,7 +139,40 @@
             	{% block authentication %}
 
 				{% if not user.is_authenticated %}
-				<a href="/accounts/login/">login</a> | <a href="/accounts/register/">register</a>
+				<button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button> | <a href="/accounts/register/">register</a>
+				<div class="modal fade" id="myModal" role="dialog">
+				    <div class="modal-dialog">
+				    
+				      <!-- Modal content-->
+				      <div class="modal-content">
+				        <div class="modal-header" style="padding:35px 50px;">
+				          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				          	<h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+				        </div>
+				        <div class="modal-body" style="padding:40px 50px;">
+				          <form action="/accounts/auth/" method="post">{% csrf_token %}
+				            <div class="form-group">
+				              	<label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+				              	<input data-toggle="tooltip" data-placement="right" title="enter your username" type="text" name="username" value="" id="username" placeholder="your username">
+				            </div>
+				            <div class="form-group">
+				              	<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+				              	<input data-toggle="tooltip" data-placement="right" title="enter your password" type="password" name="password" value="" placeholder="your password" id="password">
+				            </div>
+				            <div class="checkbox">
+				              	<label><input type="checkbox" value="" checked>Remember me</label>
+				            </div>
+				              	<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+				          </form>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+				          <p>Not a member? <a href="#">Sign Up</a></p>
+				          <p>Forgot <a href="#">Password?</a></p>
+				        </div>
+				      </div>
+				    </div>
+				</div>
 				{% endif %}
 				{% if user.is_authenticated %}
 				<a href="{% url 'userprofile:profile' %}" title="{{ full_name }}">{{ username }}</a> <span class="">|</span> <a href="/accounts/logout/">logout</a></div>
