@@ -132,7 +132,7 @@
             	{% block authentication %}
 
 				{% if not user.is_authenticated %}
-				<button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button> | <a href="/accounts/register/">register</a>
+				<a id="myBtn">Login</a> | <a href="/accounts/register/">register</a>
 				{% endif %}
 				{% if user.is_authenticated %}
 				<a href="{% url 'userprofile:profile' %}" title="{{ full_name }}">{{ username }}</a> <span class="">|</span> <a href="/accounts/logout/">logout</a></div>
