@@ -85,7 +85,7 @@
                     </li>
                 </ul>
                 <form action="/contact/" method="post">{% csrf_token %}
-                    <p>Subject: <a href="#" data-toggle="tooltip" data-placement="right" title="enter subject"><input type="text" name="subject" value=""></a>{% if subject_error %}<b style="color: red; font-weight: normal">{{ subject_error }}</b>{% endif %}</p>
+                    <p data-toggle="tooltip" data-placement="right" title="enter subject">Subject: ><input type="text" name="subject" value=""></a>{% if subject_error %}<b style="color: red; font-weight: normal">{{ subject_error }}</b>{% endif %}</p>
                     <p>Your e-mail (optional): <input data-toggle="tooltip" data-placement="right" title="enter valid e-mail address" type="text" name="email" value="">{% if email_error %}<b style="color: red; font-weight: normal">{{ email_error }}</b>{% endif %}</p>
                     <p>Message: <textarea name="message" rows="5" cols="30"></textarea></p>{% if message_error %}<b style="color: red; font-weight: normal">{{ message_error }}</b>{% endif %}
                 <input type="submit" value="Send email">
