@@ -139,8 +139,8 @@
             	{% block authentication %}
 
 				{% if not user.is_authenticated %}
-				<button type="button" class="btn btn-default btn-lg" data-target="#modalLogin" id="myBtn">Login</button> | <a href="/accounts/register/">register</a>
-				<div class="modal fade" id="modalLogin" role="dialog">
+				<button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button> | <a href="/accounts/register/">register</a>
+				<div class="modal fade" id="myModal" role="dialog">
 				    <div class="modal-dialog">
 				    
 				      <!-- Modal content-->
