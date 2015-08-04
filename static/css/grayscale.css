@@ -532,3 +532,7 @@ body {
   background-color: #f9f9f9;
   color: black!important;
 }
+
+.modal-body {
+    color: black!important;
+}
