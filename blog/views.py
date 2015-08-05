@@ -12,6 +12,7 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from blog.forms import BlogForm
 
+
 def create_blog(request):
     if request.POST:
         form = BlogForm(request.POST, request.FILES)
@@ -26,42 +27,52 @@ def create_blog(request):
     args.update(csrf(request))
     args['form'] = form
     if request.user.is_authenticated():
-        args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+        args['sidebar'] = Sidebar.objects.filter(
+            pub_date__lte=timezone.now()).order_by('-pub_date')
         args['username'] = request.user.username
-        args['full_name'] = request.user.first_name + ' ' + request.user.last_name
+        args['full_name'] = request.user.first_name + \
+            ' ' + request.user.last_name
         args['form'] = args['form']
         return render(request, 'blog/create_blog.html', args)
     else:
         args['form'] = args['form']
-        args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+        args['sidebar'] = Sidebar.objects.filter(
+            pub_date__lte=timezone.now()).order_by('-pub_date')
         return render(request, 'blog/create_blog.html', args)
+
 
 def blogs(request):
-    args={}
+    args = {}
     args.update(csrf(request))
     args['blogs'] = Blog.objects.all().order_by('-pub_date')
-    args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+    args['sidebar'] = Sidebar.objects.filter(
+        pub_date__lte=timezone.now()).order_by('-pub_date')
     if request.user.is_authenticated():
         args['username'] = request.user.username
-        args['full_name'] = request.user.first_name + ' ' + request.user.last_name
-        return render(request,'blog/indexb.html', args)
+        args['full_name'] = request.user.first_name + \
+            ' ' + request.user.last_name
+        return render(request, 'blog/indexb.html', args)
     else:
         return render(request, 'blog/indexb.html', args)
-    
-    return render(request,'blog/indexb.html', args)
+
+    return render(request, 'blog/indexb.html', args)
+
 
 def blog(request, blog_id=1):
-    args={}
+    args = {}
     args.update(csrf(request))
     args['blogs'] = Blog.objects.all().order_by('-pub_date')
     args['blog'] = Blog.objects.get(id=blog_id)
-    args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-    if request.user.is_authenticated(): 
+    args['sidebar'] = Sidebar.objects.filter(
+        pub_date__lte=timezone.now()).order_by('-pub_date')
+    if request.user.is_authenticated():
         args['username'] = request.user.username
-        args['full_name'] = request.user.first_name + ' ' + request.user.last_name
-        return render(request,'blog/detailb.html', args)
+        args['full_name'] = request.user.first_name + \
+            ' ' + request.user.last_name
+        return render(request, 'blog/detailb.html', args)
     else:
         return render(request, 'blog/detailb.html', args)
+
 
 def like_blog(request, blog_id):
     if blog_id:
@@ -70,10 +81,10 @@ def like_blog(request, blog_id):
         count += 1
         a.likes = count
         a.save()
-	return HttpResponseRedirect('/blog/%s' % blog_id)
+        return HttpResponseRedirect('/blog/%s' % blog_id)
 
 
-######### SEARCH AJAX ###########################################################################
+######### SEARCH AJAX ####################################################
 
 def search_titles(request):
     if request.method == "POST":
@@ -83,8 +94,8 @@ def search_titles(request):
 
     if request.user.is_authenticated():
         blogs = Blog.objects.filter(title__contains=search_text)
-        return render(request,'blog/ajax_search.html', {'blogs': blogs,'username': request.user.username, 
-                                                     'full_name': request.user.first_name + ' ' + request.user.last_name})
+        return render(request, 'blog/ajax_search.html', {'blogs': blogs, 'username': request.user.username,
+                                                         'full_name': request.user.first_name + ' ' + request.user.last_name})
     else:
         blogs = Blog.objects.filter(title__contains=search_text)
-        return render(request,'blog/ajax_search.html', {'blogs': blogs})
+        return render(request, 'blog/ajax_search.html', {'blogs': blogs})
