@@ -185,6 +185,7 @@ class IndexView(generic.ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(IndexView, self).get_context_data(*args, **kwargs)
         context['full_name'] = request.user.first_name + ' ' + request.user.last_name
+        context['username'] = request.user.username
         return context
     
     def get_queryset(self):
