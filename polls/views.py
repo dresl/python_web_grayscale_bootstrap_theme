@@ -174,9 +174,21 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/resultsq.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ResultsView, self).get_context_data(*args, **kwargs)
+        context['full_name'] = self.request.user.first_name + ' ' + self.request.user.last_name
+        context['username'] = self.request.user.username
+        return context
+
 class InfoView(generic.DetailView):
     model = Question
     template_name = 'polls/infoq.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(InfoView, self).get_context_data(*args, **kwargs)
+        context['full_name'] = self.request.user.first_name + ' ' + self.request.user.last_name
+        context['username'] = self.request.user.username
+        return context
 
 class IndexView(generic.ListView):
     template_name = 'polls/indexq.html'
@@ -198,6 +210,12 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detailq.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DetailView, self).get_context_data(*args, **kwargs)
+        context['full_name'] = self.request.user.first_name + ' ' + self.request.user.last_name
+        context['username'] = self.request.user.username
+        return context
     
     def get_queryset(self):
         """
