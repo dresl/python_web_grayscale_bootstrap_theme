@@ -181,6 +181,11 @@ class InfoView(generic.DetailView):
 class IndexView(generic.ListView):
     template_name = 'polls/indexq.html'
     context_object_name = 'latest_question_list'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(IndexView, self).get_context_data(*args, **kwargs)
+        context['full_name'] = request.user.first_name + ' ' + request.user.last_name
+        return context
     
     def get_queryset(self):
         """
