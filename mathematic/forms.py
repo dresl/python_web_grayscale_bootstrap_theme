@@ -13,16 +13,16 @@ class BrigadeForm(forms.Form):
      	self.helper = FormHelper()
      	self.helper.layout = Layout(
         Fieldset(
-             'Main',
-             'brigade',
-             'number_of_day',
-             'hours_per_day',
-             'pub_date'
-         ),
-         ButtonHolder(
-             Submit('submit', 'Submit', css_class='button white')
-         )
-     	)
+            'Main',
+            'brigade',
+            'number_of_day',
+            'hours_per_day',
+            'pub_date'
+        ),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='button white')
+        )
+     )
 
     class Meta:
 		model = Day
