@@ -6,11 +6,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (HTML, ButtonHolder, Field, Fieldset, Layout,
                                  Submit)
 
-class BrigadeForm(forms.ModelForm):
-
-	class Meta:
-		model = Day
-		fields = ('brigade', 'number_of_day', 'hours_per_day', 'pub_date')
+class BrigadeForm(forms.Form):
 
 	def __init__(self, *args, **kwargs):
         super(BrigadeForm, self).__init__(*args, **kwargs)
@@ -27,3 +23,7 @@ class BrigadeForm(forms.ModelForm):
                 Submit('submit', 'Submit', css_class='button white')
             )
         )
+
+    class Meta:
+		model = Day
+		fields = ('brigade', 'number_of_day', 'hours_per_day', 'pub_date')
