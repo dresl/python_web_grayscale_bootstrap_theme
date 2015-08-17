@@ -9,20 +9,20 @@ from crispy_forms.layout import (HTML, ButtonHolder, Field, Fieldset, Layout,
 class BrigadeForm(forms.Form):
 
 	def __init__(self, *args, **kwargs):
-        super(BrigadeForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            Fieldset(
-                'Main',
-                'brigade',
-                'number_of_day',
-                'hours_per_day',
-                'pub_date'
-            ),
-            ButtonHolder(
-                Submit('submit', 'Submit', css_class='button white')
-            )
-        )
+     	super(BrigadeForm, self).__init__(*args, **kwargs)
+     	self.helper = FormHelper()
+     	self.helper.layout = Layout(
+        Fieldset(
+             'Main',
+             'brigade',
+             'number_of_day',
+             'hours_per_day',
+             'pub_date'
+         ),
+         ButtonHolder(
+             Submit('submit', 'Submit', css_class='button white')
+         )
+     	)
 
     class Meta:
 		model = Day
