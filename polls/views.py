@@ -13,7 +13,6 @@ from mathematic.models import Brigade, Day
 from polls.forms import GreetingForm
 from polls.models import Choice, Greeting, Question, Sidebar
 
-
 ################## OTHER ####################################################
 
 
