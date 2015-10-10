@@ -34,7 +34,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-TEMPLATE_DIRS = ('/root/python_web_grayscale_bootstrap_theme/templates')
+TEMPLATE_DIRS = ('/srv/bootstrap_sites/grayscale/python_web_grayscale_bootstrap_theme/templates')
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'gettingstarted.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_db',
-        'USER': 'postgres',
-        'PASSWORD': 'djangodbpass',
+        'NAME': 'grayscale_db',
+        'USER': 'grayscale',
+        'PASSWORD': 'dbpass',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -102,7 +102,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-MEDIA_ROOT = '/root/python_web_grayscale_bootstrap_theme/static/'
+MEDIA_ROOT = '/srv/bootstrap_sites/grayscale/python_web_grayscale_bootstrap_theme/static/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
@@ -120,5 +120,5 @@ STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    ('', '/root/python_web_grayscale_bootstrap_theme/static')
+    ('', '/srv/bootstrap_sites/grayscale/python_web_grayscale_bootstrap_theme/static')
 )
