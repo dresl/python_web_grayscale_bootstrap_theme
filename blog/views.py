@@ -94,8 +94,9 @@ def search_titles(request):
 
     if request.user.is_authenticated():
         blogs = Blog.objects.filter(title__contains=search_text)
-        return render(request, 'blog/ajax_search.html', {'blogs': blogs, 'username': request.user.username,
-                                                         'full_name': request.user.first_name + ' ' + request.user.last_name})
+        return render(request, 'blog/ajax_search.html', 
+                            {'blogs': blogs, 'username': request.user.username,
+                             'full_name': request.user.first_name + ' ' + request.user.last_name})
     else:
         blogs = Blog.objects.filter(title__contains=search_text)
         return render(request, 'blog/ajax_search.html', {'blogs': blogs})

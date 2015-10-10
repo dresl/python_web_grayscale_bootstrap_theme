@@ -1,12 +1,7 @@
 from django import forms
 from mathematic.models import Brigade, Day
 
-from crispy_forms.bootstrap import Tab, TabHolder
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import (HTML, ButtonHolder, Field, Fieldset, Layout,
-                                 Submit)
-
-class BrigadeForm(forms.Form):
+class BrigadeForm(forms.ModelForm):
 
 	class Meta:
 		model = Day

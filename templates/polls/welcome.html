@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Django site</h1>
+                        <h1 class="brand-heading wow bounceIn" data-wow-duration="2s">Django site</h1>
                         <p class="intro-text">Welcome to Django site. <br>View on <a target="_blank" href="https://github.com/dresl/python_web_grayscale_bootstrap_theme">GitHub.</a></p>
                         <a href="#polls" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
@@ -22,7 +22,7 @@
     <section id="polls" class="container content-section text-center" data-wow-duration="1s" data-wow-delay="1s">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <h2><i class="fa fa-bullhorn page_icon"></i>Polls app</h2>
+                <h2 class="wow bounceInUp" data-wow-duration="3s"><i class="fa fa-bullhorn page_icon"></i>Polls app</h2>
                 <a href="{% url 'polls:indexq' %}" class="btn btn-default btn-lg"><span class="network-name">View all polls</span></a>
             </div>
         </div>
@@ -31,7 +31,7 @@
     <!-- Blog Section -->
     <section id="blog" class="content-section text-center" data-wow-duration="1s" data-wow-delay="2s">
         <div class="blog-section">
-            <h2><i class="fa fa-book page_icon"></i>Blog</h2>
+            <h2 class="wow bounceInLeft" data-wow-duration="3s"><i class="fa fa-book page_icon"></i>Blog</h2>
             <hr>
             <div class="container">
             {% for blog in blogs %}
@@ -51,7 +51,7 @@
     <!-- Brigade Section -->
     <section id="brigades" class="content-section text-center" data-wow-duration="1s" data-wow-delay="2s">
         <div class="brigade-section">
-            <h2><i class="fa fa-cubes page_icon"></i>Brigades</h2>
+            <h2 class="wow bounceInRight" data-wow-duration="3s"><i class="fa fa-cubes page_icon"></i>Brigades</h2>
             <hr>
             <div class="container">
 
@@ -69,7 +69,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container content-section text-center wow zoomInUp" class="wow slideInLeft" data-wow-duration="0.4s" data-wow-delay="1s" style="padding: 120px 0px 150px">
+    <section id="contact" class="container content-section text-center wow fadeInLeft" data-wow-duration="3s" data-wow-delay="0s" data-wow-offset="0"  data-wow-iteration="1" style="padding: 120px 0px 150px">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2><i class="fa fa-reply page_icon"></i>Contact me</h2>
