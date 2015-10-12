@@ -10,7 +10,7 @@ from books.models import Publisher, Author, Book
 from django import forms
 from django.contrib import auth
 from django.core.context_processors import csrf
-from userprofile.forms import UserCreationForm, UserProfileForm
+from userprofile.forms import MyRegistrationForm, UserProfileForm
 import datetime
 from django.core.mail import send_mail,BadHeaderError
 from django.conf import settings
@@ -96,7 +96,7 @@ def logout(request):
 
 def register_user(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = MyRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/accounts/register_success/')
@@ -105,7 +105,7 @@ def register_user(request):
 
     args = {}
     args.update(csrf(request))
-    args['form'] = UserCreationForm()
+    args['form'] = MyRegistrationForm()
     args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
     return render(request,'account/register.html', args)
 
