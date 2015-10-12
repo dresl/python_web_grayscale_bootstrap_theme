@@ -1,4 +1,5 @@
 {% extends "includes/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}Brigade{% endblock %}
 
@@ -15,13 +16,10 @@
 {% endblock page_title %}
 
 {% block content %}
-<div style="padding: 5px 10px;">
-	<form action="{% url 'blog:createb' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-	<ul class="create_greeting">
-	{{ form.as_p }}
-	</ul>
+<form action="{% url 'blog:createb' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+	
+	{{ form|crispy }}
 
-	<input type="submit" name="submit" value="Create blog" />
-	</form>
-</div>
+	<input class="btn btn-primary" type="submit" name="submit" value="Create blog" />
+</form>
 {% endblock %}

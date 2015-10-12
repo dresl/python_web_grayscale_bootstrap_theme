@@ -15,13 +15,13 @@
 
 {% block content %}
 <table border="2px" cellpadding="5px" cellspacing="0" bordercolor="black" style="width: 450px; margin: 10px auto">
-	<tr>
+	<tr style="background-color: #012D00;">
 		<th width="33%">Den</th>
 		<th width="33%">Datum</th>
 		<th width="33%">Počet hodin</th>
 	</tr>
 	{% for item in brigade %}
-	<tr>
+	<tr style="background-color: {% cycle '#1A1A1A' 'black' %}">
 		<td width="33%">{{ item.number_of_day }}</td>
 		<td width="33%">{{ item.pub_date.day }}.{{ item.pub_date.month }}. {{ item.pub_date.year }}</td>
 		<td width="33%">{{ item.hours_per_day }}</td>

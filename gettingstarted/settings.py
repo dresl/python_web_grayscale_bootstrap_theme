@@ -43,12 +43,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    #django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #third party apps
+    'crispy_forms',
+    #my apps
     'userprofile',
     'blog',
     'mathematic',
@@ -122,3 +126,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     ('', '/srv/bootstrap_sites/grayscale/python_web_grayscale_bootstrap_theme/static')
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

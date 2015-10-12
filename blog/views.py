@@ -14,31 +14,40 @@ from blog.forms import BlogForm
 
 
 def create_blog(request):
-    if request.POST:
-        form = BlogForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+    example_form = BlogForm()
+    redirect_url = request.GET.get('next')
 
-            return HttpResponseRedirect('/blog/')
-    else:
-        form = BlogForm()
+    # Form handling logic
+    if redirect_url is not None:
+        example_form.helper.form_action = reverse('blog_create') + '?next=' + redirectUrl
 
-    args = {}
-    args.update(csrf(request))
-    args['form'] = form
-    if request.user.is_authenticated():
-        args['sidebar'] = Sidebar.objects.filter(
-            pub_date__lte=timezone.now()).order_by('-pub_date')
-        args['username'] = request.user.username
-        args['full_name'] = request.user.first_name + \
-            ' ' + request.user.last_name
-        args['form'] = args['form']
-        return render(request, 'blog/create_blog.html', args)
-    else:
-        args['form'] = args['form']
-        args['sidebar'] = Sidebar.objects.filter(
-            pub_date__lte=timezone.now()).order_by('-pub_date')
-        return render(request, 'blog/create_blog.html', args)
+    return render_to_response('/blog/create_blog.html', {'example_form': example_form}, context_instance=RequestContext(request))
+    
+    # if request.POST:
+    #     form = BlogForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         form.save()
+
+    #         return HttpResponseRedirect('/blog/')
+    # else:
+    #     form = BlogForm()
+
+    # args = {}
+    # args.update(csrf(request))
+    # args['form'] = form
+    # if request.user.is_authenticated():
+    #     args['sidebar'] = Sidebar.objects.filter(
+    #         pub_date__lte=timezone.now()).order_by('-pub_date')
+    #     args['username'] = request.user.username
+    #     args['full_name'] = request.user.first_name + \
+    #         ' ' + request.user.last_name
+    #     args['form'] = args['form']
+    #     return render(request, 'blog/create_blog.html', args)
+    # else:
+    #     args['form'] = args['form']
+    #     args['sidebar'] = Sidebar.objects.filter(
+    #         pub_date__lte=timezone.now()).order_by('-pub_date')
+    #     return render(request, 'blog/create_blog.html', args)
 
 
 def blogs(request):
