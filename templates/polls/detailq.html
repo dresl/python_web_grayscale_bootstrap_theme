@@ -14,15 +14,23 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+<div class="col-md-2"></div>
+<div class="col-md-8">
 <form style="width: 480px" action="{% url 'polls:voteq' question.id %}" method="post">
 {% csrf_token %}
 {% for choice in question.choice_set.all %}
-<div class="choices">
+<div style="
+background: -moz-linear-gradient(left, white 0%, white 29%, white 50%, {{ choice.choice_text }} 71%, {{ choice.choice_text }} 100%);
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,white), color-stop(29%,white), color-stop(50%,white), color-stop(71%,{{ choice.choice_text }}), color-stop(100%,{{ choice.choice_text }}));
+" class="choices">
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
 </div>    
 {% endfor %}
-<input style="margin-top: 10px;" type="submit" value="Vote" /> | <a class="viewresults" href="{% url 'polls:resultsq' question.id %}"> display results</a> | <a class="viewresults" href="{% url 'polls:indexq'%}">Back</a>
+<hr>
+<input class="btn btn-default" style="margin-top: 10px;" type="submit" value="Vote" /> | <a class="viewresults" href="{% url 'polls:resultsq' question.id %}"> Display results</a> | <a class="viewresults" href="{% url 'polls:indexq'%}">Back</a>
 </form>
+</div>
+<div class="col-md-2"></div>
 
 {% endblock content %}

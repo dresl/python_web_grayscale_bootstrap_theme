@@ -12,9 +12,10 @@
 
 {% block content %}
 
-<ul>
+<ul style="list-style-type: none;">
 {% for choice in question.choice_set.all %}
-    <li class="result_item">{{ choice.choice_text }} <i style="color: white; font-size: 16px;" class="fa fa-long-arrow-right"></i>
+    <li class="result_item"><i style="color: {{ choice.choice_text }}" class="fa fa-circle"></i>
+ {{ choice.choice_text }} <i style="color: white; font-size: 16px;" class="fa fa-long-arrow-right"></i>
  {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
 {% endfor %}
 </ul>
