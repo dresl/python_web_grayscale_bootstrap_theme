@@ -29,6 +29,7 @@ def index(request):
         return render(request, 'math/mathindex.html', args)
 
 def create(request):
+    
     if request.POST:
         form = BrigadeForm(request.POST, request.FILES)
         if form.is_valid():

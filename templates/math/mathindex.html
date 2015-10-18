@@ -10,15 +10,22 @@
 	<li><a href="{% url 'contact'%}">Contact</a></li>
 {% endblock menu %}
 
-{% block page_title %}<i class="fa fa-cubes page_icon"></i>{% endblock page_title %}
+{% block page_title %}<i class="fa fa-cubes page_icon"></i>Kalkulačka{% endblock page_title %}
 
 {% block content %}
 
-<form action="{% url 'math:count' %}" method="post"/>{% csrf_token %}
-	<p>prvni cislo: <input type="text" name="cislo1" /></p>
-	<p>druhy cislo: <input type="text" name="cislo2" /></p>
-	<input type="submit" value="Spočítej">
-</form>
+<div class="col-md-3"></div>
+
+<div class="col-md-6">
+	<form action="{% url 'math:count' %}" method="post" />{% csrf_token %}
+		<label for="cislo1">Číslo 1</label><input class="form-control" id="cislo1" type="number" name="cislo1" />
+		<label for="cislo2">Číslo 2</label><input class="form-control" id="cislo2" type="number" name="cislo2" />
+		<hr>
+		<input class="btn btn-default" type="submit" value="Spočítej">
+	</form>	
+</div>
+
+<div class="col-md-3"></div>
 
 {% if error_message %}
 
