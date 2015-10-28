@@ -33,14 +33,13 @@ h6 {
 
 p {
     margin: 0 0 25px;
-    font-size: 18px;
     line-height: 1.5;
 }
 
 @media(min-width:768px) {
     p {
         margin: 0 0 35px;
-        font-size: 20px;
+        font-size: 18px;
         line-height: 1.6;
     }
 }
@@ -535,4 +534,28 @@ body {
 
 .modal-body {
     color: black!important;
+}
+
+.nav-tabs {
+    border-bottom: 2px solid #DDD   
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    color: white;
+    font-weight: bold;
+    cursor: default;
+    background-color: #000;
+    border-bottom: 4px solid rgb(5, 150, 88);
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+}
+
+.nav-tabs > li > a {
+    color: white;
 }

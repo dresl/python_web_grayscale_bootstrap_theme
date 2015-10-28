@@ -72,7 +72,7 @@ class BrigadeIndexView(generic.ListView):
         return Brigade.objects.filter(pub_date__lte=timezone.now())
 
 def DetailView(request, pk):
-    title_brigade = Brigade.objects.filter(pk=pk)
+    title_brigade = Brigade.objects.get(id=pk)
     if request.user.is_authenticated():
         brigade = Day.objects.filter(brigade__pk=pk).order_by('pub_date')
         def sum_hours(hours):

@@ -57,14 +57,25 @@
 
 {% else %}
 
-<p>{{ blog.body }}</p>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#blog"><i style="padding-right: 10px;" class="fa fa-calendar-o"></i>Content</a></li>
+    <li><a data-toggle="tab" href="#info"><i style="padding-right: 10px;" class="fa fa-info-circle"></i>Info</a></li>
+</ul>
 
-<div class="text_left">
-{% if blog.thumbnail %}
-<p><img style="border: 1px solid black" src="/static/{{ blog.thumbnail }}" width="350px"/></p>
-{% endif %}
-<p>likes: {{ blog.likes }} <span style="font-size: 10px;"> (You must register to like this blog.)</span></p>
-
+<div style="padding-top: 20px;" class="tab-content">
+    <div id="blog" class="tab-pane fade in active">
+      <p>{{ blog.body }}</p>
+      <div class="text_left">
+      {% if blog.thumbnail %}
+      <p><img style="border: 1px solid black" src="/static/{{ blog.thumbnail }}" width="350px"/></p>
+      {% endif %}
+      <p>likes: {{ blog.likes }} <span style="font-size: 10px;"> (You must register to like this blog.)</span></p>
+    </div>
+    </div>
+    <div id="info" class="tab-pane fade">
+      <p>Publication date: {{ blog.pub_date }}</p>
+      <p>Likes: {{ blog.likes }}</p>
+    </div>
 </div>
 
 {% endif %}

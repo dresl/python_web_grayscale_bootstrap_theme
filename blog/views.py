@@ -59,7 +59,7 @@ def blogs(request):
     return render(request, 'blog/indexb.html', args)
 
 
-def blog(request, blog_id=1):
+def blog(request, blog_id):
     args = {}
     args.update(csrf(request))
     args['blogs'] = Blog.objects.all().order_by('-pub_date')
