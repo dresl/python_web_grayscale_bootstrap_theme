@@ -559,3 +559,13 @@ body {
 .nav-tabs > li > a {
     color: white;
 }
+
+.nav-tabs > li > a:hover{
+    color: white;
+    background-color: #000;
+    border-bottom: 4px solid rgb(5, 150, 88)!important;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-color: black;
+}
