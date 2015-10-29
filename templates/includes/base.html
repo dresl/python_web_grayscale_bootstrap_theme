@@ -127,24 +127,33 @@
 					<li><a class="page-scroll" href="#blog">Blog</a></li>
 					<li><a class="page-scroll" href="#brigades">Brigades</a></li>
 					<li><a class="page-scroll" href="#contact">Contact</a></li>
-
 				{% endblock menu %}
+					{% block authentication %}
+					<li style="padding-left: 55px;">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+	                    </a>
+	                    <ul class="dropdown-menu dropdown-user">
+	                    {% if not user.is_authenticated %}
+	                        <li><a style="cursor:pointer" id="myBtn"><i class="fa fa-user fa-fw"></i> Login</a>
+	                        </li>
+	                        <li class="divider"></li>
+	                        <li><a href="/accounts/register/"><i class="fa fa-sign-in"></i> Register</a>
+	                        </li>
+	                    {% endif %}
+	                    {% if user.is_authenticated %}
+	                    	<li><a href="{% url 'userprofile:profile' %}"><i class="fa fa-user fa-fw"></i> View profile</a>
+	                        </li>
+	                        <li class="divider"></li>
+	                        <li><a href="/accounts/logout/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+	                        </li>
+	                    {% endif %}
+	                    </ul>
+	                </li>
+	                {% endblock authentication %}
+
                 </ul>				
             </div>
-            <div class="authentication">
-
-            	{% block authentication %}
-
-				{% if not user.is_authenticated %}
-				<a id="myBtn">Login</a> | <a href="/accounts/register/">register</a>
-				{% endif %}
-				{% if user.is_authenticated %}
-				<a href="{% url 'userprofile:profile' %}" title="{{ full_name }}">{{ username }}</a> <span class="">|</span> <a href="/accounts/logout/">logout</a></div>
-				{% endif %}
-
-				{% endblock authentication %}
-
-			</div>
 	    		
             <!-- /.navbar-collapse -->
         </div>

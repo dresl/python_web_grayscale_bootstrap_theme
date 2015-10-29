@@ -569,3 +569,9 @@ body {
     border-right: none;
     border-color: black;
 }
+
+.dropdown-menu>li>a:focus,.dropdown-menu>li>a:hover{
+    color: black!important;
+    text-decoration:none;
+    background-color:#f5f5f5
+}
