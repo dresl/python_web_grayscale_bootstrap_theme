@@ -1,4 +1,5 @@
 {% extends "includes/base.html" %}
+{% load staticfiles %}
 
 {% block title %}Blog{% endblock %}
 
@@ -16,12 +17,19 @@
 {% if blogs.count > 0 %}
 
 {% for blog in blogs %}
-	<a class="title_list_object" href="{% url 'blog:detailb' blog.id %}">
-	<div class="title_object">
-    	<h3>{{ blog.title }} <span class="likes">(likes: {{blog.likes}})</span></h3>
-    	{{ blog.body|truncatewords:"15" }}
+	<div class="row">
+        <div class="col-md-7">
+        	<a href="{% url 'blog:detailb' blog.id %}">
+                <img class="img-responsive" src="{% cycle '/static/img/blog2.jpg' '/static/img/blog3.jpg' '/static/img/blog4.jpg' %}" alt="">
+            </a>
+        </div>
+        <div class="col-md-5">
+            <h3>{{ blog.title }}</h3>
+            <h5>likes: {{blog.likes}}</h5>
+            <p>{{ blog.body|truncatewords:"15" }}</p>
+            <a class="btn btn-primary" href="{% url 'blog:detailb' blog.id %}">View blog <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
     </div>
-	</a>
 	<hr class="hr_low">
 {% endfor %}
 

@@ -1,4 +1,5 @@
 {% extends "includes/base.html" %}
+{% load staticfiles %}
 
 {% block welcome_content %}
     <!-- Intro Header -->
@@ -34,15 +35,20 @@
             <h2 class="wow flipInX" data-wow-duration="1s"><i class="fa fa-book page_icon"></i>Blog</h2>
             <hr>
             <div class="container">
-            {% for blog in blogs %}
-                <a href="{% url 'blog:detailb' blog.id %}">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h3>{{ blog.title }} <b class="likes">(likes: {{blog.likes}})</b></h3>
-                    {{ blog.body|truncatewords:"15" }}
-                <hr class="hr_low">
-                </div>
-                </a>
-            {% endfor %}
+                <div class="row">
+                {% for blog in blogs %}                    
+                    <div class="col-md-4 portfolio-item">
+                        <a href="{% url 'blog:detailb' blog.id %}">
+                            <img class="img-responsive" src="{% cycle '/static/img/blog2.jpg' '/static/img/blog3.jpg' '/static/img/blog4.jpg' %}" alt="">
+                        </a>
+                        &nbsp;
+                        <h3>
+                            <a href="{% url 'blog:detailb' blog.id %}">{{ blog.title }} <b class="likes">(likes: {{blog.likes}})</b></a>
+                        </h3>
+                        <p>{{ blog.body|truncatewords:"15" }}</p>
+                    </div>
+                {% endfor %}
+
             </div>
             <a href="{% url 'blog:indexb' %}" class="btn btn-default btn-lg"><span class="network-name">View all blogs</span></a>
         </div>
