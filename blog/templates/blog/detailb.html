@@ -84,7 +84,7 @@
       {% if blog.thumbnail %}
       <p><img style="border: 1px solid black" src="/static/{{ blog.thumbnail }}" width="350px"/></p>
       {% endif %}
-      <p>likes: {{ blog.likes }} <span style="font-size: 10px;"> (You must <a href="{% url 'userprofile:register_user' %}">register</a> to like this blog.)</span></p>
+      <p>likes: {{ blog.likes }} <span style="font-size: 10px;"> (You must be <a href="{% url 'userprofile:login' %}">log in</a> to like this blog.)</span></p>
     </div>
     </div>
     <div id="info" class="tab-pane fade">

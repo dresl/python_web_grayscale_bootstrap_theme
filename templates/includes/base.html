@@ -129,12 +129,12 @@
 					<li><a class="page-scroll" href="#contact">Contact</a></li>
 				{% endblock menu %}
 					{% block authentication %}
-					<li style="padding-left: 55px;">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+					<li style="padding-left: 55px;">						
+	                    {% if not user.is_authenticated %}
+	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                        <i class="fa fa-users fa-fw"></i>  <i class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
-	                    {% if not user.is_authenticated %}
 	                        <li><a style="cursor:pointer" id="myBtn"><i class="fa fa-user fa-fw"></i> Login</a>
 	                        </li>
 	                        <li class="divider"></li>
@@ -142,6 +142,10 @@
 	                        </li>
 	                    {% endif %}
 	                    {% if user.is_authenticated %}
+	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+	                    </a>
+	                    <ul class="dropdown-menu dropdown-user">
 	                    	<li><a href="{% url 'userprofile:profile' %}"><i class="fa fa-user fa-fw"></i> View profile</a>
 	                        </li>
 	                        <li class="divider"></li>

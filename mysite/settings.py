@@ -1,5 +1,5 @@
 """
-Django settings for gettingstarted project.
+Django settings for mysite project.
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
@@ -34,8 +34,6 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-TEMPLATE_DIRS = ('/srv/bootstrap_sites/grayscale/python_web_grayscale_bootstrap_theme/templates')
-
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 ALLOWED_HOSTS = []
@@ -69,9 +67,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'gettingstarted.urls'
+ROOT_URLCONF = 'mysite.urls'
 
-WSGI_APPLICATION = 'gettingstarted.wsgi.application'
+WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

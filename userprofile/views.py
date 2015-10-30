@@ -34,9 +34,9 @@ def edit_profile(request):
         args['username'] = request.user.username
         args['full_name'] = request.user.first_name + ' ' + request.user.last_name
         args['form'] = args['form']
-        return render(request, 'account/edit_profile.html', args)
+        return render(request, 'userprofile/edit_profile.html', args)
     else:
-        return render(request, 'account/edit_profile.html', args)
+        return render(request, 'userprofile/edit_profile.html', args)
 
 def userprofile(request):
     args = {}
@@ -49,18 +49,18 @@ def userprofile(request):
         args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
         args['username'] = request.user.username
         args['full_name'] = request.user.first_name + ' ' + request.user.last_name
-        return render(request,'account/profile.html', args)
+        return render(request,'userprofile/profile.html', args)
     else:
         args['greetings'] = Greeting.objects.all()
         args['questions'] = Question.objects.all()
         args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-        return render(request, 'account/profile.html', args)
+        return render(request, 'userprofile/profile.html', args)
 
 def login(request):
     c = {}
     c.update(csrf(request))
     c['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-    return render(request, 'account/login.html', c)
+    return render(request, 'userprofile/login.html', c)
 
 def auth_view(request):
     username = request.POST.get('username', '')
@@ -79,20 +79,20 @@ def loggedin(request):
         args['full_name'] = request.user.first_name + ' ' + request.user.last_name
         args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
         args['username'] = request.user.username
-        return render(request, 'account/loggedin.html', args)
+        return render(request, 'userprofile/loggedin.html', args)
     else:
         args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-        return render(request, 'account/loggedin.html', args)
+        return render(request, 'userprofile/loggedin.html', args)
 
 def invalid_login(request):
     sidebar = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-    return render(request,'account/invalid_login.html', {'sidebar': sidebar})
+    return render(request,'userprofile/invalid_login.html', {'sidebar': sidebar})
 
 def logout(request):
     auth.logout(request)
     args = {}
     args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-    return render(request, 'account/logout.html', args)
+    return render(request, 'userprofile/logout.html', args)
 
 def register_user(request):
     if request.method == 'POST':
@@ -107,7 +107,7 @@ def register_user(request):
     args.update(csrf(request))
     args['form'] = MyRegistrationForm()
     args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-    return render(request,'account/register.html', args)
+    return render(request,'userprofile/register.html', args)
 
 def register_success(request):
-    return render(request, 'account/register_success.html')
+    return render(request, 'userprofile/register_success.html')

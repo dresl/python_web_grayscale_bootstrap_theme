@@ -23,10 +23,10 @@ def index(request):
         args['username'] = request.user.username
         args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]
         args['full_name'] = request.user.first_name + ' ' + request.user.last_name
-        return render(request, 'math/mathindex.html', args)
+        return render(request, 'mathematic/mathindex.html', args)
     else:
         args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]
-        return render(request, 'math/mathindex.html', args)
+        return render(request, 'mathematic/mathindex.html', args)
 
 def create(request):
     
@@ -35,7 +35,7 @@ def create(request):
         if form.is_valid():
             form.save()
 
-            return HttpResponseRedirect('/math/brigade/')
+            return HttpResponseRedirect('/mathematic/brigade/')
     else:
         form = BrigadeForm()
 
@@ -48,12 +48,12 @@ def create(request):
         args['username'] = request.user.username
         args['full_name'] = request.user.first_name + ' ' + request.user.last_name
         args['form'] = args['form']
-        return render(request, 'math/brigade_create.html', args)
+        return render(request, 'mathematic/brigade_create.html', args)
     else:
-        return render(request, 'math/brigade_create.html', args)
+        return render(request, 'mathematic/brigade_create.html', args)
 
 class BrigadeIndexView(generic.ListView):
-    template_name = 'math/brigade_index.html'
+    template_name = 'mathematic/brigade_index.html'
     context_object_name = 'latest_brigade_list'
 
     def get_context_data(self, *args, **kwargs):
@@ -119,7 +119,7 @@ def DetailView(request, pk):
                 return round(total, 2)
             average_price = average_price(brigade)
             
-            return render(request, 'math/brigade_detail.html', {'brigade': brigade,
+            return render(request, 'mathematic/brigade_detail.html', {'brigade': brigade,
                                                            'sum_hours': sum_hours,
                                                            'title_brigade': title_brigade,
                                                            'average_hours': average_hours,
@@ -129,7 +129,7 @@ def DetailView(request, pk):
                                                            'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                            'full_name': request.user.first_name + ' ' + request.user.last_name})
         else:
-            return render(request, 'math/brigade_index_error.html')
+            return render(request, 'mathematic/brigade_index_error.html')
     
     else:
         brigade = Day.objects.filter(brigade__pk=pk).order_by('pub_date')
@@ -177,7 +177,7 @@ def DetailView(request, pk):
                 return round(total, 2)
             average_price = average_price(brigade)
 
-            return render(request, 'math/brigade_detail.html', {'brigade': brigade,
+            return render(request, 'mathematic/brigade_detail.html', {'brigade': brigade,
                                                            'sum_hours': sum_hours,
                                                            'average_hours': average_hours,
                                                            'title_brigade': title_brigade,
@@ -185,50 +185,50 @@ def DetailView(request, pk):
                                                            'average_price': average_price,
                                                            'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],})
         else:
-            return render(request, 'math/brigade_index_error.html')
+            return render(request, 'mathematic/brigade_index_error.html')
 
 def count(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
             if len(request.POST['cislo1']) == 0 or len(request.POST['cislo2']) == 0:
                 error_message = 'Zadej vsechny udaje'
-                return render(request, 'math/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
                                                                'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                'full_name': request.user.first_name + ' ' + request.user.last_name})
             elif request.POST['cislo1'].isdigit() and request.POST['cislo2'].isdigit():
                 cislo1 = int(request.POST['cislo1'])
                 cislo2 = int(request.POST['cislo2'])
                 vysledek = cislo2 + cislo1
-                return render(request, 'math/vysledek.html', {'vysledek': vysledek,'username': request.user.username,
+                return render(request, 'mathematic/vysledek.html', {'vysledek': vysledek,'username': request.user.username,
                                                               'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                               'full_name': request.user.first_name + ' ' + request.user.last_name})
             elif not request.POST['cislo1'].isdigit() or not request.POST['cislo2'].isdigit():
                 error_message = 'Musis zadat cislo'
-                return render(request, 'math/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
                                                                'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                'full_name': request.user.first_name + ' ' + request.user.last_name})
             else:
                 error_message = 'ahoj'
-                return render(request, 'math/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
                                                                'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                'full_name': request.user.first_name + ' ' + request.user.last_name})
     else:
         if request.method == 'POST':
             if len(request.POST['cislo1']) == 0 or len(request.POST['cislo2']) == 0:
                 error_message = 'Zadej vsechny udaje'
-                return render(request, 'math/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
                                                                'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
             elif request.POST['cislo1'].isdigit() and request.POST['cislo2'].isdigit():
                 cislo1 = int(request.POST['cislo1'])
                 cislo2 = int(request.POST['cislo2'])
                 vysledek = cislo2 + cislo1
-                return render(request, 'math/vysledek.html', {'vysledek': vysledek,'username': request.user.username,
+                return render(request, 'mathematic/vysledek.html', {'vysledek': vysledek,'username': request.user.username,
                                                               'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
             elif not request.POST['cislo1'].isdigit() or not request.POST['cislo2'].isdigit():
                 error_message = 'Musis zadat cislo'
-                return render(request, 'math/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
                                                                'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
             else:
                 error_message = 'ahoj'
-                return render(request, 'math/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
                                                                'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
