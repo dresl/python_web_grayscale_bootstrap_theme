@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import *
+from django.template import RequestContext
 from django.views import generic
 from django.utils import timezone
 from django import forms
@@ -35,7 +36,7 @@ def create(request):
         if form.is_valid():
             form.save()
 
-            return HttpResponseRedirect('/mathematic/brigade/')
+            return HttpResponseRedirect('/math/brigade/')
     else:
         form = BrigadeForm()
 
@@ -187,26 +188,78 @@ def DetailView(request, pk):
         else:
             return render(request, 'mathematic/brigade_index_error.html')
 
+class CalcIndexView(generic.ListView):
+    template_name = 'mathematic/calc_index.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CalcIndexView, self).get_context_data(*args, **kwargs)
+
+        if self.request.user.is_authenticated():
+            context['full_name'] = self.request.user.first_name + ' ' + self.request.user.last_name
+            context['username'] = self.request.user.username
+        return context
+
+    def get_queryset(self):
+
+        return Brigade.objects.filter(pub_date__lte=timezone.now())
+
+def choose(request):
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            if request.POST['myfield'] == 'plus':
+                myfield = request.POST['myfield']
+                return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
+            elif request.POST['myfield'] == 'minus':
+                myfield = request.POST['myfield']
+                return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
+    else:
+        if request.method == 'POST':
+            if request.POST['myfield'] == 'plus':
+                myfield = request.POST['myfield']
+                return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
+            elif request.POST['myfield'] == 'minus':
+                myfield = request.POST['myfield']
+                return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
+
 def count(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
-            if len(request.POST['cislo1']) == 0 or len(request.POST['cislo2']) == 0:
-                error_message = 'Zadej vsechny udaje'
-                return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
-                                                               'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                               'full_name': request.user.first_name + ' ' + request.user.last_name})
-            elif request.POST['cislo1'].isdigit() and request.POST['cislo2'].isdigit():
-                cislo1 = int(request.POST['cislo1'])
-                cislo2 = int(request.POST['cislo2'])
-                vysledek = cislo2 + cislo1
-                return render(request, 'mathematic/vysledek.html', {'vysledek': vysledek,'username': request.user.username,
-                                                              'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                              'full_name': request.user.first_name + ' ' + request.user.last_name})
-            elif not request.POST['cislo1'].isdigit() or not request.POST['cislo2'].isdigit():
-                error_message = 'Musis zadat cislo'
-                return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
-                                                               'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                               'full_name': request.user.first_name + ' ' + request.user.last_name})
+            if request.POST['myfield'] == 'plus':
+                if len(request.POST['cislo1']) == 0 or len(request.POST['cislo2']) == 0:
+                    error_message = 'Zadej vsechny udaje'
+                    return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
+                elif request.POST['cislo1'].isdigit() and request.POST['cislo2'].isdigit():
+                    cislo1 = int(request.POST['cislo1'])
+                    cislo2 = int(request.POST['cislo2'])
+                    vysledek = cislo2 + cislo1
+                    return render(request, 'mathematic/vysledek.html', {'vysledek': vysledek,'username': request.user.username,
+                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name})
+                elif not request.POST['cislo1'].isdigit() or not request.POST['cislo2'].isdigit():
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
+            elif request.POST['myfield'] == 'minus':
+                if len(request.POST['cislo1m']) == 0 or len(request.POST['cislo2m']) == 0:
+                    error_message = 'Zadej vsechny udaje'
+                    return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
+                elif request.POST['cislo1m'].isdigit() and request.POST['cislo2m'].isdigit():
+                    cislo1 = int(request.POST['cislo1m'])
+                    cislo2 = int(request.POST['cislo2m'])
+                    vysledek = cislo1 - cislo2
+                    return render(request, 'mathematic/vysledek.html', {'vysledek': vysledek,'username': request.user.username,
+                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name})
+                elif not request.POST['cislo1m'].isdigit() or not request.POST['cislo2m'].isdigit():
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,
+                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
             else:
                 error_message = 'ahoj'
                 return render(request, 'mathematic/mathindex.html', {'error_message': error_message,'username': request.user.username,

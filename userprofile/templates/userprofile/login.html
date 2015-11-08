@@ -16,7 +16,7 @@
 	<p class="error">Sorry, that's not a valid username or password</p>
 {% endif %}
 
-<form action="/accounts/auth/" method="post">{% csrf_token %}
+<form method="post" action="/accounts/auth/">{% csrf_token %}
 	<p>Username: <input data-toggle="tooltip" data-placement="right" title="enter your username" type="text" name="username" value="" id="username" placeholder="your username"></p>
 	<p>Password: <input data-toggle="tooltip" data-placement="right" title="enter your password" type="password" name="password" value="" placeholder="your password" id="password"></p>
 

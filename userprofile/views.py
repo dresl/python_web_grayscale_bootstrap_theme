@@ -59,14 +59,12 @@ def userprofile(request):
 def login(request):
     c = {}
     c.update(csrf(request))
-    c['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
     return render(request, 'userprofile/login.html', c)
 
 def auth_view(request):
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
     user = auth.authenticate(username=username, password=password)
-
     if user is not None:
         auth.login(request, user)
         return HttpResponseRedirect('/accounts/profile/')

@@ -10,27 +10,17 @@
 	<li><a href="{% url 'contact'%}">Contact</a></li>
 {% endblock menu %}
 
-{% block page_title %}<i class="fa fa-cubes page_icon"></i>Kalkulačka{% endblock page_title %}
+{% block page_title %}<i class="fa fa-cubes page_icon"></i>Mathematic{% endblock page_title %}
 
 {% block content %}
 
 <div class="col-md-3"></div>
 
 <div class="col-md-6">
-	<form action="{% url 'math:count' %}" method="post" />{% csrf_token %}
-		<label for="cislo1">Číslo 1</label><input class="form-control" id="cislo1" type="number" name="cislo1" />
-		<label for="cislo2">Číslo 2</label><input class="form-control" id="cislo2" type="number" name="cislo2" />
-		<hr>
-		<input class="btn btn-default" type="submit" value="Spočítej">
-	</form>	
+	<a href="{% url 'math:brigade_index' %}"><h1>Brigades</h1></a>
+	<a href="{% url 'math:calc_index' %}"><h1>Calc</h1></a>
 </div>
 
 <div class="col-md-3"></div>
-
-{% if error_message %}
-
-	<p style="color: red;">{{ error_message }}</p>
-
-{% endif %}
 
 {% endblock %}
