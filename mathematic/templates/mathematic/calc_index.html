@@ -20,6 +20,13 @@
 
 <hr>
 
+{% if vysledek %}
+<p>vysledek je {{ vysledek }} </p>
+{% endif %}
+
+{% if error_message %}
+	<p style="color: red;">{{ error_message }}</p>
+{% endif %}
 <script type="text/javascript">
 var myselect = $("#sCountry");
 myselect[0].selectedIndex = 3;
@@ -32,15 +39,12 @@ myselect.selectmenu('refresh');
 <form action="{% url 'math:count' %}" method="post" />{% csrf_token %}
 	<label for="cislo1">Číslo 1</label><input class="form-control" id="cislo1" type="number" name="cislo1" />
 	<label for="cislo2">Číslo 2</label><input class="form-control" id="cislo2" type="number" name="cislo2" />
-	<select name='myfield'>
+	<select style="visibility: hidden" name='myfield'>
   		<option value="plus" selected>Plus</option>
 	</select>
 	<hr>
 	<input class="btn btn-default" type="submit" value="Spočítej">
 </form>
-{% if error_message %}
-	<p style="color: red;">{{ error_message }}</p>
-{% endif %}
 
 {% elif myfield == 'minus' %}
 
@@ -48,15 +52,12 @@ myselect.selectmenu('refresh');
 <form action="{% url 'math:count' %}" method="post" />{% csrf_token %}
 	<label for="cislo1m">Číslo 1</label><input class="form-control" id="cislo1m" type="number" name="cislo1m" />
 	<label for="cislo2m">Číslo 2</label><input class="form-control" id="cislo2m" type="number" name="cislo2m" />
-	<select name='myfield'>
+	<select style="visibility: hidden" name='myfield'>
   		<option value="minus" selected>Minus</option>
 	</select>
 	<hr>
 	<input class="btn btn-default" type="submit" value="Spočítej">
 </form>
-{% if error_message %}
-	<p style="color: red;">{{ error_message }}</p>
-{% endif %}
 
 {% endif %}
 
