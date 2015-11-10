@@ -1,17 +1,5 @@
 from django.contrib import admin
-from polls.models import Choice, Question, Greeting, Sidebar
-
-class GreetingAdmin(admin.ModelAdmin):
-    list_filter = ('title'),
-    search_fields = ('title'),
-    list_display = ('title', 'pub_date', 'likes')
-    fieldsets = [
-        ('Name',               {'fields': ['title']}),
-        ('Date information', {'fields': ['pub_date']}), #'classes': ['collapse']
-        ('Content',               {'fields': ['body']}),
-        ('thumbnail',            {'fields': ['thumbnail']}),
-        ('Likes',            {'fields': ['likes']}),
-    ]
+from polls.models import Choice, Question, Sidebar
     
 class ChoiceInline(admin.TabularInline):
     model = Choice
@@ -36,5 +24,4 @@ class SidebarAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Greeting, GreetingAdmin)
 admin.site.register(Sidebar, SidebarAdmin)

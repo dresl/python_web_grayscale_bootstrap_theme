@@ -11,7 +11,7 @@ from django.core.context_processors import csrf
 from django.template.loader import get_template
 from django.template import Context
 import datetime
-from polls.models import Choice, Question, Greeting, Sidebar
+from polls.models import Choice, Question, Sidebar
 from books.models import Book
 from mathematic.models import Brigade, Day
 from django.core.mail import send_mail

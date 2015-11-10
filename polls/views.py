@@ -10,8 +10,7 @@ from django.template import *
 from django.utils import timezone
 from django.views import generic
 from mathematic.models import Brigade, Day
-from polls.forms import GreetingForm
-from polls.models import Choice, Greeting, Question, Sidebar
+from polls.models import Choice, Question, Sidebar
 
 ################## OTHER ####################################################
 
@@ -220,13 +219,13 @@ def search_titles(request):
         search_text = ''
 
     if request.user.is_authenticated():
-        greetings = Greeting.objects.filter(title__contains=search_text)
+        greetings = Question.objects.filter(title__contains=search_text)
         return render(request, 'polls/ajax_search.html', {
             'greetings': greetings, 'username': request.user.username,
             'full_name': request.user.first_name + ' ' + request.user.last_name
         })
     else:
-        greetings = Greeting.objects.filter(title__contains=search_text)
+        greetings = Question.objects.filter(title__contains=search_text)
         return render(request, 'polls/ajax_search.html', {
             'greetings': greetings
         })

@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.template import *
 from django.views import generic
 from django.utils import timezone
-from polls.models import Choice, Question, Greeting, Sidebar
+from polls.models import Choice, Question, Sidebar
 from userprofile.models import UserProfile
 from books.models import Publisher, Author, Book
 from django import forms
@@ -44,14 +44,12 @@ def userprofile(request):
     if request.user.is_authenticated():
     	args['profile_picture'] = request.user.profile.profile_picture
         args['hobbies'] = request.user.profile.hobbies
-        args['greetings'] = Greeting.objects.all()
         args['questions'] = Question.objects.all()
         args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
         args['username'] = request.user.username
         args['full_name'] = request.user.first_name + ' ' + request.user.last_name
         return render(request,'userprofile/profile.html', args)
     else:
-        args['greetings'] = Greeting.objects.all()
         args['questions'] = Question.objects.all()
         args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
         return render(request, 'userprofile/profile.html', args)

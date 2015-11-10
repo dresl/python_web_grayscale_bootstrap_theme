@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.template import *
 from django.views import generic
 from django.utils import timezone
-from polls.models import Choice, Question, Greeting, Sidebar
+from polls.models import Choice, Question, Sidebar
 from books.models import Publisher, Author, Book
 from django import forms
 from django.contrib import auth
