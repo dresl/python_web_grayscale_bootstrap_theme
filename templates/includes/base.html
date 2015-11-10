@@ -121,12 +121,20 @@
 
                 <ul class="nav navbar-nav">
                 {% block menu %}
-
-                    <li><a class="page-scroll" href="{% url 'welcome' %}">Welcome</a></li>
+                {% if request.path == '/' %}
+					<li><a class="page-scroll" href="{% url 'welcome' %}">Welcome</a></li>
 					<li><a class="page-scroll" href="#polls">Polls</a></li>
 					<li><a class="page-scroll" href="#blog">Blog</a></li>
 					<li><a class="page-scroll" href="#brigades">Brigades</a></li>
 					<li><a class="page-scroll" href="#contact">Contact</a></li>
+				{% else %}
+				    <li><a href="{% url 'welcome' %}">Welcome</a></li>
+    				<li {% if '/polls/' in request.path %}class="active"{% endif %}><a href="{% url 'polls:indexq'%}">Polls</a></li>
+    				<li {% if '/blog/' in request.path %}class="active"{% endif %}><a href="{% url 'blog:indexb'%}">Blog</a></li>
+    				<li {% if '/brigade/' in request.path %}class="active"{% endif %}><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
+    				<li {% if '/contact/' in request.path %}class="active"{% endif %}><a href="{% url 'welcome' %}#contact">Contact</a></li>
+                {% endif %}
+                    
 				{% endblock menu %}
 					<li style="padding-left: 25px;">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">

@@ -2,16 +2,7 @@
 
 {% block title %}Brigade{% endblock %}
 
-{% block menu %}
-	<li><a href="{% url 'welcome' %}">Welcome</a></li>
-	<li><a href="{% url 'welcome' %}#polls">Polls</a></li>
-	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
-	<li class="active"><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
-	<li><a href="{% url 'welcome' %}#contact">Contact</a></li>
-{% endblock menu %}
-
 {% block page_title %}<i class="fa fa-cubes page_icon"></i>{{title_brigade}}{% endblock page_title %}
-
 
 {% block content %}
 <table border="2px" cellpadding="5px" cellspacing="0" bordercolor="black" style="width: 450px; margin: 10px auto">
@@ -69,7 +60,7 @@
         </div>
         <div class="modal-body">
           	<form action="{% url 'math:createb' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-				<ul class="create_greeting">
+				<ul class="float_left">
 				{{ form.as_p }}
 				</ul>
 

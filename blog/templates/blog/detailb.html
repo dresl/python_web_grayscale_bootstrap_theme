@@ -29,14 +29,6 @@
 	</script>
 {% endblock script_fixed_scroll %}
 
-{% block menu %}
-	<li><a href="{% url 'welcome' %}">Welcome</a></li>
-	<li><a href="{% url 'welcome' %}#polls">Polls</a></li>
-	<li class="active"><a href="{% url 'blog:indexb'%}">Blog</a></li>
-	<li><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
-	<li><a href="{% url 'welcome' %}#contact">Contact</a></li>
-{% endblock menu %}
-
 {% block page_title %}<i class="fa fa-book page_icon"></i>{{ blog.title }}{% endblock page_title %}
 
 {% block content %}

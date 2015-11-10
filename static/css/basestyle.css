@@ -308,7 +308,7 @@ input:focus:not([type=submit]) {
 	color: #333;
 }
 
-.create_greeting p label {
+.float_left p label {
 	float: left;
 }
 

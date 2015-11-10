@@ -24,7 +24,6 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('userprofile.urls', namespace='userprofile')),
     url(r'^math/', include('mathematic.urls', namespace='math')),
     url(r'^polls/', include('polls.urlsq', namespace='polls')),
-    url(r'^greeting/', include('polls.urlsg', namespace='greeting')),
     url(r'^blog/', include('blog.urls', namespace='blog')),
     url(r'^admin/', include(admin.site.urls)),
 )

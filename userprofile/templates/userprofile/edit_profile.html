@@ -1,17 +1,9 @@
 {% extends "includes/base.html" %}
 
-{% block menu %}
-	<li><a href="{% url 'welcome' %}">Welcome</a></li>
-	<li><a href="{% url 'welcome' %}#polls">Polls</a></li>
-	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
-	<li><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
-	<li><a href="{% url 'welcome' %}#contact">Contact</a></li>
-{% endblock menu %}
-
 {% block content %}
 
 	<form action="{% url 'userprofile:edit_profile' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-	<ul class="create_greeting">
+	<ul class="float_left">
 	{{ form.as_p }}
 	</ul>
 

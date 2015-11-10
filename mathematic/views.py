@@ -257,7 +257,7 @@ def count(request):
     else:
         if request.method == 'GET':
             if request.GET['myfield'] == 'plus':
-                if request.GET['cislo1'].isdigit() and request.GET['cislo2'].isdigit():
+                if request.GET['cislo1'] and request.GET['cislo2']:
                     cislo1 = int(request.GET['cislo1'])
                     cislo2 = int(request.GET['cislo2'])
                     vysledek_ = cislo1 + cislo2
@@ -269,7 +269,7 @@ def count(request):
                     return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
             elif request.GET['myfield'] == 'minus':
-                if request.GET['cislo1m'].isdigit() and request.GET['cislo2m'].isdigit():
+                if request.GET['cislo1m'] and request.GET['cislo2m']:
                     cislo1 = int(request.GET['cislo1m'])
                     cislo2 = int(request.GET['cislo2m'])
                     vysledek_ = cislo1 - cislo2

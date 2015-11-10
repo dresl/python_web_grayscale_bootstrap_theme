@@ -1,13 +1,5 @@
 {% extends "includes/base.html" %}
 
-{% block menu %}
-	<li><a href="{% url 'welcome' %}">Welcome</a></li>
-	<li><a href="{% url 'welcome' %}#polls">Polls</a></li>
-	<li><a href="{% url 'blog:indexb'%}">Blog</a></li>
-	<li><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
-	<li><a href="{% url 'welcome' %}#contact">Contact</a></li>
-{% endblock menu %}
-
 {% block page_title %}Your login details are invalid!{% endblock page_title %}
 
 {% block content %}
