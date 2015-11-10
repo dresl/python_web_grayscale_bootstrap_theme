@@ -205,107 +205,80 @@ class CalcIndexView(generic.ListView):
 
 def choose(request):
     if request.user.is_authenticated():
-        if request.method == 'POST':
-            if request.POST['myfield'] == 'plus':
-                myfield = request.POST['myfield']
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'plus':
+                myfield = request.GET['myfield']
                 return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
-            elif request.POST['myfield'] == 'minus':
-                myfield = request.POST['myfield']
+            elif request.GET['myfield'] == 'minus':
+                myfield = request.GET['myfield']
                 return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
     else:
-        if request.method == 'POST':
-            if request.POST['myfield'] == 'plus':
-                myfield = request.POST['myfield']
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'plus':
+                myfield = request.GET['myfield']
                 return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
-            elif request.POST['myfield'] == 'minus':
-                myfield = request.POST['myfield']
+            elif request.GET['myfield'] == 'minus':
+                myfield = request.GET['myfield']
                 return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
 
 def count(request):
     if request.user.is_authenticated():
-        if request.method == 'POST':
-            if request.POST['myfield'] == 'plus':
-                if len(request.POST['cislo1']) == 0 or len(request.POST['cislo2']) == 0:
-                    error_message = 'Zadej vsechny udaje'
-                    return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
-                elif request.POST['cislo1'].isdigit() and request.POST['cislo2'].isdigit():
-                    cislo1 = int(request.POST['cislo1'])
-                    cislo2 = int(request.POST['cislo2'])
-                    vysledek = cislo2 + cislo1
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'plus':
+                if request.GET['cislo1'] and request.GET['cislo2']:
+                    cislo1 = int(request.GET['cislo1'])
+                    cislo2 = int(request.GET['cislo2'])
+                    vysledek_ = cislo1 + cislo2
+                    vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
-                elif not request.POST['cislo1'].isdigit() or not request.POST['cislo2'].isdigit():
+                else:
                     error_message = 'Musis zadat cislo'
                     return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                    'full_name': request.user.first_name + ' ' + request.user.last_name})
-            elif request.POST['myfield'] == 'minus':
-                if len(request.POST['cislo1m']) == 0 or len(request.POST['cislo2m']) == 0:
-                    error_message = 'Zadej vsechny udaje'
-                    return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
-                elif request.POST['cislo1m'].isdigit() and request.POST['cislo2m'].isdigit():
-                    cislo1 = int(request.POST['cislo1m'])
-                    cislo2 = int(request.POST['cislo2m'])
-                    vysledek = cislo1 - cislo2
+
+            elif request.GET['myfield'] == 'minus':
+                if request.GET['cislo1m'] and request.GET['cislo2m']:
+                    cislo1 = int(request.GET['cislo1m'])
+                    cislo2 = int(request.GET['cislo2m'])
+                    vysledek_ = cislo1 - cislo2
+                    vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
-                elif not request.POST['cislo1m'].isdigit() or not request.POST['cislo2m'].isdigit():
+
+                else:
                     error_message = 'Musis zadat cislo'
                     return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                    'full_name': request.user.first_name + ' ' + request.user.last_name})
-            else:
-                error_message = 'ahoj'
-                return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
-                                                               'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                               'full_name': request.user.first_name + ' ' + request.user.last_name})
     else:
-        if request.method == 'POST':
-            if request.POST['myfield'] == 'plus':
-                if len(request.POST['cislo1']) == 0 or len(request.POST['cislo2']) == 0:
-                    error_message = 'Zadej vsechny udaje'
-                    return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
-                elif request.POST['cislo1'].isdigit() and request.POST['cislo2'].isdigit():
-                    cislo1 = int(request.POST['cislo1'])
-                    cislo2 = int(request.POST['cislo2'])
-                    vysledek = cislo2 + cislo1
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'plus':
+                if request.GET['cislo1'].isdigit() and request.GET['cislo2'].isdigit():
+                    cislo1 = int(request.GET['cislo1'])
+                    cislo2 = int(request.GET['cislo2'])
+                    vysledek_ = cislo1 + cislo2
+                    vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
-                elif not request.POST['cislo1'].isdigit() or not request.POST['cislo2'].isdigit():
-                    error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
                 else:
                     error_message = 'ahoj'
                     return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
-            elif request.POST['myfield'] == 'minus':
-                if len(request.POST['cislo1m']) == 0 or len(request.POST['cislo2m']) == 0:
-                    error_message = 'Zadej vsechny udaje'
-                    return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                })
-                elif request.POST['cislo1m'].isdigit() and request.POST['cislo2m'].isdigit():
-                    cislo1 = int(request.POST['cislo1m'])
-                    cislo2 = int(request.POST['cislo2m'])
-                    vysledek = cislo1 - cislo2
+            elif request.GET['myfield'] == 'minus':
+                if request.GET['cislo1m'].isdigit() and request.GET['cislo2m'].isdigit():
+                    cislo1 = int(request.GET['cislo1m'])
+                    cislo2 = int(request.GET['cislo2m'])
+                    vysledek_ = cislo1 - cislo2
+                    vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                 })
-                elif not request.POST['cislo1m'].isdigit() or not request.POST['cislo2m'].isdigit():
+                else:
                     error_message = 'Musis zadat cislo'
                     return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                })
-            else:
-                error_message = 'ahoj'
-                return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
-                                                               'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                 })
