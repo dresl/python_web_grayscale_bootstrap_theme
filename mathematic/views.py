@@ -265,7 +265,7 @@ def count(request):
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
                 else:
-                    error_message = 'ahoj'
+                    error_message = 'Musis zadat cislo'
                     return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
             elif request.GET['myfield'] == 'minus':
