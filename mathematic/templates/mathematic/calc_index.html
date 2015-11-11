@@ -50,8 +50,8 @@ myselect.selectmenu('refresh');
 
 <h3>Minus</h3>
 <form action="{% url 'math:count' %}" method="get" />{% csrf_token %}
-	<label for="cislo1m">Číslo 1</label><input class="form-control" id="cislo1m" type="number" name="cislo1m" step="any" required/>
-	<label for="cislo2m">Číslo 2</label><input class="form-control" id="cislo2m" type="number" name="cislo2m" step="any" required/>
+	<label for="cislo1m">Číslo 1</label><input class="form-control" id="cislo1m" type="number" name="cislo1" step="any" required/>
+	<label for="cislo2m">Číslo 2</label><input class="form-control" id="cislo2m" type="number" name="cislo2" step="any" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="minus" selected>Minus</option>
 	</select>

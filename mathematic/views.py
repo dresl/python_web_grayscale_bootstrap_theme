@@ -241,9 +241,9 @@ def count(request):
                                                                    'full_name': request.user.first_name + ' ' + request.user.last_name})
 
             elif request.GET['myfield'] == 'minus':
-                if request.GET['cislo1m'] and request.GET['cislo2m']:
-                    cislo1 = float(request.GET['cislo1m'])
-                    cislo2 = float(request.GET['cislo2m'])
+                if request.GET['cislo1'] and request.GET['cislo2']:
+                    cislo1 = float(request.GET['cislo1'])
+                    cislo2 = float(request.GET['cislo2'])
                     vysledek_ = cislo1 - cislo2
                     vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
@@ -270,9 +270,9 @@ def count(request):
                     return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
             elif request.GET['myfield'] == 'minus':
-                if request.GET['cislo1m'] and request.GET['cislo2m']:
-                    cislo1 = float(request.GET['cislo1m'])
-                    cislo2 = float(request.GET['cislo2m'])
+                if request.GET['cislo1'] and request.GET['cislo2']:
+                    cislo1 = float(request.GET['cislo1'])
+                    cislo2 = float(request.GET['cislo2'])
                     vysledek_ = cislo1 - cislo2
                     vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
