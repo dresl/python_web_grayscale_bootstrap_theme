@@ -11,7 +11,7 @@
 <div class="col-md-6">
 <form method="get" action="{% url 'math:choose' %}">{% csrf_token %}
 	<label for="sCountry">Operation:</label>
-	<select placeholder="AAA" name='myfield' id="sCountry" onchange='this.form.submit()'>
+	<select name='myfield' id="sCountry" onchange='this.form.submit()'>
   		<option value="plus" selected>Plus</option>
   		<option value="minus">Minus</option>
 	</select>
@@ -37,8 +37,8 @@ myselect.selectmenu('refresh');
 
 <h3>Plus</h3>
 <form action="{% url 'math:count' %}" method="get" />{% csrf_token %}
-	<label for="cislo1">Číslo 1</label><input class="form-control" id="cislo1" type="number" name="cislo1" />
-	<label for="cislo2">Číslo 2</label><input class="form-control" id="cislo2" type="number" name="cislo2" />
+	<label for="cislo1">Číslo 1</label><input class="form-control" id="cislo1" type="number" name="cislo1" required/>
+	<label for="cislo2">Číslo 2</label><input class="form-control" id="cislo2" type="number" name="cislo2" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="plus" selected>Plus</option>
 	</select>
@@ -50,8 +50,8 @@ myselect.selectmenu('refresh');
 
 <h3>Minus</h3>
 <form action="{% url 'math:count' %}" method="get" />{% csrf_token %}
-	<label for="cislo1m">Číslo 1</label><input class="form-control" id="cislo1m" type="number" name="cislo1m" />
-	<label for="cislo2m">Číslo 2</label><input class="form-control" id="cislo2m" type="number" name="cislo2m" />
+	<label for="cislo1m">Číslo 1</label><input class="form-control" id="cislo1m" type="number" name="cislo1m" required/>
+	<label for="cislo2m">Číslo 2</label><input class="form-control" id="cislo2m" type="number" name="cislo2m" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="minus" selected>Minus</option>
 	</select>
