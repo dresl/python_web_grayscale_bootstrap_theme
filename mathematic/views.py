@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, render_to_response
+from decimal import *
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import *
@@ -226,8 +227,8 @@ def count(request):
         if request.method == 'GET':
             if request.GET['myfield'] == 'plus':
                 if request.GET['cislo1'] and request.GET['cislo2']:
-                    cislo1 = int(request.GET['cislo1'])
-                    cislo2 = int(request.GET['cislo2'])
+                    cislo1 = float(request.GET['cislo1'])
+                    cislo2 = float(request.GET['cislo2'])
                     vysledek_ = cislo1 + cislo2
                     vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
@@ -241,8 +242,8 @@ def count(request):
 
             elif request.GET['myfield'] == 'minus':
                 if request.GET['cislo1m'] and request.GET['cislo2m']:
-                    cislo1 = int(request.GET['cislo1m'])
-                    cislo2 = int(request.GET['cislo2m'])
+                    cislo1 = float(request.GET['cislo1m'])
+                    cislo2 = float(request.GET['cislo2m'])
                     vysledek_ = cislo1 - cislo2
                     vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
@@ -258,8 +259,8 @@ def count(request):
         if request.method == 'GET':
             if request.GET['myfield'] == 'plus':
                 if request.GET['cislo1'] and request.GET['cislo2']:
-                    cislo1 = int(request.GET['cislo1'])
-                    cislo2 = int(request.GET['cislo2'])
+                    cislo1 = float(request.GET['cislo1'])
+                    cislo2 = float(request.GET['cislo2'])
                     vysledek_ = cislo1 + cislo2
                     vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
@@ -270,8 +271,8 @@ def count(request):
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
             elif request.GET['myfield'] == 'minus':
                 if request.GET['cislo1m'] and request.GET['cislo2m']:
-                    cislo1 = int(request.GET['cislo1m'])
-                    cislo2 = int(request.GET['cislo2m'])
+                    cislo1 = float(request.GET['cislo1m'])
+                    cislo2 = float(request.GET['cislo2m'])
                     vysledek_ = cislo1 - cislo2
                     vysledek = str(vysledek_)
                     return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
