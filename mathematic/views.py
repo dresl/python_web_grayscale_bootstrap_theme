@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, render_to_response
-from decimal import *
+from math import *
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import *
@@ -204,82 +204,139 @@ class CalcIndexView(generic.ListView):
 
         return Brigade.objects.filter(pub_date__lte=timezone.now())
 
-def choose(request):
+#*************Circle***************************************************************
+def index_circle(request):
+    if request.user.is_authenticated():
+        return render(request, 'mathematic/index_circle.html',)
+    else:
+        return render(request, 'mathematic/index_circle.html',)
+
+def choose_circle(request):
     if request.user.is_authenticated():
         if request.method == 'GET':
-            if request.GET['myfield'] == 'plus':
+            if request.GET['myfield'] == 'rk':
                 myfield = request.GET['myfield']
-                return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
-            elif request.GET['myfield'] == 'minus':
+                return render(request, 'mathematic/index_circle.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'ok':
                 myfield = request.GET['myfield']
-                return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
+                return render(request, 'mathematic/index_circle.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'sk':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_circle.html', {'myfield': myfield})
     else:
         if request.method == 'GET':
-            if request.GET['myfield'] == 'plus':
+            if request.GET['myfield'] == 'rk':
                 myfield = request.GET['myfield']
-                return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
-            elif request.GET['myfield'] == 'minus':
+                return render(request, 'mathematic/index_circle.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'ok':
                 myfield = request.GET['myfield']
-                return render(request, 'mathematic/calc_index.html', {'myfield': myfield})
+                return render(request, 'mathematic/index_circle.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'sk':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_circle.html', {'myfield': myfield})
 
-def count(request):
+def count_circle(request):
     if request.user.is_authenticated():
         if request.method == 'GET':
-            if request.GET['myfield'] == 'plus':
-                if request.GET['cislo1'] and request.GET['cislo2']:
-                    cislo1 = float(request.GET['cislo1'])
-                    cislo2 = float(request.GET['cislo2'])
-                    vysledek_ = cislo1 + cislo2
-                    vysledek = str(vysledek_)
-                    return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
+            if request.GET['myfield'] == 'rk':
+                if request.GET['cislo1']:
+                    cislo1_ = float(request.GET['cislo1'])
+                    cislo1 = str(cislo1_)
+                    obvod_ = round(2*3.14*cislo1_, 5)
+                    obvod = str(obvod_)
+                    obsah_ = round(3.14*pow(cislo1_, 2), 5)
+                    obsah = str(obsah_)
+                    return render(request, 'mathematic/index_circle.html', { 'cislo1': cislo1, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
                 else:
                     error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
+                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,'username': request.user.username,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                    'full_name': request.user.first_name + ' ' + request.user.last_name})
 
-            elif request.GET['myfield'] == 'minus':
-                if request.GET['cislo1'] and request.GET['cislo2']:
-                    cislo1 = float(request.GET['cislo1'])
-                    cislo2 = float(request.GET['cislo2'])
-                    vysledek_ = cislo1 - cislo2
-                    vysledek = str(vysledek_)
-                    return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
+            elif request.GET['myfield'] == 'ok':
+                if request.GET['cislo2']:
+                    obvod_ = float(request.GET['cislo2'])
+                    obvod = str(obvod_)
+                    cislo2_ = round(obvod_ / (2*3.14), 5)
+                    cislo2 = str(cislo2_)
+                    obsah_ = round(3.14*pow(cislo2_, 2), 5)
+                    obsah = str(obsah_)
+                    return render(request, 'mathematic/index_circle.html', { 'cislo2': cislo2, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
-
                 else:
                     error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
+                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,'username': request.user.username,
+                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
+
+            elif request.GET['myfield'] == 'sk':
+                if request.GET['cislo3']:
+                    obsah_ = float(request.GET['cislo3'])
+                    obsah = str(obsah_)
+                    cislo3_ = round(sqrt(obsah_/3.14), 5)
+                    cislo3 = str(cislo3_)
+                    obvod_ = round(2*3.14*cislo3_, 5)
+                    obvod = str(obvod_)
+                    return render(request, 'mathematic/index_circle.html', { 'cislo3': cislo3, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
+                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name})
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,'username': request.user.username,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                    'full_name': request.user.first_name + ' ' + request.user.last_name})
     else:
         if request.method == 'GET':
-            if request.GET['myfield'] == 'plus':
-                if request.GET['cislo1'] and request.GET['cislo2']:
-                    cislo1 = float(request.GET['cislo1'])
-                    cislo2 = float(request.GET['cislo2'])
-                    vysledek_ = cislo1 + cislo2
-                    vysledek = str(vysledek_)
-                    return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
-                else:
-                    error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]})
-            elif request.GET['myfield'] == 'minus':
-                if request.GET['cislo1'] and request.GET['cislo2']:
-                    cislo1 = float(request.GET['cislo1'])
-                    cislo2 = float(request.GET['cislo2'])
-                    vysledek_ = cislo1 - cislo2
-                    vysledek = str(vysledek_)
-                    return render(request, 'mathematic/calc_index.html', {'vysledek': vysledek,'username': request.user.username,
+            if request.GET['myfield'] == 'rk':
+                if request.GET['cislo1']:
+                    cislo1_ = float(request.GET['cislo1'])
+                    cislo1 = str(cislo1_)
+                    obvod_ = round(2*3.14*cislo1_, 5)
+                    obvod = str(obvod_)
+                    obsah_ = round(3.14*pow(cislo1_, 2), 5)
+                    obsah = str(obsah_)
+                    return render(request, 'mathematic/index_circle.html', { 'cislo1': cislo1, 'obvod': obvod, 'obsah': obsah,
                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                })
+                                                                  })
                 else:
                     error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/calc_index.html', {'error_message': error_message,'username': request.user.username,
+                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                })
+                                                                   })
+
+            elif request.GET['myfield'] == 'ok':
+                if request.GET['cislo2']:
+                    obvod_ = float(request.GET['cislo2'])
+                    obvod = str(obvod_)
+                    cislo2_ = round(obvod_ / (2*3.14), 5)
+                    cislo2 = str(cislo2_)
+                    obsah_ = round(3.14*pow(cislo2_, 2), 5)
+                    obsah = str(obsah_)
+                    return render(request, 'mathematic/index_circle.html', { 'cislo2': cislo2, 'obvod': obvod, 'obsah': obsah,
+                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                  })
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,
+                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                   })
+
+            elif request.GET['myfield'] == 'sk':
+                if request.GET['cislo3']:
+                    obsah_ = float(request.GET['cislo3'])
+                    obsah = str(obsah_)
+                    cislo3_ = round(sqrt(obsah_/3.14), 5)
+                    cislo3 = str(cislo3_)
+                    obvod_ = round(2*3.14*cislo3_, 5)
+                    obvod = str(obvod_)
+                    return render(request, 'mathematic/index_circle.html', { 'cislo3': cislo3, 'obvod': obvod, 'obsah': obsah,
+                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                  })
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,
+                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                                                                   })

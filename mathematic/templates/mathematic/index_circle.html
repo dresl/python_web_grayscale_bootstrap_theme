@@ -1,0 +1,148 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Kalkulačka{% endblock %}
+
+{% block page_title %}<i class="fa fa fa-calculator page_icon"></i>Kruh/kružnice{% endblock page_title %}
+
+{% block content %}
+
+<div class="col-md-3"></div>
+
+<div class="col-md-6">
+<form method="get" action="{% url 'math:choose_circle' %}">{% csrf_token %}
+	<label for="sCountry">Kruh/kružnice:</label>
+	<select name='myfield' id="sCountry" onchange='this.form.submit()'>
+  		<option value="rk" selected>Znám poloměr</option>
+  		<option value="ok">Znám obvod</option>
+  		<option value="sk">Znám obsah</option>
+	</select>
+	<noscript><input type="submit" value="Submit"></noscript>
+</form>
+
+<hr>
+
+{% if cislo1 %}
+<h3>Znám poloměr</h3>
+<table width="320px" class="table table-bordered">
+	<thead>
+	  	<tr>
+	    	<td style="padding: 4px 8px; font-weight: bold">Poloměr:</td>
+	    	<td style="padding: 4px 8px; font-weight: bold">{{ cislo1 }} cm</td>
+	  	</tr>
+	</thead>
+	<tbody>
+	  	<tr>
+	   		<td style="padding: 4px 8px">Obvod:</td>
+	   		<td style="padding: 4px 8px">{{ obvod }} cm</td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Obsah:</td>
+	    	<td style="padding: 4px 8px">{{ obsah }} cm<sup>2</sup></td>
+	  	</tr>
+	</tbody>
+</table>
+
+{% elif cislo2 %}
+<h3>Znám obvod</h3>
+<table width="320px" class="table table-bordered">
+	<thead>
+	  	<tr>
+	   		<td style="padding: 4px 8px; font-weight: bold">Obvod:</td>
+	   		<td style="padding: 4px 8px; font-weight: bold">{{ obvod }} cm</td>
+	  	</tr>
+	</thead>
+	<tbody>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Poloměr:</td>
+	    	<td style="padding: 4px 8px">{{ cislo2 }} cm</td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Obsah:</td>
+	    	<td style="padding: 4px 8px">{{ obsah }} cm<sup>2</sup></td>
+	  	</tr>
+	</tbody>
+</table>
+
+{% elif cislo3 %}
+<h3>Znám obsah</h3>
+<table width="320px" class="table table-bordered">
+	<thead>
+	  	<tr>
+	    	<td style="padding: 4px 8px; font-weight: bold">Obsah:</td>
+	    	<td style="padding: 4px 8px; font-weight: bold">{{ obsah }} cm<sup>2</sup></td>
+	  	</tr>
+	</thead>
+	<tbody>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Poloměr:</td>
+	    	<td style="padding: 4px 8px">{{ cislo3 }} cm</td>
+	  	</tr>
+	  	<tr>
+	   		<td style="padding: 4px 8px">Obvod:</td>
+	   		<td style="padding: 4px 8px">{{ obvod }} cm</td>
+	  	</tr>
+	</tbody>
+</table>
+
+{% endif %}
+
+{% if error_message %}
+	<p style="color: red;">{{ error_message }}</p>
+{% endif %}
+<script type="text/javascript">
+var myselect = $("#sCountry");
+myselect[0].selectedIndex = 3;
+myselect.selectmenu('refresh');
+</script>
+
+<script type="text/javascript">
+ function FocusOnInput()
+ {
+ document.getElementById("cislo1").focus();
+ }
+ </script>
+
+{% if myfield == 'rk' %}
+<div onload="form1.reset();">
+<h3>Znám poloměr</h3>
+<form id="form1" action="{% url 'math:count_circle' %}" method="get" />{% csrf_token %}
+	<label for="cislo1">Poloměr (cm)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo1" step="any" required/>
+	<select style="visibility: hidden" name='myfield'>
+  		<option value="rk" selected>Znám poloměr</option>
+	</select>
+	<hr>
+	<input class="btn btn-default" type="submit" value="Spočítej">
+</form>
+</div>
+
+{% elif myfield == 'ok' %}
+
+<h3>Znám obvod</h3>
+<form action="{% url 'math:count_circle' %}" method="get" />{% csrf_token %}
+	<label for="cislo1">Obvod (cm)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo2" step="any" required/>
+	<select style="visibility: hidden" name='myfield'>
+  		<option value="ok" selected>obvod</option>
+	</select>
+	<hr>
+	<input class="btn btn-default" type="submit" value="Spočítej">
+</form>
+
+{% elif myfield == 'sk' %}
+
+<h3>Znám obsah</h3>
+<form action="{% url 'math:count_circle' %}" method="get" />{% csrf_token %}
+	<label for="cislo1">Obsah (cm<sup>2</sup>)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo3" step="any" required/>
+	<select style="visibility: hidden" name='myfield'>
+  		<option value="sk" selected>obsah</option>
+	</select>
+	<hr>
+	<input class="btn btn-default" type="submit" value="Spočítej">
+</form>
+
+{% endif %}
+
+</div>
+
+<div class="col-md-3"></div>
+
+{% endblock %}

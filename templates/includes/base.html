@@ -94,7 +94,7 @@
 	</script>
 	<title>{% block title %}Django site {{ greeting.title }} {{ question.question_text }}{% endblock %}</title>
 </head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body onload="FocusOnInput()" id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
 
@@ -141,7 +141,7 @@
 	                        <i {% if '/calc/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-calculator"></i></i>
 	                    </a>
 	                    <ul class="dropdown-menu">
-	                        <li><a href="{% url 'math:calc_index' %}" style="cursor:pointer"></i> Calculator</a></li>
+	                        <li><a href="{% url 'math:calc_index' %}" style="cursor:pointer"></i> Kalkulačka</a></li>
 	                    </ul>
 					{% block authentication %}
 					<li style="padding-left: 15px;">						

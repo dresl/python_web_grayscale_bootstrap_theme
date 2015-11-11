@@ -2,67 +2,26 @@
 
 {% block title %}Calc{% endblock %}
 
-{% block page_title %}<i class="fa fa fa-calculator page_icon"></i>Calculator{% endblock page_title %}
+{% block page_title %}<i class="fa fa fa-calculator page_icon"></i>Kalkulačka{% endblock page_title %}
 
 {% block content %}
 
-<div class="col-md-3"></div>
+<div class="col-md-1"></div>
 
-<div class="col-md-6">
-<form method="get" action="{% url 'math:choose' %}">{% csrf_token %}
-	<label for="sCountry">Operation:</label>
-	<select name='myfield' id="sCountry" onchange='this.form.submit()'>
-  		<option value="plus" selected>Plus</option>
-  		<option value="minus">Minus</option>
-	</select>
-	<noscript><input type="submit" value="Submit"></noscript>
-</form>
-
-<hr>
-
-{% if vysledek %}
-<p>vysledek je {{ vysledek }} </p>
-{% endif %}
-
-{% if error_message %}
-	<p style="color: red;">{{ error_message }}</p>
-{% endif %}
-<script type="text/javascript">
-var myselect = $("#sCountry");
-myselect[0].selectedIndex = 3;
-myselect.selectmenu('refresh');
-</script>
-
-{% if myfield == 'plus' %}
-
-<h3>Plus</h3>
-<form action="{% url 'math:count' %}" method="get" />{% csrf_token %}
-	<label for="cislo1">Číslo 1</label><input class="form-control" id="cislo1" type="number" name="cislo1" step="any" required/>
-	<label for="cislo2">Číslo 2</label><input class="form-control" id="cislo2" type="number" name="cislo2" step="any" required/>
-	<select style="visibility: hidden" name='myfield'>
-  		<option value="plus" selected>Plus</option>
-	</select>
-	<hr>
-	<input class="btn btn-default" type="submit" value="Spočítej">
-</form>
-
-{% elif myfield == 'minus' %}
-
-<h3>Minus</h3>
-<form action="{% url 'math:count' %}" method="get" />{% csrf_token %}
-	<label for="cislo1m">Číslo 1</label><input class="form-control" id="cislo1m" type="number" name="cislo1" step="any" required/>
-	<label for="cislo2m">Číslo 2</label><input class="form-control" id="cislo2m" type="number" name="cislo2" step="any" required/>
-	<select style="visibility: hidden" name='myfield'>
-  		<option value="minus" selected>Minus</option>
-	</select>
-	<hr>
-	<input class="btn btn-default" type="submit" value="Spočítej">
-</form>
-
-{% endif %}
+<div style="text-align: left" class="col-md-10">
+<div class="row">
+<a href="{% url 'math:index_circle' %}"><div class="col-md-5"><h2>Kruh/kružnice</h2></div></a>
+<div class="col-md-2"></div>
+<a href="#"><div class="col-md-5"><h2>Čtverec</h2></div></a>
+</div>
+<div class="row">
+<a href="#"><div class="col-md-5"><h2>Obdélník</h2></div></a>
+<div class="col-md-2"></div>
+<a href="#"><div class="col-md-5"><h2>Lichoběžník</h2></div></a>
+</div>
 
 </div>
 
-<div class="col-md-3"></div>
+<div class="col-md-1"></div>
 
 {% endblock %}
