@@ -5,22 +5,26 @@
 {% block page_title %}<i class="fa fa fa-calculator page_icon"></i>Kruh/kružnice{% endblock page_title %}
 
 {% block content %}
+<div class="row">
+<div class="col-md-2"></div>
 
-<div class="col-md-3"></div>
-
-<div class="col-md-6">
+<div class="col-md-8">
 <form method="get" action="{% url 'math:choose_circle' %}">{% csrf_token %}
 	<label for="sCountry">Kruh/kružnice:</label>
-	<select name='myfield' id="sCountry" onchange='this.form.submit()'>
+	<select name='myfield' id="sCountry" onchange='this.form.submit()' class="form-control">
   		<option value="rk" selected>Znám poloměr</option>
   		<option value="ok">Znám obvod</option>
   		<option value="sk">Znám obsah</option>
 	</select>
 	<noscript><input type="submit" value="Submit"></noscript>
 </form>
-
 <hr>
+</div>
+</div>
 
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
 {% if cislo1 %}
 <h3>Znám poloměr</h3>
 <table width="320px" class="table table-bordered">
@@ -141,8 +145,9 @@ myselect.selectmenu('refresh');
 
 {% endif %}
 
-</div>
-
 <div class="col-md-3"></div>
 
 {% endblock %}
+
+</div>
+</div>

@@ -1,4 +1,5 @@
 {% extends "includes/base.html" %}
+{% load staticfiles %}
 
 {% block title %}Calc{% endblock %}
 
@@ -10,18 +11,72 @@
 
 <div style="text-align: left" class="col-md-10">
 <div class="row">
-<a href="{% url 'math:index_circle' %}"><div class="col-md-5"><h2>Kruh/kružnice</h2></div></a>
-<div class="col-md-2"></div>
-<a href="#"><div class="col-md-5"><h2>Čtverec</h2></div></a>
+	<a href="#">
+	<div class="col-md-5">
+		<h3>Kalkulačka</h3>
+		<img width="250px" src="{% static 'img/icons_math/calc/calc.png' %}" 
+		onmouseover="hovercalc(this);" onmouseout="unhovercalc(this);">
+	</div>
+	</a>
+	<div class="col-md-2"></div>
+	<a href="{% url 'math:index_circle' %}">
+	<div class="col-md-5">
+		<h3>Kruh/kružnice</h3>
+		<img width="250px" src="{% static 'img/icons_math/kruh/kruh.png' %}" 
+		onmouseover="hoverkruh(this);" onmouseout="unhoverkruh(this);">
+	</div>
+	</a>
 </div>
 <div class="row">
-<a href="#"><div class="col-md-5"><h2>Obdélník</h2></div></a>
-<div class="col-md-2"></div>
-<a href="#"><div class="col-md-5"><h2>Lichoběžník</h2></div></a>
+	<a href="#">
+	<div class="col-md-5">
+		<h3>Čtverec</h3>
+		<img width="250px" src="{% static 'img/icons_math/ctverec/ctverec.png' %}" 
+		onmouseover="hoverctverec(this);" onmouseout="unhoverctverec(this);">
+	</div>
+	</a>
+	<div class="col-md-2"></div>
+	<a href="#">
+	<div class="col-md-5">
+		<h3>Obdélník</h3>
+		<img width="250px" src="{% static 'img/icons_math/obdelnik/obdelnik.png' %}" 
+		onmouseover="hoverobdelnik(this);" onmouseout="unhoverobdelnik(this);">
+	</div>
+	</a>
 </div>
 
 </div>
 
 <div class="col-md-1"></div>
+
+<script type="text/javascript">
+function hoverkruh(element) {
+    element.setAttribute('src', "{% static 'img/icons_math/kruh/kruh_hover.png' %}");
+}
+function unhoverkruh(element) {
+    element.setAttribute('src', "{% static 'img/icons_math/kruh/kruh.png' %}");
+}
+
+function hovercalc(element) {
+    element.setAttribute('src', "{% static 'img/icons_math/calc/calc_hover.png' %}");
+}
+function unhovercalc(element) {
+    element.setAttribute('src', "{% static 'img/icons_math/calc/calc.png' %}");
+}
+
+function hoverctverec(element) {
+    element.setAttribute('src', "{% static 'img/icons_math/ctverec/ctverec_hover.png' %}");
+}
+function unhoverctverec(element) {
+    element.setAttribute('src', "{% static 'img/icons_math/ctverec/ctverec.png' %}");
+}
+
+function hoverobdelnik(element) {
+    element.setAttribute('src', "{% static 'img/icons_math/obdelnik/obdelnik_hover.png' %}");
+}
+function unhoverobdelnik(element) {
+    element.setAttribute('src', "{% static 'img/icons_math/obdelnik/obdelnik.png' %}");
+}		
+</script>
 
 {% endblock %}
