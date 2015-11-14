@@ -678,3 +678,77 @@ def count_obdelnik(request):
                         'error_message': error_message,
                         'username': request.user.username,
                         'full_name': request.user.first_name + ' ' + request.user.last_name})
+    else:
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'abo':
+                if request.GET['cislo1'] and request.GET['cislo2']:
+                    cislo1_ = float(request.GET['cislo1'])
+                    cislo1 = str(cislo1_)
+                    cislo2_ = float(request.GET['cislo2'])
+                    cislo2 = str(cislo2_)
+                    obvod_ = 2*(cislo1_+cislo2_)
+                    obvod = str(obvod_)
+                    obsah_ = cislo1_*cislo2_
+                    obsah = str(obsah_)
+                    uhlopricka_ = round(sqrt(pow(cislo1_, 2)+pow(cislo2_, 2)), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'cislo1': cislo1,
+                        'cislo2': cislo2,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        })
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'error_message': error_message,
+                        })
+            elif request.GET['myfield'] == 'aboo':
+                if request.GET['cislo3'] and request.GET['cislo4']:
+                    cislo3_ = float(request.GET['cislo3'])
+                    cislo3 = str(cislo3_)
+                    obvod_ = float(request.GET['cislo4'])
+                    obvod = str(obvod_)
+                    cislo4_ = (obvod_/2)-cislo3_
+                    cislo4 = str(cislo4_)
+                    obsah_ = cislo3_*cislo4_
+                    obsah = str(obsah_)
+                    uhlopricka_ = round(sqrt(pow(cislo3_, 2)+pow(cislo4_, 2)), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'cislo3': cislo3,
+                        'cislo4': cislo4,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        })
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'error_message': error_message,
+                        })
+            elif request.GET['myfield'] == 'abso':
+                if request.GET['cislo5'] and request.GET['cislo6']:
+                    cislo5_ = float(request.GET['cislo6'])
+                    cislo5 = str(cislo5_)
+                    obsah_ = float(request.GET['cislo5'])
+                    obsah = str(obsah_)
+                    cislo6_ = round(obsah_/cislo5_,5)
+                    cislo6 = str(cislo6_)
+                    obvod_ = round(2*(cislo5_+cislo6_), 5)
+                    obvod = str(obvod_)
+                    uhlopricka_ = round(sqrt(pow(cislo5_, 2)+pow(cislo6_, 2)), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'cislo5': cislo5,
+                        'cislo6': cislo6,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        })
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'error_message': error_message,
+                        })
