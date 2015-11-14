@@ -110,8 +110,8 @@ myselect.selectmenu('refresh');
 
 {% if myfield == 'rk' %}
 <div onload="form1.reset();">
-<h3>Znám poloměr</h3>
-<form id="form1" action="{% url 'math:count_circle' %}" method="get" />{% csrf_token %}
+<h3 class="wow fadeIn" data-wow-delay="0.75s">Znám poloměr</h3>
+<form class="wow fadeInDown" id="form1" action="{% url 'math:count_circle' %}" method="get" />{% csrf_token %}
 	<label for="cislo1">Poloměr (cm)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo1" step="any" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="rk" selected>Znám poloměr</option>
@@ -123,8 +123,8 @@ myselect.selectmenu('refresh');
 
 {% elif myfield == 'ok' %}
 
-<h3>Znám obvod</h3>
-<form action="{% url 'math:count_circle' %}" method="get" />{% csrf_token %}
+<h3 class="wow fadeIn" data-wow-delay="0.75s">Znám obvod</h3>
+<form class="wow fadeInDown" action="{% url 'math:count_circle' %}" method="get" />{% csrf_token %}
 	<label for="cislo1">Obvod (cm)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo2" step="any" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="ok" selected>obvod</option>
@@ -135,8 +135,8 @@ myselect.selectmenu('refresh');
 
 {% elif myfield == 'sk' %}
 
-<h3>Znám obsah</h3>
-<form action="{% url 'math:count_circle' %}" method="get" />{% csrf_token %}
+<h3 class="wow fadeIn" data-wow-delay="0.75s">Znám obsah</h3>
+<form class="wow fadeInDown" action="{% url 'math:count_circle' %}" method="get" />{% csrf_token %}
 	<label for="cislo1">Obsah (cm<sup>2</sup>)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo3" step="any" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="sk" selected>obsah</option>

@@ -150,8 +150,8 @@ myselect.selectmenu('refresh');
 
 {% if myfield == 'ac' %}
 <div onload="form1.reset();">
-<h3>Znám stranu 'a'</h3>
-<form id="form1" action="{% url 'math:count_ctverec' %}" method="get" />{% csrf_token %}
+<h3 class="wow fadeIn" data-wow-delay="0.75s">Znám stranu 'a'</h3>
+<form class="wow fadeInDown" id="form1" action="{% url 'math:count_ctverec' %}" method="get" />{% csrf_token %}
 	<label for="cislo1">Strana a (cm)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo1" step="any" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="ac" selected>Znám stranu a</option>
@@ -163,8 +163,8 @@ myselect.selectmenu('refresh');
 
 {% elif myfield == 'oc' %}
 
-<h3>Znám obvod</h3>
-<form action="{% url 'math:count_ctverec' %}" method="get" />{% csrf_token %}
+<h3 class="wow fadeIn" data-wow-delay="0.75s">Znám obvod</h3>
+<form class="wow fadeInDown" action="{% url 'math:count_ctverec' %}" method="get" />{% csrf_token %}
 	<label for="cislo1">Obvod (cm)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo2" step="any" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="oc" selected>obvod</option>
@@ -175,8 +175,8 @@ myselect.selectmenu('refresh');
 
 {% elif myfield == 'sc' %}
 
-<h3>Znám obsah</h3>
-<form action="{% url 'math:count_ctverec' %}" method="get" />{% csrf_token %}
+<h3 class="wow fadeIn" data-wow-delay="0.75s">Znám obsah</h3>
+<form class="wow fadeInDown" action="{% url 'math:count_ctverec' %}" method="get" />{% csrf_token %}
 	<label for="cislo1">Obsah (cm<sup>2</sup>)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo3" step="any" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="sc" selected>obsah</option>
@@ -187,8 +187,8 @@ myselect.selectmenu('refresh');
 
 {% elif myfield == 'uc' %}
 
-<h3>Znám úhlopříčku 'u'</h3>
-<form action="{% url 'math:count_ctverec' %}" method="get" />{% csrf_token %}
+<h3 class="wow fadeIn" data-wow-delay="0.75s">Znám úhlopříčku 'u'</h3>
+<form class="wow fadeInDown" action="{% url 'math:count_ctverec' %}" method="get" />{% csrf_token %}
 	<label for="cislo1">Úhlopříčka (cm)</label><input min="0" class="form-control" id="cislo1" type="number" name="cislo4" step="any" required/>
 	<select style="visibility: hidden" name='myfield'>
   		<option value="uc" selected>uhlopricka</option>
