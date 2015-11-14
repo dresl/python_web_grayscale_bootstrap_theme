@@ -2,7 +2,9 @@
 
 {% block title %}Kalkulačka{% endblock %}
 
-{% block page_title %}<i class="fa fa fa-calculator page_icon"></i>Kruh/kružnice{% endblock page_title %}
+{% block page_title %}<a href="{% url 'math:calc_index' %}"><i style="padding-right: 20px" class="fa fa-arrow-circle-left"></i></a>
+<i class="fa fa fa-calculator page_icon"></i>Kruh/kružnice
+{% endblock page_title %}
 
 {% block content %}
 <div class="row">

@@ -1,0 +1,183 @@
+{% extends "includes/base.html" %}
+
+{% block title %}Obdélník{% endblock %}
+
+{% block page_title %}<a href="{% url 'math:calc_index' %}"><i style="padding-right: 20px" class="fa fa-arrow-circle-left"></i></a>
+<i class="fa fa fa-calculator page_icon"></i>Obdélník
+{% endblock page_title %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-2"></div>
+
+<div class="col-md-8">
+<form method="get" action="{% url 'math:choose_obdelnik' %}">{% csrf_token %}
+	<label for="sCountry">Obdélník:</label>
+	<select name='myfield' id="sCountry" onchange='this.form.submit()' class="form-control">
+  		<option value="abo" selected>Znám stranu 'a' i 'b'</option>
+  		<option value="aboo">Znám obvod a jednu stranu</option>
+  		<option value="abso">Znám obsah a jednu stranu</option>
+	</select>
+	<noscript><input type="submit" value="Submit"></noscript>
+</form>
+<hr>
+</div>
+</div>
+
+<script type="text/javascript">
+var myselect = $("#sCountry");
+myselect[0].selectedIndex = 5;
+myselect.selectmenu('refresh');
+</script>
+
+<script type="text/javascript">
+ function FocusOnInput()
+ {
+ document.getElementById("cislo1").focus();
+ }
+ </script>
+
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+
+{% if error_message %}
+	<p style="color: red;">{{ error_message }}</p>
+{% endif %}
+
+{% if cislo1 and cislo2%}
+<h3>Znám stranu 'a' i 'b'</h3>
+<table width="320px" class="table table-bordered">
+	<thead>
+	  	<tr>
+	    	<td style="padding: 4px 8px; font-weight: bold">Strana a:</td>
+	    	<td style="padding: 4px 8px; font-weight: bold">{{ cislo1 }} cm</td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px; font-weight: bold">Strana b:</td>
+	    	<td style="padding: 4px 8px; font-weight: bold">{{ cislo2 }} cm</td>
+	  	</tr>
+	</thead>
+	<tbody>
+	  	<tr>
+	   		<td style="padding: 4px 8px">Obvod:</td>
+	   		<td style="padding: 4px 8px">{{ obvod }} cm</td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Obsah:</td>
+	    	<td style="padding: 4px 8px">{{ obsah }} cm<sup>2</sup></td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Úhlopříčka:</td>
+	    	<td style="padding: 4px 8px">{{ uhlopricka }} cm</td>
+	  	</tr>
+	</tbody>
+</table>
+
+{% elif cislo3 and cislo4 %}
+<h3>Znám obvod a jednu stranu</h3>
+<table width="320px" class="table table-bordered">
+	<thead>
+	  	<tr>
+	   		<td style="padding: 4px 8px; font-weight: bold">Obvod:</td>
+	   		<td style="padding: 4px 8px; font-weight: bold">{{ obvod }} cm</td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px; font-weight: bold">Strana a:</td>
+	    	<td style="padding: 4px 8px; font-weight: bold">{{ cislo3 }} cm</td>
+	  	</tr>
+	</thead>
+	<tbody>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Strana b:</td>
+	    	<td style="padding: 4px 8px">{{ cislo4 }} cm</td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Obsah:</td>
+	    	<td style="padding: 4px 8px">{{ obsah }} cm<sup>2</sup></td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Úhlopříčka:</td>
+	    	<td style="padding: 4px 8px">{{ uhlopricka }} cm</td>
+	  	</tr>
+	</tbody>
+</table>
+
+{% elif cislo5 and cislo6 %}
+<h3>Znám obsah a jednu stranu</h3>
+<table width="320px" class="table table-bordered">
+	<thead>
+	  	<tr>
+	    	<td style="padding: 4px 8px; font-weight: bold">Obsah:</td>
+	    	<td style="padding: 4px 8px; font-weight: bold">{{ obsah }} cm<sup>2</sup></td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px; font-weight: bold">Strana a:</td>
+	    	<td style="padding: 4px 8px; font-weight: bold">{{ cislo5 }} cm</td>
+	  	</tr>
+	</thead>
+	<tbody>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Strana b:</td>
+	    	<td style="padding: 4px 8px">{{ cislo6 }} cm</td>
+	  	</tr>
+	  	<tr>
+	   		<td style="padding: 4px 8px">Obvod:</td>
+	   		<td style="padding: 4px 8px">{{ obvod }} cm</td>
+	  	</tr>
+	  	<tr>
+	    	<td style="padding: 4px 8px">Úhlopříčka:</td>
+	    	<td style="padding: 4px 8px">{{ uhlopricka }} cm</td>
+	  	</tr>
+	</tbody>
+</table>
+
+{% endif %}
+
+{% if myfield == 'abo' %}
+<div onload="form1.reset();">
+<h3>Znám stranu 'a' i 'b'</h3>
+<form id="form1" action="{% url 'math:count_obdelnik' %}" method="get" />{% csrf_token %}
+	<label for="cislo1">Strana 'a' (cm)</label><input min="0.001" class="form-control" id="cislo1" type="number" name="cislo1" step="any" required/>
+	<label for="cislo2">Strana 'b' (cm)</label><input min="0.001" class="form-control" id="cislo2" type="number" name="cislo2" step="any" required/>
+	<select style="visibility: hidden" name='myfield'>
+  		<option value="abo" selected>Znám stranu a i b</option>
+	</select>
+	<hr>
+	<input class="btn btn-default" type="submit" value="Spočítej">
+</form>
+</div>
+
+{% elif myfield == 'aboo' %}
+
+<h3>Znám obvod a jednu stranu</h3>
+<form action="{% url 'math:count_obdelnik' %}" method="get" />{% csrf_token %}
+	<label for="cislo1">Obvod (cm)</label><input min="0.0001" class="form-control" id="cislo1" type="number" name="cislo4" step="any" required/>
+	<label for="cislo2">Strana 'a' nebo 'b' (cm)</label><input min="0.0001" class="form-control" id="cislo2" type="number" name="cislo3" step="any" required/>
+	<select style="visibility: hidden" name='myfield'>
+  		<option value="aboo" selected>obvod a jedna strana</option>
+	</select>
+	<hr>
+	<input class="btn btn-default" type="submit" value="Spočítej">
+</form>
+
+{% elif myfield == 'abso' %}
+
+<h3>Znám obsah a jednu stranu</h3>
+<form action="{% url 'math:count_obdelnik' %}" method="get" />{% csrf_token %}
+	<label for="cislo1">Obsah (cm)<sup>2</sup>)</label><input min="0.0001" class="form-control" id="cislo1" type="number" name="cislo5" step="any" required/><label for="cislo2">Strana 'a' nebo 'b' (cm)<sup>2</sup>)</label><input min="0.0001" class="form-control" id="cislo2" type="number" name="cislo6" step="any" required/>
+	<select style="visibility: hidden" name='myfield'>
+  		<option value="abso" selected>obsah a jedna strana</option>
+	</select>
+	<hr>
+	<input class="btn btn-default" type="submit" value="Spočítej">
+</form>
+
+{% endif %}
+
+<div class="col-md-3"></div>
+
+{% endblock %}
+
+</div>
+</div>

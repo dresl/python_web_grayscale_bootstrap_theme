@@ -12,4 +12,14 @@ urlpatterns = patterns('',
     url(r'^calc/circle/$', views.index_circle, name='index_circle'),
     url(r'^calc/circle/choose$', views.choose_circle, name='choose_circle'),
     url(r'^calc/circle/count/$', views.count_circle, name='count_circle'),
+    #calc
+    url(r'^calc/calc/$', views.index_calc, name='index_calc'),
+    #ctverec
+    url(r'^calc/ctverec/$', views.index_ctverec, name='index_ctverec'),
+    url(r'^calc/ctverec/choose$', views.choose_ctverec, name='choose_ctverec'),
+    url(r'^calc/ctverec/count/$', views.count_ctverec, name='count_ctverec'),
+    #obdelnik
+    url(r'^calc/obdelnik/$', views.index_obdelnik, name='index_obdelnik'),
+    url(r'^calc/obdelnik/choose$', views.choose_obdelnik, name='choose_obdelnik'),
+    url(r'^calc/obdelnik/count/$', views.count_obdelnik, name='count_obdelnik'),
 )

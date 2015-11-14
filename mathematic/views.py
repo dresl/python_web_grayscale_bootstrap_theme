@@ -340,3 +340,341 @@ def count_circle(request):
                     return render(request, 'mathematic/index_circle.html', {'error_message': error_message,
                                                                    'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                    })
+
+#*************Calc***************************************************************
+def index_calc(request):
+    if request.user.is_authenticated():
+        return render(request, 'mathematic/index_calc.html',)
+    else:
+        return render(request, 'mathematic/index_calc.html',)
+
+#*************Ctverec************************************************************
+def index_ctverec(request):
+    if request.user.is_authenticated():
+        return render(request, 'mathematic/index_ctverec.html',)
+    else:
+        return render(request, 'mathematic/index_ctverec.html',)
+
+def choose_ctverec(request):
+    if request.user.is_authenticated():
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'ac':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_ctverec.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'oc':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_ctverec.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'sc':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_ctverec.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'uc':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_ctverec.html', {'myfield': myfield})
+    else:
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'ac':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_ctverec.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'oc':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_ctverec.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'sc':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_ctverec.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'uc':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_ctverec.html', {'myfield': myfield})
+
+def count_ctverec(request):
+    if request.user.is_authenticated():
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'ac':
+                if request.GET['cislo1']:
+                    cislo1_ = float(request.GET['cislo1'])
+                    cislo1 = str(cislo1_)
+                    obvod_ = 4*cislo1_
+                    obvod = str(obvod_)
+                    obsah_ = round(pow(cislo1_, 2), 5)
+                    obsah = str(obsah_)
+                    uhlopricka_ = round(cislo1_*sqrt(2), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'cislo1': cislo1,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'error_message': error_message,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+            elif request.GET['myfield'] == 'oc':
+                if request.GET['cislo2']:
+                    obvod_ = float(request.GET['cislo2'])
+                    obvod = str(obvod_)
+                    cislo2_ = obvod_/4
+                    cislo2 = str(cislo2_)
+                    obsah_ = round(pow(cislo2_, 2), 5)
+                    obsah = str(obsah_)
+                    uhlopricka_ = round(cislo2_*sqrt(2), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'cislo2': cislo2,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'error_message': error_message,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+            elif request.GET['myfield'] == 'sc':
+                if request.GET['cislo3']:
+                    obsah_ = float(request.GET['cislo3'])
+                    obsah = str(obsah_)
+                    cislo3_ = sqrt(obsah_)
+                    cislo3 = str(cislo3_)
+                    obvod_ = round(4*cislo3_, 5)
+                    obvod = str(obvod_)
+                    uhlopricka_ = round(cislo3_*sqrt(2), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'cislo3': cislo3,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'error_message': error_message,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+            elif request.GET['myfield'] == 'uc':
+                if request.GET['cislo4']:
+                    uhlopricka_ = float(request.GET['cislo4'])
+                    uhlopricka = str(uhlopricka_)
+                    cislo4_ = uhlopricka_/sqrt(2)
+                    cislo4 = str(cislo4_)
+                    obvod_ = round(4*cislo4_, 5)
+                    obvod = str(obvod_)
+                    obsah_ = round(pow(cislo4_, 2), 5)
+                    obsah = str(obsah_)
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'cislo4': cislo4,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'error_message': error_message,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+    else:
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'ac':
+                if request.GET['cislo1']:
+                    cislo1_ = float(request.GET['cislo1'])
+                    cislo1 = str(cislo1_)
+                    obvod_ = 4*cislo1_
+                    obvod = str(obvod_)
+                    obsah_ = round(pow(cislo1_, 2), 5)
+                    obsah = str(obsah_)
+                    uhlopricka_ = round(cislo1_*sqrt(2), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'cislo1': cislo1,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        })
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'error_message': error_message,
+                        })
+            elif request.GET['myfield'] == 'oc':
+                if request.GET['cislo2']:
+                    obvod_ = float(request.GET['cislo2'])
+                    obvod = str(obvod_)
+                    cislo2_ = obvod_/4
+                    cislo2 = str(cislo2_)
+                    obsah_ = round(pow(cislo2_, 2), 5)
+                    obsah = str(obsah_)
+                    uhlopricka_ = round(cislo2_*sqrt(2), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'cislo2': cislo2,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        })
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'error_message': error_message,
+                        })
+            elif request.GET['myfield'] == 'sc':
+                if request.GET['cislo3']:
+                    obsah_ = float(request.GET['cislo3'])
+                    obsah = str(obsah_)
+                    cislo3_ = sqrt(obsah_)
+                    cislo3 = str(cislo3_)
+                    obvod_ = round(4*cislo3_, 5)
+                    obvod = str(obvod_)
+                    uhlopricka_ = round(cislo3_*sqrt(2), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'cislo3': cislo3,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        })
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'error_message': error_message,
+                        })
+            elif request.GET['myfield'] == 'uc':
+                if request.GET['cislo4']:
+                    uhlopricka_ = float(request.GET['cislo4'])
+                    uhlopricka = str(uhlopricka_)
+                    cislo4_ = uhlopricka_/sqrt(2)
+                    cislo4 = str(cislo4_)
+                    obvod_ = round(4*cislo4_, 5)
+                    obvod = str(obvod_)
+                    obsah_ = round(pow(cislo4_, 2), 5)
+                    obsah = str(obsah_)
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'cislo4': cislo4,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        })
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_ctverec.html', {
+                        'error_message': error_message,
+                        })
+
+#*************Obdelnik************************************************************
+def index_obdelnik(request):
+    if request.user.is_authenticated():
+        return render(request, 'mathematic/index_obdelnik.html',)
+    else:
+        return render(request, 'mathematic/index_obdelnik.html',)
+def choose_obdelnik(request):
+    if request.user.is_authenticated():
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'abo':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'aboo':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'abso':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
+    else:
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'abo':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'aboo':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
+            elif request.GET['myfield'] == 'abso':
+                myfield = request.GET['myfield']
+                return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
+
+def count_obdelnik(request):
+    if request.user.is_authenticated():
+        if request.method == 'GET':
+            if request.GET['myfield'] == 'abo':
+                if request.GET['cislo1'] and request.GET['cislo2']:
+                    cislo1_ = float(request.GET['cislo1'])
+                    cislo1 = str(cislo1_)
+                    cislo2_ = float(request.GET['cislo2'])
+                    cislo2 = str(cislo2_)
+                    obvod_ = 2*(cislo1_+cislo2_)
+                    obvod = str(obvod_)
+                    obsah_ = cislo1_*cislo2_
+                    obsah = str(obsah_)
+                    uhlopricka_ = round(sqrt(pow(cislo1_, 2)+pow(cislo2_, 2)), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'cislo1': cislo1,
+                        'cislo2': cislo2,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'error_message': error_message,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+            elif request.GET['myfield'] == 'aboo':
+                if request.GET['cislo3'] and request.GET['cislo4']:
+                    cislo3_ = float(request.GET['cislo3'])
+                    cislo3 = str(cislo3_)
+                    obvod_ = float(request.GET['cislo4'])
+                    obvod = str(obvod_)
+                    cislo4_ = (obvod_/2)-cislo3_
+                    cislo4 = str(cislo4_)
+                    obsah_ = cislo3_*cislo4_
+                    obsah = str(obsah_)
+                    uhlopricka_ = round(sqrt(pow(cislo3_, 2)+pow(cislo4_, 2)), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'cislo3': cislo3,
+                        'cislo4': cislo4,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'error_message': error_message,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+            elif request.GET['myfield'] == 'abso':
+                if request.GET['cislo5'] and request.GET['cislo6']:
+                    cislo5_ = float(request.GET['cislo6'])
+                    cislo5 = str(cislo5_)
+                    obsah_ = float(request.GET['cislo5'])
+                    obsah = str(obsah_)
+                    cislo6_ = round(obsah_/cislo5_,5)
+                    cislo6 = str(cislo6_)
+                    obvod_ = round(2*(cislo5_+cislo6_), 5)
+                    obvod = str(obvod_)
+                    uhlopricka_ = round(sqrt(pow(cislo5_, 2)+pow(cislo6_, 2)), 5)
+                    uhlopricka = str(uhlopricka_)
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'cislo5': cislo5,
+                        'cislo6': cislo6,
+                        'obvod': obvod,
+                        'obsah': obsah,
+                        'uhlopricka': uhlopricka,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
+                else:
+                    error_message = 'Musis zadat cislo'
+                    return render(request, 'mathematic/index_obdelnik.html', {
+                        'error_message': error_message,
+                        'username': request.user.username,
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})

@@ -7,14 +7,22 @@
 
 {% block content %}
 
+<style type="text/css">
+
+img {
+	width: 250px;
+}
+
+</style>
+
 <div class="col-md-1"></div>
 
 <div style="text-align: left" class="col-md-10">
 <div class="row">
-	<a href="#">
+	<a href="{% url 'math:index_calc' %}">
 	<div class="col-md-5">
 		<h3>Kalkulačka</h3>
-		<img width="250px" src="{% static 'img/icons_math/calc/calc.png' %}" 
+		<img src="{% static 'img/icons_math/calc/calc.png' %}" 
 		onmouseover="hovercalc(this);" onmouseout="unhovercalc(this);">
 	</div>
 	</a>
@@ -22,25 +30,25 @@
 	<a href="{% url 'math:index_circle' %}">
 	<div class="col-md-5">
 		<h3>Kruh/kružnice</h3>
-		<img width="250px" src="{% static 'img/icons_math/kruh/kruh.png' %}" 
+		<img src="{% static 'img/icons_math/kruh/kruh.png' %}" 
 		onmouseover="hoverkruh(this);" onmouseout="unhoverkruh(this);">
 	</div>
 	</a>
 </div>
 <hr>
 <div class="row">
-	<a href="#">
+	<a href="{% url 'math:index_ctverec' %}">
 	<div class="col-md-5">
 		<h3>Čtverec</h3>
-		<img width="250px" src="{% static 'img/icons_math/ctverec/ctverec.png' %}" 
+		<img src="{% static 'img/icons_math/ctverec/ctverec.png' %}" 
 		onmouseover="hoverctverec(this);" onmouseout="unhoverctverec(this);">
 	</div>
 	</a>
 	<div class="col-md-2"></div>
-	<a href="#">
+	<a href="{% url 'math:index_obdelnik' %}">
 	<div class="col-md-5">
 		<h3>Obdélník</h3>
-		<img width="250px" src="{% static 'img/icons_math/obdelnik/obdelnik.png' %}" 
+		<img src="{% static 'img/icons_math/obdelnik/obdelnik.png' %}" 
 		onmouseover="hoverobdelnik(this);" onmouseout="unhoverobdelnik(this);">
 	</div>
 	</a>
@@ -77,7 +85,7 @@ function hoverobdelnik(element) {
 }
 function unhoverobdelnik(element) {
     element.setAttribute('src', "{% static 'img/icons_math/obdelnik/obdelnik.png' %}");
-}		
+}
 </script>
 
-{% endblock %}
+{% endblock content %}
