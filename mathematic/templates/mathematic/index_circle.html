@@ -95,6 +95,7 @@
 {% if error_message %}
 	<p style="color: red;">{{ error_message }}</p>
 {% endif %}
+
 <script type="text/javascript">
 var myselect = $("#sCountry");
 myselect[0].selectedIndex = 3;
@@ -102,11 +103,14 @@ myselect.selectmenu('refresh');
 </script>
 
 <script type="text/javascript">
- function FocusOnInput()
- {
- document.getElementById("cislo1").focus();
- }
- </script>
+function FocusOnInput() {
+    document.getElementById("cislo1").focus();
+}
+
+function start(){
+    FocusOnInput();
+}
+</script>
 
 {% if myfield == 'rk' %}
 <div onload="form1.reset();">

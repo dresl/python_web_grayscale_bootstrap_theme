@@ -3,7 +3,13 @@
 {% block page_title %}{{ full_name }}<b style='font-weight: normal!important; font-size: 14px!important;'> ({{ username }})</b>{% endblock page_title %}
 
 {% block content %}
+<button class="btn-default" onclick="goBacks()">Go Back</button>
 
+<script>
+function goBacks() {
+    window.history.back();
+}
+</script>
 
 {% if user.is_authenticated %}
 <div class="text_left">

@@ -4,6 +4,17 @@
 
 {% block content %}
 
+<script>
+
+function goBack() {
+    window.history.back();
+}
+
+function start(){
+    goBack();
+}
+</script>
+
 	<p>Click <a href="/accounts/login/">here</a> to login again.</p>
 
 {% endblock %}
