@@ -9,7 +9,7 @@
 {% if blogs.count > 0 %}
 
 {% for blog in blogs %}
-	<div class="row">
+	<div class="row wow fadeIn" data-wow-duration="2s">
         <div class="col-md-7">
         	<a href="{% url 'blog:detailb' blog.id %}">
                 <img class="img-responsive" src="{% cycle '/static/img/blog2.jpg' '/static/img/blog3.jpg' '/static/img/blog4.jpg' %}" alt="">
