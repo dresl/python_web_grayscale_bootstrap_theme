@@ -140,10 +140,10 @@
 				{% endblock menu %}
 					<li style="padding-left: 25px;">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                        <i {% if '/calc/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-calculator"></i></i>
+	                        <i {% if '/math/' in request.path and '/brigade/' not in request.path%}style="color: #42DCA3"{% endif %} class="fa fa-briefcase"></i></i>
 	                    </a>
 	                    <ul class="dropdown-menu">
-	                        <li><a href="{% url 'math:calc_index' %}" style="cursor:pointer"></i> Kalkulačka</a></li>
+	                        <li><a href="{% url 'math:calc_index' %}" style="cursor:pointer"><i {% if '/math/calc/' in request.path %}style="color: rgb(73, 141, 116)"{% endif %} class="fa fa-calculator"></i> Kalkulačka</a></li>
 	                    </ul>
 					{% block authentication %}
 					<li style="padding-left: 15px;">						
@@ -168,6 +168,11 @@
 	                        <li class="divider"></li>
 	                        <li><a href="/accounts/logout/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 	                        </li>
+	                        {% if user.is_superuser %}
+	                        <li class="divider"></li>
+	                        <li><a href="/admin/"><i class="fa fa-eye"></i> Admin</a>
+	                        </li>
+	                        {% endif %}
 	                    {% endif %}
 	                    </ul>
 	                </li>
