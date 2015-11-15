@@ -6,9 +6,4 @@ class BrigadeForm(forms.ModelForm):
 	class Meta:
 		model = Day
 		fields = ('brigade', 'number_of_day', 'hours_per_day', 'pub_date')
-
-class BrigadeForm2(forms.ModelForm):
-
-	class Meta:
-		model = Day
-		fields = ('brigade', 'number_of_day', 'hours_per_day', 'pub_date')
+		
