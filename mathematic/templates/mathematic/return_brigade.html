@@ -1,0 +1,26 @@
+{% extends "includes/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Brigade{% endblock %}
+
+{% block page_title %}<i class="fa fa-cubes page_icon"></i>Přidat den{% endblock page_title %}
+
+{% block content %}
+<script>
+
+function returnBrigade() {
+    window.history.go(-2);
+}
+
+function start(){
+    returnBrigade();
+}
+</script>
+
+<div class="col-md-3"></div>
+<div class="col-md-6">
+
+</div>
+<div class="col-md-3"></div>
+
+{% endblock %}

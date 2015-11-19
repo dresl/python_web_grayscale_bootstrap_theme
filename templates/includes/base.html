@@ -70,14 +70,12 @@
 		});
 	</script>
 
-	{% block script_fixed_scroll %}{% endblock script_fixed_scroll %}
-
 	<script type="text/javascript">
 	var timeOut;
 	function scrollToTop() {
 	  if (document.body.scrollTop!=0 || document.documentElement.scrollTop!=0){
 	    window.scrollBy(0,-30);
-	    timeOut=setTimeout('scrollToTop()',10);
+	    timeOut=setTimeout('scrollToTop()',5);
 	  }
 	  else clearTimeout(timeOut);
 	}

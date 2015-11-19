@@ -43,8 +43,17 @@ def create(request):
 
     args = {}
     args.update(csrf(request))
+    list_ = []
+    countb = Brigade.objects.count() + 1
+    brigades_count = [i for i in range(1,countb)]
+    for i in brigades_count:
+        q = Brigade.objects.get(id=i)
+        last_days = q.day_set.order_by('-pub_date')[0:1].get()
+        list_.append('%s: %s' % (q, last_days))
+
     args['form'] = form
-    args['brigade'] = Day.objects.order_by('-pub_date')[:1]
+    args['last_days'] = ", ".join(list_)
+    args['day'] = Day.objects.order_by('-pub_date')[:1]
     args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
     if request.user.is_authenticated():
         args['username'] = request.user.username
@@ -130,7 +139,7 @@ def DetailView(request, pk):
                                                            'username': request.user.username,
                                                            'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                            'full_name': request.user.first_name + ' ' + request.user.last_name})
-        else:
+        elif Day.objects.count() < 0:
             return render(request, 'mathematic/brigade_index_error.html')
     
     else:

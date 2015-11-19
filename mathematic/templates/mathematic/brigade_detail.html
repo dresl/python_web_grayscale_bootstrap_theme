@@ -1,10 +1,12 @@
 {% extends "includes/base.html" %}
+{% load staticfiles %}
 
 {% block title %}Brigade{% endblock %}
 
 {% block page_title %}<i class="fa fa-cubes page_icon"></i>{{title_brigade}}{% endblock page_title %}
 
 {% block content %}
+<div id="load_tweets">
 <table border="2px" cellpadding="5px" cellspacing="0" bordercolor="black" style="width: 450px; margin: 10px auto">
 	<tr style="background-color: #012D00;">
 		<th width="33%">Den</th>
@@ -22,6 +24,7 @@
 		<th width="33%"></th><th width="33%"></th><th width="33%">celkem: {{ sum_hours }}</th>
 	</tr>
 </table>
+</div>
 
 &nbsp;
 <hr class="hr_low">

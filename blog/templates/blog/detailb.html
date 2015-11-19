@@ -1,37 +1,36 @@
 {% extends "includes/base.html" %}
+{% load staticfiles %}
 
 {% block title %}Blog | {{ blog.title }}{% endblock %}
-
-{% block script_fixed_scroll %}
-	<script type="text/javascript">
-	window.onbeforeunload = function () {
-	var scrollPos;
-	if (typeof window.pageYOffset != 'undefined') {
-	scrollPos = window.pageYOffset;
-	}
-	else if (typeof document.compatMode != 'undefined' &&
-	document.compatMode != 'BackCompat') {
-	scrollPos = document.documentElement.scrollTop;
-	}
-	else if (typeof document.body != 'undefined') {
-	scrollPos = document.body.scrollTop;
-	}
-	document.cookie = "scrollTop=" + scrollPos; //存储滚动条位置到cookies中
-	}
-
-	window.onload = function () {
-	if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
-	var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
-	document.documentElement.scrollTop = parseInt(arr[1]);
-	document.body.scrollTop = parseInt(arr[1]);
-	}
-	}
-	</script>
-{% endblock script_fixed_scroll %}
 
 {% block page_title %}<i class="fa fa-book page_icon"></i>{{ blog.title }}{% endblock page_title %}
 
 {% block content %}
+
+<script type="text/javascript">
+window.onbeforeunload = function () {
+var scrollPos;
+if (typeof window.pageYOffset != 'undefined') {
+scrollPos = window.pageYOffset;
+}
+else if (typeof document.compatMode != 'undefined' &&
+document.compatMode != 'BackCompat') {
+scrollPos = document.documentElement.scrollTop;
+}
+else if (typeof document.body != 'undefined') {
+scrollPos = document.body.scrollTop;
+}
+document.cookie = "scrollTop=" + scrollPos; //存储滚动条位置到cookies中
+}
+
+window.onload = function () {
+if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
+var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+document.documentElement.scrollTop = parseInt(arr[1]);
+document.body.scrollTop = parseInt(arr[1]);
+}
+}
+</script>
 
 {% if user.is_authenticated %}
 
