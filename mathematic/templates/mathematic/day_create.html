@@ -1,0 +1,87 @@
+{% extends "includes/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Brigade{% endblock %}
+
+{% block page_title %}<i class="fa fa-cubes page_icon"></i>Přidat den{% endblock page_title %}
+
+{% block content %}
+
+{% if brigade %}
+
+<div class="col-md-3">
+	<form method="get" action="{% url 'math:choose_brigade' %}">{% csrf_token %}
+		<label for="sCountry">Vyber brigádu:</label>
+		<select name='myfield' id="sCountry" onchange='this.form.submit()' class="form-control">
+			{% for i in brigades %}
+	  		<option value="{{ i }}" selected>{{ i }}</option>
+	  		{% endfor %}
+		</select>
+		<noscript><input type="submit" value="Submit"></noscript>
+	</form>
+<script type="text/javascript">
+var myselect = $("#sCountry");
+myselect[0].selectedIndex = 1000000;
+myselect.selectmenu('refresh');
+</script>
+<hr>
+<button id="reset">Nastavit datum na aktuální čas</button>
+</div>
+<div class="col-md-6">
+<form method="post" action="{% url 'math:create_day' %}">{% csrf_token %}
+	<label for="brigada">Brigáda</label>
+	<input id="brigada" class="form-control" type="text" value="{{ brigade }}" name="brigade_title" readonly>
+	<label for="den">Pořadí dne</label>
+	<input id="den" class="form-control" type="text" value="Den: {{ last_day }}" name="number_of_day" readonly>
+	<label for="hodiny">Hodin denně</label>
+	<input id="hodiny" class="form-control" type="number" max="24" min="1" step="any" name="hours_per_day" required>
+	<label for="pub_date">Datum publikování</label>
+	<input id="pub_date" class="form-control" type="date" value="{{ now }}" name="now" data-date-inline-picker="true" required>
+	<hr>
+	<input class="btn btn-primary" type="submit" name="submit" value="Přidat den" />
+</form>
+</div>
+<script type="text/javascript">
+    document.getElementById('reset').onclick= function() {
+        var field= document.getElementById('pub_date');
+        field.value= field.defaultValue;
+    };
+</script>
+{% else %}
+
+<div class="col-md-3">
+	<form method="get" action="{% url 'math:choose_brigade' %}">{% csrf_token %}
+	<div class="form-group has-success has-feedback">
+		<label for="sCountry">Vyber brigádu:</label>
+		<select name='myfield' id="sCountry" onchange='this.form.submit()' class="form-control">
+			{% for i in brigades %}			
+	  		<option value="{{ i }}" selected>{{ i }}</option>
+	  		{% endfor %}
+		</select>
+		<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+		</div>
+		<noscript><input type="submit" value="Submit"></noscript>
+	</form>
+<script type="text/javascript">
+var myselect = $("#sCountry");
+myselect[0].selectedIndex = 1000000;
+myselect.selectmenu('refresh');
+</script>
+</div>
+<div class="col-md-6">
+	<label for="den">Pořadí dne</label>
+	<input placeholder="disabled input" id="den" class="form-control" type="text" name="number_of_day" disabled>
+	<label for="hodiny">Hodin denně</label>
+	<input placeholder="disabled input" id="hodiny" class="form-control" type="number" max="24" min="1" step="any" name="hours_per_day" disabled>
+	<label for="pub_date">Datum publikování</label>
+	<input placeholder="disabled input" id="pub_date" class="form-control" type="date" disabled>
+	<hr>
+	<input class="btn btn-primary" type="submit" name="submit" value="Přidat den" />
+</div>
+
+{% endif %}
+
+<div class="col-md-3">
+<p style="font-size: 13px"><b>Poslední dny:</b> <br>{{ last_days }}</p>
+</div>
+{% endblock %}

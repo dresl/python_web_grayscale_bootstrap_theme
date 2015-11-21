@@ -3,8 +3,10 @@ from django.conf.urls import patterns, include, url
 from mathematic import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index'),  
-    url(r'^brigade/create/$', views.create, name='createb'),
+    url(r'^$', views.index, name='index'),
+    url(r'^brigade/choose_brigade/$', views.choose_brigade, name='choose_brigade'),
+    url(r'^brigade/index_create_day/$', views.index_create_day, name='index_create_day'),
+    url(r'^brigade/create_day/$', views.create_day, name='create_day'),
     url(r'^brigade/$', views.BrigadeIndexView.as_view(), name='brigade_index'),
     url(r'^brigade/(?P<pk>\d+)/$', views.DetailView, name='detailb'),
     url(r'^calc/$', views.CalcIndexView.as_view(), name='calc_index'),

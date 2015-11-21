@@ -50,7 +50,7 @@
 	</tr>
 </table>
 
-<a href="{% url 'math:createb' %}"><button class="btn btn-default" style="margin-top: 20px;">Přidat další den</button></a>
+<a href="{% url 'math:index_create_day' %}"><button class="btn btn-default" style="margin-top: 20px;">Přidat další den</button></a>
 
 <div class="modal fade" id="mymodal" role="dialog">
     <div class="modal-dialog">
@@ -62,7 +62,7 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-          	<form action="{% url 'math:createb' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+          	<form action="{% url 'math:index_create_day' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
 				<ul class="float_left">
 				{{ form.as_p }}
 				</ul>

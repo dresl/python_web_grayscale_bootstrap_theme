@@ -30,38 +30,95 @@ def index(request):
         args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]
         return render(request, 'mathematic/mathindex.html', args)
 
-def create(request):
-    
-    if request.POST:
-        form = BrigadeForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+def index_create_day(request):
+    if request.user.is_authenticated():
+        args = {}
+        list_ = []
+        countb = Brigade.objects.count() + 1
+        brigades_count = [i for i in range(1,countb)]
+        for i in brigades_count:
+            q = Brigade.objects.get(id=i)
+            last_days = q.day_set.order_by('-pub_date')[0:1].get()
+            list_.append('%s: %s' % (q, last_days))
+        args['last_days'] = ", ".join(list_)
+        args['brigades'] = Brigade.objects.all()
+        return render(request, 'mathematic/day_create.html', args)
+    else:
+        args = {}
+        list_ = []
+        countb = Brigade.objects.count() + 1
+        brigades_count = [i for i in range(1,countb)]
+        for i in brigades_count:
+            q = Brigade.objects.get(id=i)
+            last_days = q.day_set.order_by('-pub_date')[0:1].get()
+            list_.append('%s: %s' % (q, last_days))
+        args['last_days'] = ", ".join(list_)
+        args['brigades'] = Brigade.objects.all()
+        return render(request, 'mathematic/day_create.html', args)
 
+def choose_brigade(request):
+    if request.user.is_authenticated():
+        if request.method == 'GET':
+            args = {}
+            list_ = []
+            countb = Brigade.objects.count() + 1
+            brigades_count = [i for i in range(1,countb)]
+            for i in brigades_count:
+                q = Brigade.objects.get(id=i)
+                last_days = q.day_set.order_by('-pub_date')[0:1].get()
+                list_.append('%s: %s' % (q, last_days))
+            args['last_days'] = ", ".join(list_)
+            args['brigade'] = request.GET['myfield']
+            args['now'] = str(timezone.now().year) + '-' + str(datetime.datetime.now().month) + '-' + \
+            str(timezone.now().day) + ' ' + str(timezone.now().hour) + ':' + \
+            str(timezone.now().minute) + ':' + str(timezone.now().second)
+            a = Brigade.objects.get(brigade_title=args['brigade'])
+            last_day_ = a.day_set.all().order_by('-pub_date')[0]
+            last_day = str(last_day_)[5:len(str(last_day_))]
+            args['last_day'] = int(last_day) + 1
+            args['brigades'] = Brigade.objects.all()
+            return render(request, 'mathematic/day_create.html', args)
+    else:
+        if request.method == 'GET':
+            args = {}
+            list_ = []
+            countb = Brigade.objects.count() + 1
+            brigades_count = [i for i in range(1,countb)]
+            for i in brigades_count:
+                q = Brigade.objects.get(id=i)
+                last_days = q.day_set.order_by('-pub_date')[0:1].get()
+                list_.append('%s: %s' % (q, last_days))
+            args['last_days'] = ", ".join(list_)
+            args['brigade'] = request.GET['myfield']
+            args['now'] = str(timezone.now().year) + '-' + str(datetime.datetime.now().month) + '-' + \
+            str(timezone.now().day) + ' ' + str(timezone.now().hour) + ':' + \
+            str(timezone.now().minute) + ':' + str(timezone.now().second)
+            a = Brigade.objects.get(brigade_title=args['brigade'])
+            last_day_ = a.day_set.all().order_by('-pub_date')[0]
+            last_day = str(last_day_)[5:len(str(last_day_))]
+            args['last_day'] = int(last_day) + 1
+            args['brigades'] = Brigade.objects.all()
+            return render(request, 'mathematic/day_create.html', args)
+
+def create_day(request):
+    if request.user.is_authenticated():
+        if request.POST:
+            brigade_title = request.POST['brigade_title']
+            number_of_day = request.POST['number_of_day']
+            hours_per_day = request.POST['hours_per_day']
+            now = request.POST['now']
+            q = Brigade.objects.get(brigade_title=brigade_title)
+            q.day_set.create(number_of_day=number_of_day, hours_per_day=hours_per_day, pub_date=now)
             return HttpResponseRedirect('/math/brigade/')
     else:
-        form = BrigadeForm()
-
-    args = {}
-    args.update(csrf(request))
-    list_ = []
-    countb = Brigade.objects.count() + 1
-    brigades_count = [i for i in range(1,countb)]
-    for i in brigades_count:
-        q = Brigade.objects.get(id=i)
-        last_days = q.day_set.order_by('-pub_date')[0:1].get()
-        list_.append('%s: %s' % (q, last_days))
-
-    args['form'] = form
-    args['last_days'] = ", ".join(list_)
-    args['day'] = Day.objects.order_by('-pub_date')[:1]
-    args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-    if request.user.is_authenticated():
-        args['username'] = request.user.username
-        args['full_name'] = request.user.first_name + ' ' + request.user.last_name
-        args['form'] = args['form']
-        return render(request, 'mathematic/brigade_create.html', args)
-    else:
-        return render(request, 'mathematic/brigade_create.html', args)
+        if request.POST:
+            brigade_title = request.POST['brigade_title']
+            number_of_day = request.POST['number_of_day']
+            hours_per_day = request.POST['hours_per_day']
+            now = request.POST['now']
+            q = Brigade.objects.get(brigade_title=brigade_title)
+            q.day_set.create(number_of_day=number_of_day, hours_per_day=hours_per_day, pub_date=now)
+            return HttpResponseRedirect('/math/brigade/')
 
 class BrigadeIndexView(generic.ListView):
     template_name = 'mathematic/brigade_index.html'
