@@ -43,8 +43,9 @@
                         </a>
                         &nbsp;
                         <h3>
-                            <a href="{% url 'blog:detailb' blog.id %}">{{ blog.title }} <b class="likes">(likes: {{blog.likes}})</b></a>
+                            <a href="{% url 'blog:detailb' blog.id %}">{{ blog.title }}</a>
                         </h3>
+                        <i>{{ blog.pub_date.day }}. {{ blog.pub_date.month }}. {{ blog.pub_date.year }} | likes: {{blog.likes}}</i>
                         <p>{{ blog.body|truncatewords:"15" }}</p>
                     </div>
                 {% endfor %}

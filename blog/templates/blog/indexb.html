@@ -4,30 +4,68 @@
 {% block title %}Blog{% endblock %}
 
 {% block page_title %}<i class="fa fa-book page_icon"></i>Blog{% endblock page_title %}
+
 {% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+    <form action="{% url 'blog:choose_order_blog_by_age' %}" method="get">{% csrf_token %}
+        <label>Podle stáří:</label>
+        <select name="myfield">
+            {% if myfield == 'newest' %}
+            <option selected="selected" value="newest">od nejnovějších</option>
+            <option value="oldest">od nejstarších</option>
+            {% elif myfield == 'oldest' %}
+            <option value="newest">od nejnovějších</option>
+            <option selected="selected" value="oldest">od nejstarších</option>
+            {% else %}
+            <option value="newest">od nejnovějších</option>
+            <option value="oldest">od nejstarších</option>
+            {% endif %}
+        </select>
+        <input type="submit" value="potvrdit">
+    </form>
+    </div>
+    <div class="col-md-6">
+    <form action="{% url 'blog:choose_order_blog_by_year' %}" method="get">{% csrf_token %}
+        <label>Podle roku:</label>
+        <select name="myfield">
+        {% if full_date %}
+        <option>{{ full_date }}</option>
+        {% endif %}
+        <option disabled>-------</option>
+        {% for i in blog_counter %}
+            <option>{{ i }}</option>
+        {% endfor %}
+        </select>
+        <input type="submit" value="potvrdit">
+    </form>
+    </div>
+</div>
+<hr>
 
 {% if blogs.count > 0 %}
 
-{% for blog in blogs %}
-	<div class="row wow fadeIn" data-wow-duration="2s">
+    {% for blog in blogs %}
+    <div class="row wow fadeIn" data-wow-duration="2s">
         <div class="col-md-7">
-        	<a href="{% url 'blog:detailb' blog.id %}">
+            <a href="{% url 'blog:detailb' blog.id %}">
                 <img class="img-responsive" src="{% cycle '/static/img/blog2.jpg' '/static/img/blog3.jpg' '/static/img/blog4.jpg' %}" alt="">
             </a>
         </div>
         <div class="col-md-5">
             <h3>{{ blog.title }}</h3>
-            <h5>likes: {{blog.likes}}</h5>
+            <h5>likes: {{blog.likes}} | {{ blog.pub_date.day }}. {{ blog.pub_date.month }}. {{ blog.pub_date.year }}</h5>
             <p>{{ blog.body|truncatewords:"15" }}</p>
             <a class="btn btn-primary" href="{% url 'blog:detailb' blog.id %}">View blog <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
     </div>
-	<hr class="hr_low">
-{% endfor %}
+    <hr class="hr_low">
+    {% endfor %}
 
 {% else %}
 
-<p>No blogs are available.</p>
+    <p>Žádný blog nenalezen.</p>
 
 {% endif %}
 

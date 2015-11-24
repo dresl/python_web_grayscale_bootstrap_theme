@@ -23,11 +23,13 @@ def index(request):
     args={}
     if request.user.is_authenticated():
         args['username'] = request.user.username
-        args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]
+        args['sidebar'] = Sidebar.objects.filter(
+            pub_date__lte=timezone.now()).order_by('-pub_date')[:50]
         args['full_name'] = request.user.first_name + ' ' + request.user.last_name
         return render(request, 'mathematic/mathindex.html', args)
     else:
-        args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50]
+        args['sidebar'] = Sidebar.objects.filter(
+            pub_date__lte=timezone.now()).order_by('-pub_date')[:50]
         return render(request, 'mathematic/mathindex.html', args)
 
 def index_create_day(request):
@@ -108,7 +110,8 @@ def create_day(request):
             hours_per_day = request.POST['hours_per_day']
             now = request.POST['now']
             q = Brigade.objects.get(brigade_title=brigade_title)
-            q.day_set.create(number_of_day=number_of_day, hours_per_day=hours_per_day, pub_date=now)
+            q.day_set.create(number_of_day=number_of_day,
+                hours_per_day=hours_per_day, pub_date=now)
             return HttpResponseRedirect('/math/brigade/')
     else:
         if request.POST:
@@ -117,7 +120,8 @@ def create_day(request):
             hours_per_day = request.POST['hours_per_day']
             now = request.POST['now']
             q = Brigade.objects.get(brigade_title=brigade_title)
-            q.day_set.create(number_of_day=number_of_day, hours_per_day=hours_per_day, pub_date=now)
+            q.day_set.create(number_of_day=number_of_day,
+                hours_per_day=hours_per_day, pub_date=now)
             return HttpResponseRedirect('/math/brigade/')
 
 class BrigadeIndexView(generic.ListView):
@@ -187,15 +191,17 @@ def DetailView(request, pk):
                 return round(total, 2)
             average_price = average_price(brigade)
             
-            return render(request, 'mathematic/brigade_detail.html', {'brigade': brigade,
-                                                           'sum_hours': sum_hours,
-                                                           'title_brigade': title_brigade,
-                                                           'average_hours': average_hours,
-                                                           'sum_price': sum_price,
-                                                           'average_price': average_price,
-                                                           'username': request.user.username,
-                                                           'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                           'full_name': request.user.first_name + ' ' + request.user.last_name})
+            return render(request, 'mathematic/brigade_detail.html', {
+                'brigade': brigade,
+                'sum_hours': sum_hours,
+                'title_brigade': title_brigade,
+                'average_hours': average_hours,
+                'sum_price': sum_price,
+                'average_price': average_price,
+                'username': request.user.username,
+                'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                'full_name': request.user.first_name + ' ' + request.user.last_name})
+            
         elif Day.objects.count() < 0:
             return render(request, 'mathematic/brigade_index_error.html')
     
@@ -245,13 +251,15 @@ def DetailView(request, pk):
                 return round(total, 2)
             average_price = average_price(brigade)
 
-            return render(request, 'mathematic/brigade_detail.html', {'brigade': brigade,
-                                                           'sum_hours': sum_hours,
-                                                           'average_hours': average_hours,
-                                                           'title_brigade': title_brigade,
-                                                           'sum_price': sum_price,
-                                                           'average_price': average_price,
-                                                           'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],})
+            return render(request, 'mathematic/brigade_detail.html', {
+                'brigade': brigade,
+                'sum_hours': sum_hours,
+                'average_hours': average_hours,
+                'title_brigade': title_brigade,
+                'sum_price': sum_price,
+                'average_price': average_price,
+                'sidebar': Sidebar.objects.filter(
+                    pub_date__lte=timezone.now()).order_by('-pub_date')[:50],})
         else:
             return render(request, 'mathematic/brigade_index_error.html')
 
@@ -312,14 +320,16 @@ def count_circle(request):
                     obvod = str(obvod_)
                     obsah_ = round(3.14*pow(cislo1_, 2), 5)
                     obsah = str(obsah_)
-                    return render(request, 'mathematic/index_circle.html', { 'cislo1': cislo1, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    return render(request, 'mathematic/index_circle.html', {
+                        'cislo1': cislo1, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
                 else:
                     error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,'username': request.user.username,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    return render(request, 'mathematic/index_circle.html', {
+                        'error_message': error_message,'username': request.user.username,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
 
             elif request.GET['myfield'] == 'ok':
                 if request.GET['cislo2']:
@@ -329,14 +339,16 @@ def count_circle(request):
                     cislo2 = str(cislo2_)
                     obsah_ = round(3.14*pow(cislo2_, 2), 5)
                     obsah = str(obsah_)
-                    return render(request, 'mathematic/index_circle.html', { 'cislo2': cislo2, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    return render(request, 'mathematic/index_circle.html', {
+                        'cislo2': cislo2, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
                 else:
                     error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,'username': request.user.username,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    return render(request, 'mathematic/index_circle.html', {
+                        'error_message': error_message,'username': request.user.username,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
 
             elif request.GET['myfield'] == 'sk':
                 if request.GET['cislo3']:
@@ -346,14 +358,16 @@ def count_circle(request):
                     cislo3 = str(cislo3_)
                     obvod_ = round(2*3.14*cislo3_, 5)
                     obvod = str(obvod_)
-                    return render(request, 'mathematic/index_circle.html', { 'cislo3': cislo3, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    return render(request, 'mathematic/index_circle.html', {
+                        'cislo3': cislo3, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
                 else:
                     error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,'username': request.user.username,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
-                                                                   'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    return render(request, 'mathematic/index_circle.html', {
+                        'error_message': error_message,'username': request.user.username,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                        'full_name': request.user.first_name + ' ' + request.user.last_name})
     else:
         if request.method == 'GET':
             if request.GET['myfield'] == 'rk':
@@ -364,13 +378,15 @@ def count_circle(request):
                     obvod = str(obvod_)
                     obsah_ = round(3.14*pow(cislo1_, 2), 5)
                     obsah = str(obsah_)
-                    return render(request, 'mathematic/index_circle.html', { 'cislo1': cislo1, 'obvod': obvod, 'obsah': obsah,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                    return render(request, 'mathematic/index_circle.html', {
+                        'cislo1': cislo1, 'obvod': obvod, 'obsah': obsah,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                   })
                 else:
                     error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                    return render(request, 'mathematic/index_circle.html', {
+                        'error_message': error_message,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                    })
 
             elif request.GET['myfield'] == 'ok':
@@ -381,13 +397,15 @@ def count_circle(request):
                     cislo2 = str(cislo2_)
                     obsah_ = round(3.14*pow(cislo2_, 2), 5)
                     obsah = str(obsah_)
-                    return render(request, 'mathematic/index_circle.html', { 'cislo2': cislo2, 'obvod': obvod, 'obsah': obsah,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                    return render(request, 'mathematic/index_circle.html', {
+                        'cislo2': cislo2, 'obvod': obvod, 'obsah': obsah,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                   })
                 else:
                     error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                    return render(request, 'mathematic/index_circle.html', {
+                        'error_message': error_message,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                    })
 
             elif request.GET['myfield'] == 'sk':
@@ -398,13 +416,15 @@ def count_circle(request):
                     cislo3 = str(cislo3_)
                     obvod_ = round(2*3.14*cislo3_, 5)
                     obvod = str(obvod_)
-                    return render(request, 'mathematic/index_circle.html', { 'cislo3': cislo3, 'obvod': obvod, 'obsah': obsah,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                    return render(request, 'mathematic/index_circle.html', {
+                        'cislo3': cislo3, 'obvod': obvod, 'obsah': obsah,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                   })
                 else:
                     error_message = 'Musis zadat cislo'
-                    return render(request, 'mathematic/index_circle.html', {'error_message': error_message,
-                                                                   'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
+                    return render(request, 'mathematic/index_circle.html', {
+                        'error_message': error_message,
+                        'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
                                                                    })
 
 #*************Calc***************************************************************
