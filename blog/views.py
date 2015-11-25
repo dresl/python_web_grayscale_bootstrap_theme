@@ -76,7 +76,6 @@ def choose_order_blog_by_age(request):
                 num = Blog.objects.filter(pub_date__year = i).count()
                 final = '%s (%s)' % (i, num)
                 list_.append(final)
-            args['full_date'] = str(request.GET['myfield'])
             args['blog_counter'] = list_
             if request.GET['myfield'] == 'newest':
                 args['blogs'] = Blog.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
