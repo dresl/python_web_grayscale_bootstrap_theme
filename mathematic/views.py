@@ -36,10 +36,9 @@ def index_create_day(request):
     if request.user.is_authenticated():
         args = {}
         list_ = []
-        countb = Brigade.objects.count() + 1
-        brigades_count = [i for i in range(1,countb)]
-        for i in brigades_count:
-            q = Brigade.objects.get(id=i)
+        brigades_title = Brigade.objects.all()
+        for i in brigades_title:
+            q = Brigade.objects.get(brigade_title=i)
             last_days = q.day_set.order_by('-pub_date')[0:1].get()
             list_.append('%s: %s' % (q, last_days))
         args['last_days'] = ", ".join(list_)
@@ -48,10 +47,9 @@ def index_create_day(request):
     else:
         args = {}
         list_ = []
-        countb = Brigade.objects.count() + 1
-        brigades_count = [i for i in range(1,countb)]
-        for i in brigades_count:
-            q = Brigade.objects.get(id=i)
+        brigades_title = Brigade.objects.all()
+        for i in brigades_title:
+            q = Brigade.objects.get(brigade_title=i)
             last_days = q.day_set.order_by('-pub_date')[0:1].get()
             list_.append('%s: %s' % (q, last_days))
         args['last_days'] = ", ".join(list_)
@@ -63,10 +61,9 @@ def choose_brigade(request):
         if request.method == 'GET':
             args = {}
             list_ = []
-            countb = Brigade.objects.count() + 1
-            brigades_count = [i for i in range(1,countb)]
-            for i in brigades_count:
-                q = Brigade.objects.get(id=i)
+            brigades_title = Brigade.objects.all()
+            for i in brigades_title:
+                q = Brigade.objects.get(brigade_title=i)
                 last_days = q.day_set.order_by('-pub_date')[0:1].get()
                 list_.append('%s: %s' % (q, last_days))
             args['last_days'] = ", ".join(list_)
@@ -84,10 +81,9 @@ def choose_brigade(request):
         if request.method == 'GET':
             args = {}
             list_ = []
-            countb = Brigade.objects.count() + 1
-            brigades_count = [i for i in range(1,countb)]
-            for i in brigades_count:
-                q = Brigade.objects.get(id=i)
+            brigades_title = Brigade.objects.all()
+            for i in brigades_title:
+                q = Brigade.objects.get(brigade_title=i)
                 last_days = q.day_set.order_by('-pub_date')[0:1].get()
                 list_.append('%s: %s' % (q, last_days))
             args['last_days'] = ", ".join(list_)

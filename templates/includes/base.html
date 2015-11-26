@@ -150,10 +150,10 @@
 	                        <i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-users fa-fw"></i><i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
-	                        <li><a style="cursor:pointer" id="myBtn"><i class="fa fa-user fa-fw"></i> Login</a>
+	                        <li><a style="cursor:pointer" id="myBtn"><i class="fa fa-user fa-fw"></i> Přihlásit se</a>
 	                        </li>
 	                        <li class="divider"></li>
-	                        <li><a href="/accounts/register/"><i class="fa fa-sign-in"></i> Register</a>
+	                        <li><a href="/accounts/register/"><i class="fa fa-sign-in"></i> Registrovat se</a>
 	                        </li>
 	                    {% endif %}
 	                    {% if user.is_authenticated %}
@@ -161,10 +161,10 @@
 	                        <i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-user fa-fw"></i><i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
-	                    	<li><a href="{% url 'userprofile:profile' %}"><i class="fa fa-user fa-fw"></i> View profile</a>
+	                    	<li><a href="{% url 'userprofile:profile' %}"><i class="fa fa-user fa-fw"></i> Zobrazit profil</a>
 	                        </li>
 	                        <li class="divider"></li>
-	                        <li><a href="/accounts/logout/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+	                        <li><a href="/accounts/logout/"><i class="fa fa-sign-out fa-fw"></i> Odhlásit se</a>
 	                        </li>
 	                        {% if user.is_superuser %}
 	                        <li class="divider"></li>
