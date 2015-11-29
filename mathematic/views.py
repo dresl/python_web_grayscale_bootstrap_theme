@@ -312,9 +312,9 @@ def count_circle(request):
                 if request.GET['cislo1']:
                     cislo1_ = float(request.GET['cislo1'])
                     cislo1 = str(cislo1_)
-                    obvod_ = round(2*3.14*cislo1_, 5)
+                    obvod_ = 2*3.14*cislo1_
                     obvod = str(obvod_)
-                    obsah_ = round(3.14*pow(cislo1_, 2), 5)
+                    obsah_ = 3.14*pow(cislo1_, 2)
                     obsah = str(obsah_)
                     return render(request, 'mathematic/index_circle.html', {
                         'cislo1': cislo1, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
@@ -331,9 +331,9 @@ def count_circle(request):
                 if request.GET['cislo2']:
                     obvod_ = float(request.GET['cislo2'])
                     obvod = str(obvod_)
-                    cislo2_ = round(obvod_ / (2*3.14), 5)
+                    cislo2_ = obvod_ / (2*3.14)
                     cislo2 = str(cislo2_)
-                    obsah_ = round(3.14*pow(cislo2_, 2), 5)
+                    obsah_ = 3.14*pow(cislo2_, 2)
                     obsah = str(obsah_)
                     return render(request, 'mathematic/index_circle.html', {
                         'cislo2': cislo2, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
@@ -350,9 +350,9 @@ def count_circle(request):
                 if request.GET['cislo3']:
                     obsah_ = float(request.GET['cislo3'])
                     obsah = str(obsah_)
-                    cislo3_ = round(sqrt(obsah_/3.14), 5)
+                    cislo3_ = sqrt(obsah_/3.14)
                     cislo3 = str(cislo3_)
-                    obvod_ = round(2*3.14*cislo3_, 5)
+                    obvod_ = 2*3.14*cislo3_
                     obvod = str(obvod_)
                     return render(request, 'mathematic/index_circle.html', {
                         'cislo3': cislo3, 'obvod': obvod, 'obsah': obsah, 'username': request.user.username,
@@ -370,9 +370,9 @@ def count_circle(request):
                 if request.GET['cislo1']:
                     cislo1_ = float(request.GET['cislo1'])
                     cislo1 = str(cislo1_)
-                    obvod_ = round(2*3.14*cislo1_, 5)
+                    obvod_ = 2*3.14*cislo1_
                     obvod = str(obvod_)
-                    obsah_ = round(3.14*pow(cislo1_, 2), 5)
+                    obsah_ = 3.14*pow(cislo1_, 2)
                     obsah = str(obsah_)
                     return render(request, 'mathematic/index_circle.html', {
                         'cislo1': cislo1, 'obvod': obvod, 'obsah': obsah,
@@ -389,9 +389,9 @@ def count_circle(request):
                 if request.GET['cislo2']:
                     obvod_ = float(request.GET['cislo2'])
                     obvod = str(obvod_)
-                    cislo2_ = round(obvod_ / (2*3.14), 5)
+                    cislo2_ = obvod_ / (2*3.14)
                     cislo2 = str(cislo2_)
-                    obsah_ = round(3.14*pow(cislo2_, 2), 5)
+                    obsah_ = 3.14*pow(cislo2_, 2)
                     obsah = str(obsah_)
                     return render(request, 'mathematic/index_circle.html', {
                         'cislo2': cislo2, 'obvod': obvod, 'obsah': obsah,
@@ -408,9 +408,9 @@ def count_circle(request):
                 if request.GET['cislo3']:
                     obsah_ = float(request.GET['cislo3'])
                     obsah = str(obsah_)
-                    cislo3_ = round(sqrt(obsah_/3.14), 5)
+                    cislo3_ = sqrt(obsah_/3.14)
                     cislo3 = str(cislo3_)
-                    obvod_ = round(2*3.14*cislo3_, 5)
+                    obvod_ = 2*3.14*cislo3_
                     obvod = str(obvod_)
                     return render(request, 'mathematic/index_circle.html', {
                         'cislo3': cislo3, 'obvod': obvod, 'obsah': obsah,
@@ -476,9 +476,9 @@ def count_ctverec(request):
                     cislo1 = str(cislo1_)
                     obvod_ = 4*cislo1_
                     obvod = str(obvod_)
-                    obsah_ = round(pow(cislo1_, 2), 5)
+                    obsah_ = pow(cislo1_, 2)
                     obsah = str(obsah_)
-                    uhlopricka_ = round(cislo1_*sqrt(2), 5)
+                    uhlopricka_ = cislo1_*sqrt(2)
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_ctverec.html', {
                         'cislo1': cislo1,
@@ -499,9 +499,9 @@ def count_ctverec(request):
                     obvod = str(obvod_)
                     cislo2_ = obvod_/4
                     cislo2 = str(cislo2_)
-                    obsah_ = round(pow(cislo2_, 2), 5)
+                    obsah_ = pow(cislo2_, 2)
                     obsah = str(obsah_)
-                    uhlopricka_ = round(cislo2_*sqrt(2), 5)
+                    uhlopricka_ = cislo2_*sqrt(2)
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_ctverec.html', {
                         'cislo2': cislo2,
@@ -522,9 +522,9 @@ def count_ctverec(request):
                     obsah = str(obsah_)
                     cislo3_ = sqrt(obsah_)
                     cislo3 = str(cislo3_)
-                    obvod_ = round(4*cislo3_, 5)
+                    obvod_ = 4*cislo3_
                     obvod = str(obvod_)
-                    uhlopricka_ = round(cislo3_*sqrt(2), 5)
+                    uhlopricka_ = cislo3_*sqrt(2)
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_ctverec.html', {
                         'cislo3': cislo3,
@@ -545,9 +545,9 @@ def count_ctverec(request):
                     uhlopricka = str(uhlopricka_)
                     cislo4_ = uhlopricka_/sqrt(2)
                     cislo4 = str(cislo4_)
-                    obvod_ = round(4*cislo4_, 5)
+                    obvod_ = 4*cislo4_
                     obvod = str(obvod_)
-                    obsah_ = round(pow(cislo4_, 2), 5)
+                    obsah_ = pow(cislo4_, 2)
                     obsah = str(obsah_)
                     return render(request, 'mathematic/index_ctverec.html', {
                         'cislo4': cislo4,
@@ -570,9 +570,9 @@ def count_ctverec(request):
                     cislo1 = str(cislo1_)
                     obvod_ = 4*cislo1_
                     obvod = str(obvod_)
-                    obsah_ = round(pow(cislo1_, 2), 5)
+                    obsah_ = pow(cislo1_, 2)
                     obsah = str(obsah_)
-                    uhlopricka_ = round(cislo1_*sqrt(2), 5)
+                    uhlopricka_ = cislo1_*sqrt(2)
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_ctverec.html', {
                         'cislo1': cislo1,
@@ -591,9 +591,9 @@ def count_ctverec(request):
                     obvod = str(obvod_)
                     cislo2_ = obvod_/4
                     cislo2 = str(cislo2_)
-                    obsah_ = round(pow(cislo2_, 2), 5)
+                    obsah_ = pow(cislo2_, 2)
                     obsah = str(obsah_)
-                    uhlopricka_ = round(cislo2_*sqrt(2), 5)
+                    uhlopricka_ = cislo2_*sqrt(2)
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_ctverec.html', {
                         'cislo2': cislo2,
@@ -612,9 +612,9 @@ def count_ctverec(request):
                     obsah = str(obsah_)
                     cislo3_ = sqrt(obsah_)
                     cislo3 = str(cislo3_)
-                    obvod_ = round(4*cislo3_, 5)
+                    obvod_ = 4*cislo3_
                     obvod = str(obvod_)
-                    uhlopricka_ = round(cislo3_*sqrt(2), 5)
+                    uhlopricka_ = cislo3_*sqrt(2)
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_ctverec.html', {
                         'cislo3': cislo3,
@@ -633,9 +633,9 @@ def count_ctverec(request):
                     uhlopricka = str(uhlopricka_)
                     cislo4_ = uhlopricka_/sqrt(2)
                     cislo4 = str(cislo4_)
-                    obvod_ = round(4*cislo4_, 5)
+                    obvod_ = 4*cislo4_
                     obvod = str(obvod_)
-                    obsah_ = round(pow(cislo4_, 2), 5)
+                    obsah_ = pow(cislo4_, 2)
                     obsah = str(obsah_)
                     return render(request, 'mathematic/index_ctverec.html', {
                         'cislo4': cislo4,
@@ -692,7 +692,7 @@ def count_obdelnik(request):
                     obvod = str(obvod_)
                     obsah_ = cislo1_*cislo2_
                     obsah = str(obsah_)
-                    uhlopricka_ = round(sqrt(pow(cislo1_, 2)+pow(cislo2_, 2)), 5)
+                    uhlopricka_ = sqrt(pow(cislo1_, 2)+pow(cislo2_, 2))
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_obdelnik.html', {
                         'cislo1': cislo1,
@@ -718,7 +718,7 @@ def count_obdelnik(request):
                     cislo4 = str(cislo4_)
                     obsah_ = cislo3_*cislo4_
                     obsah = str(obsah_)
-                    uhlopricka_ = round(sqrt(pow(cislo3_, 2)+pow(cislo4_, 2)), 5)
+                    uhlopricka_ = sqrt(pow(cislo3_, 2)+pow(cislo4_, 2))
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_obdelnik.html', {
                         'cislo3': cislo3,
@@ -740,11 +740,11 @@ def count_obdelnik(request):
                     cislo5 = str(cislo5_)
                     obsah_ = float(request.GET['cislo5'])
                     obsah = str(obsah_)
-                    cislo6_ = round(obsah_/cislo5_,5)
+                    cislo6_ = obsah_/cislo5_
                     cislo6 = str(cislo6_)
-                    obvod_ = round(2*(cislo5_+cislo6_), 5)
+                    obvod_ = 2*(cislo5_+cislo6_)
                     obvod = str(obvod_)
-                    uhlopricka_ = round(sqrt(pow(cislo5_, 2)+pow(cislo6_, 2)), 5)
+                    uhlopricka_ = sqrt(pow(cislo5_, 2)+pow(cislo6_, 2))
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_obdelnik.html', {
                         'cislo5': cislo5,
@@ -772,7 +772,7 @@ def count_obdelnik(request):
                     obvod = str(obvod_)
                     obsah_ = cislo1_*cislo2_
                     obsah = str(obsah_)
-                    uhlopricka_ = round(sqrt(pow(cislo1_, 2)+pow(cislo2_, 2)), 5)
+                    uhlopricka_ = sqrt(pow(cislo1_, 2)+pow(cislo2_, 2))
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_obdelnik.html', {
                         'cislo1': cislo1,
@@ -796,7 +796,7 @@ def count_obdelnik(request):
                     cislo4 = str(cislo4_)
                     obsah_ = cislo3_*cislo4_
                     obsah = str(obsah_)
-                    uhlopricka_ = round(sqrt(pow(cislo3_, 2)+pow(cislo4_, 2)), 5)
+                    uhlopricka_ = sqrt(pow(cislo3_, 2)+pow(cislo4_, 2))
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_obdelnik.html', {
                         'cislo3': cislo3,
@@ -816,11 +816,11 @@ def count_obdelnik(request):
                     cislo5 = str(cislo5_)
                     obsah_ = float(request.GET['cislo5'])
                     obsah = str(obsah_)
-                    cislo6_ = round(obsah_/cislo5_,5)
+                    cislo6_ = obsah_/cislo5_
                     cislo6 = str(cislo6_)
-                    obvod_ = round(2*(cislo5_+cislo6_), 5)
+                    obvod_ = 2*(cislo5_+cislo6_)
                     obvod = str(obvod_)
-                    uhlopricka_ = round(sqrt(pow(cislo5_, 2)+pow(cislo6_, 2)), 5)
+                    uhlopricka_ = sqrt(pow(cislo5_, 2)+pow(cislo6_, 2))
                     uhlopricka = str(uhlopricka_)
                     return render(request, 'mathematic/index_obdelnik.html', {
                         'cislo5': cislo5,

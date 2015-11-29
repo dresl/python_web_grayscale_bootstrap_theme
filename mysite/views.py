@@ -58,83 +58,44 @@ def send_email(request):
 def contact(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
-            if not request.POST.get('subject', '') and not request.POST.get('message', '') or request.POST.get('email') and '@' not in request.POST['email']:
-                subject_error = 'Enter a subject.'
-                message_error = 'Enter a message.'
-                email_error = 'Enter a valid e-mail address.'
-                return render(request, 'apps/contact_form.html', {'subject_error': subject_error, 
-                                                                  'message_error': message_error,
-                                                                  'email_error': email_error,
-                                                                  'username': request.user.username,
-                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
-            if not request.POST.get('subject', ''):
-                subject_error = 'Enter a subject.'
-                return render(request, 'apps/contact_form.html', {'subject_error': subject_error,'username': request.user.username,
-                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
-            if not request.POST.get('message', ''):
-                message_error = 'Enter a message.'
-                return render(request, 'apps/contact_form.html', {'message_error': message_error,'username': request.user.username,
-                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
-            if request.POST.get('email') and '@' not in request.POST['email']:
-                email_error = 'Enter a valid e-mail address.'
-                return render(request, 'apps/contact_form.html', {'email_error': email_error,'username': request.user.username,
-                                                                  'full_name': request.user.first_name + ' ' + request.user.last_name,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
-            else:
-                send_mail(
-                    request.POST['subject'],
-                    request.POST['message'],
-                    request.POST.get('email', ''),
-                    ['resldominik@gymnachod.cz'], fail_silently=False
-                )
-                return HttpResponseRedirect('/contact/thanks/')
-        return render(request,'apps/contact_form.html', {
-            'subject': request.POST.get('subject', ''),
-            'message': request.POST.get('message', ''),
-            'email': request.POST.get('email', ''),
-            'username': request.user.username,
-            'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date'),
-            'full_name': request.user.first_name + ' ' + request.user.last_name
-        })
+            form_email = request.POST.get('email')
+            form_message = request.POST.get('message')
+            form_full_name = request.POST.get('full_name')
+            
+            subject = 'Site contact form'
+            from_email = settings.EMAIL_HOST_USER
+            to_email = [from_email, 'resldominik@gymnachod.cz']
+            contact_message = "%s: %s via %s" % (
+                form_full_name,
+                form_message,
+                form_email)
+
+            send_mail(subject,
+                contact_message,
+                from_email,
+                to_email,
+                fail_silently=True)
+            return HttpResponseRedirect('/contact/thanks/')
     else:
         if request.method == 'POST':
-            if not request.POST.get('subject', '') and not request.POST.get('message', '') or request.POST.get('email') and '@' not in request.POST['email']:
-                subject_error = 'Enter a subject.'
-                message_error = 'Enter a message.'
-                email_error = 'Enter a valid e-mail address.'
-                return render(request, 'apps/contact_form.html', {'subject_error': subject_error, 
-                                                                  'message_error': message_error,
-                                                                  'email_error': email_error,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
-            if not request.POST.get('subject', ''):
-                subject_error = 'Enter a subject.'
-                return render(request, 'apps/contact_form.html', {'subject_error': subject_error,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
-            if not request.POST.get('message', ''):
-                message_error = 'Enter a message.'
-                return render(request, 'apps/contact_form.html', {'message_error': message_error,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
-            if request.POST.get('email') and '@' not in request.POST['email']:
-                email_error = 'Enter a valid e-mail address.'
-                return render(request, 'apps/contact_form.html', {'email_error': email_error,
-                                                                  'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
-            else:
-                send_mail(
-                    request.POST['subject'],
-                    request.POST['message'],
-                    request.POST.get('email', ''),
-                    ['resldominik@gymnachod.cz'], fail_silently=False
-                )
-                return HttpResponseRedirect('/contact/thanks/')
-        return render(request,'apps/contact_form.html', {
-            'subject': request.POST.get('subject', ''),
-            'message': request.POST.get('message', ''),
-            'email': request.POST.get('email', ''),
-            'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-        })
+            form_email = request.POST.get('email')
+            form_message = request.POST.get('message')
+            form_full_name = request.POST.get('full_name')
+            
+            subject = 'Site contact form'
+            from_email = settings.EMAIL_HOST_USER
+            to_email = [from_email, 'resldominik@gymnachod.cz']
+            contact_message = "%s: %s via %s" % (
+                form_full_name,
+                form_message,
+                form_email)
+
+            send_mail(subject,
+                contact_message,
+                from_email,
+                to_email,
+                fail_silently=True)
+            return HttpResponseRedirect('/contact/thanks/')
 
 def home(request):
     now = datetime.datetime.now()
