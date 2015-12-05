@@ -50,7 +50,7 @@ def choose_order_blog_by_age(request):
             args['now_year'] = now_year
             for i in b:
                 num = Blog.objects.filter(pub_date__year = i).count()
-                final = '%s (%s)' % (i, num)
+                final = '%s - %s' % (i, num)
                 list_.append(final)
             args['years'] = b
             args['blog_counter'] = list_
@@ -74,7 +74,7 @@ def choose_order_blog_by_age(request):
             args['myfield'] = request.GET['myfield']
             for i in b:
                 num = Blog.objects.filter(pub_date__year = i).count()
-                final = '%s (%s)' % (i, num)
+                final = '%s - %s' % (i, num)
                 list_.append(final)
             args['blog_counter'] = list_
             if request.GET['myfield'] == 'newest':
@@ -95,7 +95,7 @@ def choose_order_blog_by_year(request):
             args['blogs'] = Blog.objects.all().order_by('-pub_date')
             for i in b:
                 num = Blog.objects.filter(pub_date__year = i).count()
-                final = '%s (%s)' % (i, num)
+                final = '%s - %s' % (i, num)
                 list_.append(final)
             args['blog_counter'] = list_
             date = int(str(request.GET['myfield'])[0:4])
@@ -112,7 +112,7 @@ def choose_order_blog_by_year(request):
             args['blogs'] = Blog.objects.all().order_by('-pub_date')
             for i in b:
                 num = Blog.objects.filter(pub_date__year = i).count()
-                final = '%s (%s)' % (i, num)
+                final = '%s - %s' % (i, num)
                 list_.append(final)
             args['blog_counter'] = list_
             date = int(str(request.GET['myfield'])[0:4])
@@ -129,7 +129,7 @@ def blogs(request):
     args['blogs'] = Blog.objects.all().order_by('-pub_date')
     for i in b:
         num = Blog.objects.filter(pub_date__year = i).count()
-        final = '%s (%s)' % (i, num)
+        final = '%s - %s' % (i, num)
         list_.append(final)
     args['blog_counter'] = list_
     args['sidebar'] = Sidebar.objects.filter(
