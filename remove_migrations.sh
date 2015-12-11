@@ -1,3 +1,3 @@
 #!bin/bash
 
-find . -name "*00*.py" -type f -delete
+find . -name "*00*.py*" -type f -delete
