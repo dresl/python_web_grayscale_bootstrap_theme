@@ -11,6 +11,7 @@ class BlogAdmin(admin.ModelAdmin):
         ('Content',               {'fields': ['body']}),
         ('Thumbnail',            {'fields': ['thumbnail']}),
         ('Likes',            {'fields': ['likes']}),
+        ('Users',            {'fields': ['users_like_it']}),
     ]
 
 admin.site.register(Blog, BlogAdmin)

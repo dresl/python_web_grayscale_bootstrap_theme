@@ -2,7 +2,18 @@
 . /srv/bootstrap_sites/bootstrap_venv/bin/activate
 
 echo "
-import django;from polls.models import Question, Choice; from mathematic.models import Brigade, Day; from datetime import timedelta; from django.utils import timezone; from blog.models import Blog;
+import django;
+from django.contrib.auth.models import User;
+from polls.models import Question, Choice;
+from mathematic.models import Brigade, Day;
+from datetime import timedelta;
+from django.utils import timezone;
+from blog.models import Blog;
+from books.models import Publisher, Author, Book;
+a=Publisher(name='XXX', address='XXXX', city='XXXXX', state_province='XXX', country='England', website='www.example.com'); a.save();
+b=Author(first_name='William', last_name='Shakespeare'); b.save();
+b=Author(first_name='Božena', last_name='Němcová'); b.save();
+b=Author(first_name='Karel', last_name='Čapek'); b.save();
 i='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin egestas iaculis nisl sed molestie. Nam vel sollicitudin sapien. Duis vel semper dolor. Sed non dictum justo, non laoreet enim. Cras semper convallis dapibus. Integer vel neque magna. Proin cursus blandit pellentesque. Cras enim ex, feugiat eu tempus eget, viverra vel libero. Maecenas vitae magna nec orci tristique ultricies ac non velit. Donec tristique arcu id commodo eleifend. Vivamus vehicula elit vitae tortor convallis, id venenatis nibh pharetra. Phasellus eget augue et massa pellentesque ullamcorper eget eget enim. Suspendisse fringilla sapien neque, id aliquet orci ornare a. Fusce in eros lorem. Ut tincidunt in ex non auctor. Duis sed turpis hendrerit, mollis mauris fringilla, tincidunt magna. Sed nec scelerisque nulla. In vitae tellus eu magna consectetur interdum. In in lectus pulvinar, tristique libero at, laoreet ipsum. Donec et nibh sit amet magna varius dictum vel non justo. Aenean eu nisi eget arcu ullamcorper varius. Curabitur mattis consequat lorem, at bibendum nunc laoreet sit amet. Aenean fringilla sapien dolor, ut semper metus pharetra cursus. Etiam vitae ipsum euismod, luctus ex sed, interdum risus. In lectus ante, euismod nec metus nec, porta tincidunt nisl. ';
 a=Blog(title='My first blog', body=(i + ' ') * 3, pub_date=timezone.now()-timedelta(days=5*366), likes='2'); a.save();
 a=Blog(title='My second blog', body=(i + ' ') * 3, pub_date=timezone.now()-timedelta(days=5*326), likes='4'); a.save();
@@ -83,4 +94,14 @@ q.day_set.create(number_of_day='Den: 12', hours_per_day=11, pub_date=timezone.no
 q.day_set.create(number_of_day='Den: 13', hours_per_day=9, pub_date=timezone.now()-timedelta(days=2));
 q.day_set.create(number_of_day='Den: 14', hours_per_day=9, pub_date=timezone.now()-timedelta(days=1));
 q.day_set.create(number_of_day='Den: 15', hours_per_day=8, pub_date=timezone.now());
+user = User.objects.create_user('user1', 'userone@userone.com', 'useronepass');
+user.first_name = 'User'; user.last_name = 'One'; user.save();
+user = User.objects.create_user('user2', 'usertwo@usertwo.com', 'usertwopass');
+user.first_name = 'User'; user.last_name = 'Two'; user.save();
+user = User.objects.create_user('user3', 'userthree@userthree.com', 'userthreepass');
+user.first_name = 'User'; user.last_name = 'Three'; user.save();
+user = User.objects.create_user('user4', 'userfour@userfour.com', 'userfourpass');
+user.first_name = 'User'; user.last_name = 'Four'; user.save();
+user = User.objects.create_user('root', 'nikicresl@gmail.com', 'admin');
+user.first_name = 'Dominik'; user.last_name = 'Resl'; user.is_superuser=True; user.is_staff=True; user.save();
 " | python manage.py shell

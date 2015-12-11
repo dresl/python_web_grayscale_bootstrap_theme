@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Publisher(models.Model):
     name = models.CharField(max_length=30)
@@ -21,8 +22,8 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
-    authors = models.ManyToManyField(Author)
-    publisher = models.ForeignKey(Publisher)
+    authors = models.ManyToManyField(User)
+    publisher = models.ForeignKey(Publisher, blank=True, null=True)
     publication_date = models.DateField(blank=True, null=True)
 
     def __unicode__(self):
