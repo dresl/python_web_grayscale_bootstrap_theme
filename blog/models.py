@@ -10,7 +10,6 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
     pub_date = models.DateTimeField('Date published', default=timezone.now())
-    likes = models.IntegerField(default=0)
     thumbnail = models.FileField(blank=True, null=True, upload_to=get_upload_file_name)
     users_like_it = models.ManyToManyField(User, blank=True, null=True)
     def __unicode__(self):

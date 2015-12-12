@@ -147,8 +147,14 @@ def blog(request, blog_id):
     args.update(csrf(request))
     args['blogs'] = Blog.objects.all().order_by('-pub_date')
     args['blog'] = Blog.objects.get(id=blog_id)
+    a = Blog.objects.get(id=blog_id)
+    args['likes'] = a.users_like_it.all()
     args['sidebar'] = Sidebar.objects.filter(
         pub_date__lte=timezone.now()).order_by('-pub_date')
+    likes_list = []
+    for i in a.users_like_it.all():
+        likes_list.append(i.username)
+    args['likes_list'] = likes_list
     if request.user.is_authenticated():
         args['username'] = request.user.username
         args['full_name'] = request.user.first_name + \
@@ -161,12 +167,18 @@ def blog(request, blog_id):
 def like_blog(request, blog_id):
     if blog_id:
         a = Blog.objects.get(id=blog_id)
-        count = a.likes
-        count += 1
-        a.likes = count
+        user = user = User.objects.get(username=request.user.username)
+        a.users_like_it.add(user)
         a.save()
         return HttpResponseRedirect('/blog/%s' % blog_id)
 
+def unlike_blog(request, blog_id):
+    if blog_id:
+        a = Blog.objects.get(id=blog_id)
+        user = user = User.objects.get(username=request.user.username)
+        a.users_like_it.remove(user)
+        a.save()
+        return HttpResponseRedirect('/blog/%s' % blog_id)
 
 ######### SEARCH AJAX ####################################################
 

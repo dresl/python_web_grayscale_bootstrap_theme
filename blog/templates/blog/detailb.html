@@ -32,9 +32,7 @@ document.body.scrollTop = parseInt(arr[1]);
 }
 </script>
 
-{% if user.is_authenticated %}
-
-
+{% if user.is_superuser %}
 <a style="font-size: 15px; text-decoration: none;" href="/admin/blog/blog/{{ blog.id }}/">[edit]</a>
 {% endif %}
 
@@ -50,17 +48,22 @@ document.body.scrollTop = parseInt(arr[1]);
       {% if blog.thumbnail %}
       <p><img style="border: 1px solid black" src="/static/{{ blog.thumbnail }}" width="350px"/></p>
       {% endif %}
-      {% if request.user.is_superuser %}
-      <p>Likes: {{ blog.likes }}</p>
-      <p><a href="{% url 'blog:like' blog.id %}">Like</a></p>
+      {% if request.user.is_authenticated %}
+      <p>Likes: {{ likes.count }} <b style="font-weight: normal; font-size: 14px"> (
+      {% if username in likes_list %}
+        <a href="{% url 'blog:unlike' blog.id %}">Unlike <i class="fa fa-thumbs-o-down"></i></a>
       {% else %}
-      <p>likes: {{ blog.likes }} <span style="font-size: 10px;"> (Please, <a style="cursor: pointer" id="myBtna">log in</a> to like this blog.)</span></p>
+        <a href="{% url 'blog:like' blog.id %}">Like <i class="fa fa-thumbs-o-up"></i></a>
+      {% endif %}
+      )</b></p>
+      {% else %}
+      <p>likes: {{ likes.count }} <span style="font-size: 10px;"> (Jestli chcete dát "like" tomuto blogu, <a style="cursor: pointer" id="myBtna">přihlašte se</a>)</span></p>
       {% endif %}
     </div>
     </div>
     <div id="info" class="tab-pane fade">
       <p>Publication date: {{ blog.pub_date }}</p>
-      <p>Likes: {{ blog.likes }}</p>
+      <p>Likes: {{ likes.count }}</p>
       
     </div>
 </div>

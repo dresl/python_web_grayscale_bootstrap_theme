@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^choose-by-year/$', views.choose_order_blog_by_year, name='choose_order_blog_by_year'),
     url(r'^(?P<blog_id>\d+)/$', views.blog, name='detailb'),
     url(r'^like/(?P<blog_id>\d+)/$', views.like_blog, name='like'),
+    url(r'^unlike/(?P<blog_id>\d+)/$', views.unlike_blog, name='unlike'),
     url(r'^create/$', views.create_blog, name='createb'),
     url(r'^search/$', views.search_titles, name='search_titles'),
 )

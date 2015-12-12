@@ -22,7 +22,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
-    authors = models.ManyToManyField(User)
+    authors = models.ManyToManyField(Author)
     publisher = models.ForeignKey(Publisher, blank=True, null=True)
     publication_date = models.DateField(blank=True, null=True)
 
