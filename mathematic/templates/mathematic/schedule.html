@@ -1,0 +1,27 @@
+{% extends "includes/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Rozpis laborek{% endblock %}
+
+{% block page_title %}<i class="fa fa-cube page_icon"></i>Laborky{% endblock page_title %}
+
+{% block content %}
+
+<div class="col-md-1"></div>
+
+<div class="col-md-10">
+<table border="2px" cellpadding="5px" cellspacing="0" bordercolor="black" style="width: 100%; margin: 0 auto">
+{% for a in weeks %}
+
+	<tr {% if now in a %}style="background: white; color: green"{% else %}style="background:{% cycle '#191919' 'black' %}"{% endif %}>
+	{% for item in a|slice:"1:4" %}
+		<th width="{% cycle '40%' '30%' '30%' %}">{{ item }}</th>
+	{% endfor %}
+	</tr>
+{% endfor %}
+</table>
+</div>
+
+<div class="col-md-1"></div>
+
+{% endblock content %}

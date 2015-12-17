@@ -155,6 +155,7 @@
 	                    </a>
 	                    <ul class="dropdown-menu">
 	                        <li><a href="{% url 'math:calc_index' %}" style="cursor:pointer"><i {% if '/math/calc/' in request.path %}style="color: rgb(73, 141, 116)"{% endif %} class="fa fa-calculator"></i> Kalkulačka</a></li>
+	                        <li><a href="{% url 'math:schedule' %}" style="cursor:pointer"><i {% if '/rozpis-laborky/' in request.path %}style="color: rgb(73, 141, 116)"{% endif %} class="fa fa-cube"></i> Laborky</a></li>
 	                    </ul>
 	                </li>
 					{% block authentication %}

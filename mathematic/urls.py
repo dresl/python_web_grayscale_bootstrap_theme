@@ -26,4 +26,6 @@ urlpatterns = patterns('',
     url(r'^calc/obdelnik/$', views.index_obdelnik, name='index_obdelnik'),
     url(r'^calc/obdelnik/choose$', views.choose_obdelnik, name='choose_obdelnik'),
     url(r'^calc/obdelnik/count/$', views.count_obdelnik, name='count_obdelnik'),
+    #schedule
+    url(r'^rozpis-laborky/$', views.schedule, name='schedule'),
 )
