@@ -30,29 +30,17 @@ def edit_profile(request):
     args.update(csrf(request))
     args['form'] = form
     args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-    if request.user.is_authenticated():
-        args['username'] = request.user.username
-        args['full_name'] = request.user.first_name + ' ' + request.user.last_name
-        args['form'] = args['form']
-        return render(request, 'userprofile/edit_profile.html', args)
-    else:
-        return render(request, 'userprofile/edit_profile.html', args)
+    return render(request, 'userprofile/edit_profile.html', args)
 
 def userprofile(request):
     args = {}
     args.update(csrf(request))
     if request.user.is_authenticated():
-    	args['profile_picture'] = request.user.profile.profile_picture
         args['hobbies'] = request.user.profile.hobbies
-        args['questions'] = Question.objects.all()
-        args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-        args['username'] = request.user.username
-        args['full_name'] = request.user.first_name + ' ' + request.user.last_name
-        return render(request,'userprofile/profile.html', args)
-    else:
-        args['questions'] = Question.objects.all()
-        args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-        return render(request, 'userprofile/profile.html', args)
+        args['profile_picture'] = request.user.profile.profile_picture
+    args['questions'] = Question.objects.all()
+    args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+    return render(request, 'userprofile/profile.html', args)
 
 def login(request):
     c = {}
@@ -71,14 +59,8 @@ def auth_view(request):
 
 def loggedin(request):
     args = {}
-    if request.user.is_authenticated():
-        args['full_name'] = request.user.first_name + ' ' + request.user.last_name
-        args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-        args['username'] = request.user.username
-        return render(request, 'userprofile/loggedin.html', args)
-    else:
-        args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-        return render(request, 'userprofile/loggedin.html', args)
+    args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+    return render(request, 'userprofile/loggedin.html', args)
 
 def invalid_login(request):
     sidebar = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')

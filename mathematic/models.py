@@ -5,8 +5,9 @@ import datetime
 from django.db import models
 
 class Brigade(models.Model):
-    brigade_title = models.CharField(max_length=200)
+    brigade_title = models.CharField(max_length=200, verbose_name="Název brigády")
     pub_date = models.DateTimeField('Datum publikování', default=timezone.now())
+    rate = models.PositiveIntegerField(verbose_name="Za hodinu", default=50)
     def __unicode__(self):              # __unicode__ on Python 2 ; __str__ on Python 3
         return self.brigade_title
     def was_published_recently(self):

@@ -1,0 +1,28 @@
+{% extends "includes/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Brigade{% endblock %}
+
+{% block page_title %}<i class="fa fa-cubes page_icon"></i>Přidat brigádu{% endblock page_title %}
+
+{% block content %}
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<form method="post" action="{% url 'math:create_brigade' %}">{% csrf_token %}
+	<label for="brigada">Název Brigády</label>
+	<input id="brigada" class="form-control" type="text" name="brigade_title" required>
+	<label for="den">Za hodinu (Kč)</label>
+	<input id="den" class="form-control" type="number" min="1" value="50" name="rate" required>
+	<label for="pub_date">Datum publikování</label>
+	<input id="pub_date" class="form-control" type="date" value="{{ now }}" name="now" data-date-inline-picker="true" required>
+	<hr>
+	<input class="btn btn-primary" type="submit" name="submit" value="Přidat brigádu" />
+</form>
+</div>
+<script type="text/javascript">
+    document.getElementById('reset').onclick= function() {
+        var field= document.getElementById('pub_date');
+        field.value= field.defaultValue;
+    };
+</script>
+{% endblock %}

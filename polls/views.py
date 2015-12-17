@@ -18,16 +18,7 @@ from polls.models import Choice, Question, Sidebar
 def db(request):
     sidebar = Sidebar.objects.filter(
         pub_date__lte=timezone.now()).order_by('-pub_date')
-    if request.user.is_authenticated():
-        return render(request,
-                      'polls/dbnew.html', {
-                          'sidebar': sidebar,
-                          'username': request.user.username,
-                          'full_name': request.user.first_name +
-                          ' ' + request.user.last_name
-                      })
-    else:
-        return render(request,
+    return render(request,
                       'polls/dbnew.html', {'sidebar': sidebar})
 
 
@@ -37,35 +28,18 @@ def basehtml(request):
         pub_date__lte=timezone.now()).order_by('-pub_date')
     brigades = Brigade.objects.all().order_by('-pub_date')[:5]
     now = timezone.now()
-    if request.user.is_authenticated():
-        return render(request,
-                      'includes/base.html',
-                      {'blogs': blogs,
-                       'sidebar': sidebar,
-                       'now': now,
-                       'username': request.user.username,
-                       'full_name': request.user.first_name +
-                       ' ' + request.user.last_name})
-    else:
-        return render(request,
+    return render(request,
                       'includes/base.html', {
-                          'sidebar': sidebar,
-                          'brigades': brigades
+                        'now': now,
+                        'sidebar': sidebar,
+                        'brigades': brigades
                       })
 
 
 def HelloworldView(request):
     sidebar = Sidebar.objects.filter(
         pub_date__lte=timezone.now()).order_by('-pub_date')
-    if request.user.is_authenticated():
-        return render(request,
-                    'polls/helloworld.html', {
-                    'sidebar': sidebar,
-                    'username': request.user.username,
-                    'full_name': request.user.first_name +
-                    ' ' + request.user.last_name})
-    else:
-        return render(request, 'polls/helloworld.html', {'sidebar': sidebar})
+    return render(request, 'polls/helloworld.html', {'sidebar': sidebar})
 
 
 def WelcomeView(request):
@@ -73,19 +47,9 @@ def WelcomeView(request):
         pub_date__lte=timezone.now()).order_by('-pub_date')
     blogs = Blog.objects.all().order_by('-pub_date')[:3]
     brigades = Brigade.objects.all().order_by('-pub_date')[:5]
-    if request.user.is_authenticated():
-        return render(request,
-                    'polls/welcome.html', {
-                    'sidebar': sidebar,
-                    'blogs': blogs,
-                    'brigades': brigades,
-                    'username': request.user.username,
-                    'full_name': request.user.first_name +
-                    ' ' + request.user.last_name
-                      })
-    else:
-        return render(request, 'polls/welcome.html', {
-            'sidebar': sidebar, 'brigades': brigades,
+    return render(request, 'polls/welcome.html', {
+            'sidebar': sidebar,
+            'brigades': brigades,
             'blogs': blogs
         })
 
@@ -108,11 +72,6 @@ class ResultsView(generic.DetailView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(ResultsView, self).get_context_data(*args, **kwargs)
-
-        if self.request.user.is_authenticated():
-            context['full_name'] = self.request.user.first_name + \
-                ' ' + self.request.user.last_name
-            context['username'] = self.request.user.username
         return context
 
 
@@ -123,11 +82,6 @@ class InfoView(generic.DetailView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(InfoView, self).get_context_data(*args, **kwargs)
-
-        if self.request.user.is_authenticated():
-            context['full_name'] = self.request.user.first_name + \
-                ' ' + self.request.user.last_name
-            context['username'] = self.request.user.username
         return context
 
 
@@ -138,11 +92,6 @@ class IndexView(generic.ListView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(IndexView, self).get_context_data(*args, **kwargs)
-
-        if self.request.user.is_authenticated():
-            context['full_name'] = self.request.user.first_name + \
-                ' ' + self.request.user.last_name
-            context['username'] = self.request.user.username
         return context
 
     def get_queryset(self):
@@ -161,11 +110,6 @@ class DetailView(generic.DetailView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(DetailView, self).get_context_data(*args, **kwargs)
-
-        if self.request.user.is_authenticated():
-            context['full_name'] = self.request.user.first_name + \
-                ' ' + self.request.user.last_name
-            context['username'] = self.request.user.username
         return context
 
     def get_queryset(self):
@@ -201,13 +145,7 @@ def vote(request, question_id):
 def SidebarView(request):
     sidebar = Sidebar.objects.filter(
         pub_date__lte=timezone.now()).order_by('-pub_date')[:50]
-    if request.user.is_authenticated():
-        return render(request, 'polls/test.html', {
-            'sidebar': sidebar, 'username': request.user.username,
-            'full_name': request.user.first_name + ' ' + request.user.last_name
-        })
-    else:
-        return render(request, 'polls/test.html', {'sidebar': sidebar})
+    return render(request, 'polls/test.html', {'sidebar': sidebar})
 
 
 ######### SEARCH AJAX ####################################################
@@ -218,14 +156,7 @@ def search_titles(request):
     else:
         search_text = ''
 
-    if request.user.is_authenticated():
-        greetings = Question.objects.filter(title__contains=search_text)
-        return render(request, 'polls/ajax_search.html', {
-            'greetings': greetings, 'username': request.user.username,
-            'full_name': request.user.first_name + ' ' + request.user.last_name
-        })
-    else:
-        greetings = Question.objects.filter(title__contains=search_text)
-        return render(request, 'polls/ajax_search.html', {
+    greetings = Question.objects.filter(title__contains=search_text)
+    return render(request, 'polls/ajax_search.html', {
             'greetings': greetings
         })

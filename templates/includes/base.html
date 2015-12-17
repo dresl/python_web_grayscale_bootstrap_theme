@@ -125,17 +125,30 @@
 					<li><a class="page-scroll" href="{% url 'welcome' %}">Welcome</a></li>
 					<li><a class="page-scroll" href="#polls">Polls</a></li>
 					<li><a class="page-scroll" href="#blog">Blog</a></li>
-					<li><a class="page-scroll" href="#brigades">Brigades</a></li>
-					<li><a class="page-scroll" href="#contact">Contact</a></li>
+					<li><a class="page-scroll" href="#brigades">Brigády</a></li>
+					<li><a class="page-scroll" href="#contact">Kontakt</a></li>
 				{% else %}
 				    <li><a href="{% url 'welcome' %}">Welcome</a></li>
     				<li {% if '/polls/' in request.path %}class="active"{% endif %}><a href="{% url 'polls:indexq'%}">Polls</a></li>
     				<li {% if '/blog/' in request.path %}class="active"{% endif %}><a href="{% url 'blog:indexb'%}">Blog</a></li>
-    				<li {% if '/brigade/' in request.path %}class="active"{% endif %}><a href="{% url 'welcome' %}#brigades">Brigades</a></li>
-    				<li {% if '/contact/' in request.path %}class="active"{% endif %}><a href="{% url 'welcome' %}#contact">Contact</a></li>
+    				<li {% if '/brigade/' in request.path %}class="active"{% endif %}><a href="{% url 'math:brigade_index' %}">Brigády</a></li>
+    				<li {% if '/contact/' in request.path %}class="active"{% endif %}><a href="{% url 'welcome' %}#contact">Kontakt</a></li>
                 {% endif %}
                     
 				{% endblock menu %}
+                    {% if '/brigade/' in request.path %}
+                    {% block settings_brigade %}
+                    <li style="padding-left: 25px;">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                        <i {% if '/math/' in request.path and '/brigade/' not in request.path%}style="color: #42DCA3"{% endif %} class="fa fa-cog"></i></i>
+	                    </a>
+	                    <ul class="dropdown-menu">
+	                        <li><a href="{% url 'math:index_create_day' %}" style="cursor:pointer"><i {% if '/index-create_day/' in request.path %}style="color: rgb(73, 141, 116)"{% endif %} class="fa fa-plus-square"></i> Přidat den</a></li>
+	                        <li><a href="{% url 'math:index_create_brigade' %}" style="cursor:pointer"><i {% if '/index-create_brigade/' in request.path %}style="color: rgb(73, 141, 116)"{% endif %} class="fa fa-plus-square"></i> Přidat brigádu</a></li>
+	                    </ul>
+					</li>
+                    {% endblock settings_brigade %}
+                    {% endif %}
 					<li style="padding-left: 25px;">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	                        <i {% if '/math/' in request.path and '/brigade/' not in request.path%}style="color: #42DCA3"{% endif %} class="fa fa-briefcase"></i></i>
@@ -143,6 +156,7 @@
 	                    <ul class="dropdown-menu">
 	                        <li><a href="{% url 'math:calc_index' %}" style="cursor:pointer"><i {% if '/math/calc/' in request.path %}style="color: rgb(73, 141, 116)"{% endif %} class="fa fa-calculator"></i> Kalkulačka</a></li>
 	                    </ul>
+	                </li>
 					{% block authentication %}
 					<li style="padding-left: 15px;">						
 	                    {% if not user.is_authenticated %}
@@ -161,7 +175,7 @@
 	                        <i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-user fa-fw"></i><i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
-	                    	<li><a href="{% url 'userprofile:profile' %}"><i class="fa fa-user fa-fw"></i> Zobrazit profil</a>
+	                    	<li><a href="{% url 'userprofile:profile' %}"><i class="fa fa-user fa-fw"></i> {{ request.user.username }}</a>
 	                        </li>
 	                        <li class="divider"></li>
 	                        <li><a href="/accounts/logout/"><i class="fa fa-sign-out fa-fw"></i> Odhlásit se</a>

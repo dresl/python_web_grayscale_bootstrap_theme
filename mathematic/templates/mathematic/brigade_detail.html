@@ -3,9 +3,16 @@
 
 {% block title %}Brigade{% endblock %}
 
-{% block page_title %}<i class="fa fa-cubes page_icon"></i>{{title_brigade}}{% endblock page_title %}
+{% block page_title %}<a href="{% url 'math:brigade_index' %}"><i style="padding-right: 20px" class="fa fa-arrow-circle-left"></i></a><i class="fa fa-cubes page_icon"></i>{{ title_brigade }}{% endblock page_title %}
 
 {% block content %}
+
+{% if not brigade %}
+
+<p>Nejsou vytvořené dny pro tuto brigádu</p>
+
+{% else %}
+
 <div id="load_tweets">
 <table border="2px" cellpadding="5px" cellspacing="0" bordercolor="black" style="width: 450px; margin: 10px auto">
 	<tr style="background-color: #012D00;">
@@ -34,7 +41,7 @@
 	<caption>Celkový součet</caption>
 	<tr>
 		<th width="50%">Počet hodin:</th>
-		<td width="50%">{{ sum_hours }}</td>
+		<th width="50%">{{ sum_hours }}</th>
 	</tr>
 	<tr>
 		<td width="50%">Průměrný počet hodin denně:</td>
@@ -42,13 +49,19 @@
 	</tr>
 	<tr>
 		<th width="50%">Zisk:</th>
-		<td width="50%">{{ sum_price }}</td>
+		<th width="50%">{{ sum_price }},-</th>
 	</tr>
 	<tr>
 		<td width="50%">Průměrný zisk denně:</td>
-		<td width="50%">{{ average_price }}</td>
+		<td width="50%">{{ average_price }},-</td>
+	</tr>
+	<tr>
+		<th width="50%">Za hodinu</th>
+		<th width="50%">{{ rate }},-</th>
 	</tr>
 </table>
+
+{% endif %}
 
 <a href="{% url 'math:index_create_day' %}"><button class="btn btn-default" style="margin-top: 20px;">Přidat další den</button></a>
 

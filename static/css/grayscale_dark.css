@@ -358,13 +358,15 @@ footer p {
 ::-moz-selection {
     text-shadow: none;
     background: #fcfcfc;
-    background: rgba(10, 108, 29, 0.2) none repeat scroll 0% 0%;
+    background: rgba(0, 99, 19, 1);
+    color: white;
 }
 
 ::selection {
     text-shadow: none;
     background: #fcfcfc;
     background: rgba(10, 108, 29, 0.2) none repeat scroll 0% 0%;
+    color: white;
 }
 
 img::selection {

@@ -11,6 +11,7 @@ class BrigadeAdmin(admin.ModelAdmin):
         ('Název brigády',               {'fields': ['brigade_title']}),
         ('Datum publikování', {'fields': ['pub_date'], #'classes': ['collapse']
         	}),
+        ('Za hodinu', {'fields': ['rate']}),
     ]
     inlines = [DayInline]
     list_display = ('brigade_title', 'pub_date', 'was_published_recently')

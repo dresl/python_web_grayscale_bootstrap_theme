@@ -1,9 +1,15 @@
 {% extends "includes/base.html" %}
 
-{% block page_title %}{{ full_name }}<b style='font-weight: normal!important; font-size: 14px!important;'> ({{ username }})</b>{% endblock page_title %}
+{% block page_title %}
+{% if request.user.is_authenticated %}
+{{ request.user.get_full_name }}<b style='font-weight: normal!important; font-size: 14px!important;'> ({{ request.user.username }})</b>
+{% else %}
+Tato stránka není dostupná
+{% endif %}
+{% endblock page_title %}
 
 {% block content %}
-<button class="btn-default" onclick="goBacks()">Go Back</button>
+<button class="btn-default" onclick="goBacks()">Vrátit se zpět</button>
 
 <script>
 function goBacks() {
@@ -16,11 +22,11 @@ function goBacks() {
 {% if profile_picture %}
 <p class="profile_picture"><img src="/static/{{ profile_picture }}" /></p>
 {% endif %}
-<p>Hobbies: {{ hobbies }}</p>
+<p>Záliby: {{ hobbies }}</p>
 </div>
 <!-- <a href="{% url 'userprofile:edit_profile' %}">upravit profil</a> -->
 {% else %}
-<p>To see your profile you must be login! Click here to <a href="/accounts/login/">login</a> and if you haven't got an account, register <a href="/accounts/register/">here</a></p>
+<p>Nelze zobrazit tutu stránku.<a href="/accounts/login/">Přihlašte se</a> nebo se zaregistrujte <a href="/accounts/register/">zde</a></p>
 
 {% endif %}
 
