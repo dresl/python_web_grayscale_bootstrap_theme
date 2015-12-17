@@ -10,7 +10,7 @@ class BlogAdmin(admin.ModelAdmin):
         ('Date information', {'fields': ['pub_date']}), #'classes': ['collapse']
         ('Content',               {'fields': ['body']}),
         ('Thumbnail',            {'fields': ['thumbnail']}),
-        ('Users',            {'fields': ['users_like_it']}),
+        ('Likes',            {'fields': ['users_like_it']}),
     ]
     filter_horizontal = ('users_like_it',)
 

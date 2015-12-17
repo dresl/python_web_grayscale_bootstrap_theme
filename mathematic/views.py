@@ -374,18 +374,18 @@ def count_ctverec(request):
 
 #*************Obdelnik************************************************************
 def index_obdelnik(request):
-    return render(request, 'mathematic/index_obdelnik.html', {'username': username})
+    return render(request, 'mathematic/index_obdelnik.html')
 def choose_obdelnik(request):
     if request.method == 'GET':
         if request.GET['myfield'] == 'abo':
             myfield = request.GET['myfield']
-            return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield, 'username': username})
+            return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
         elif request.GET['myfield'] == 'aboo':
             myfield = request.GET['myfield']
-            return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield, 'username': username})
+            return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
         elif request.GET['myfield'] == 'abso':
             myfield = request.GET['myfield']
-            return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield, 'username': username})
+            return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
 
 def count_obdelnik(request):
     if request.method == 'GET':
@@ -407,14 +407,14 @@ def count_obdelnik(request):
                     'obvod': obvod,
                     'obsah': obsah,
                     'uhlopricka': uhlopricka,
-                    'username': username,
-                    'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    'username': username })
             else:
                 error_message = 'Musis zadat cislo'
+                username = request.user.username
                 return render(request, 'mathematic/index_obdelnik.html', {
                     'error_message': error_message,
                     'username': username,
-                    'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    })
         elif request.GET['myfield'] == 'aboo':
             if request.GET['cislo3'] and request.GET['cislo4']:
                 cislo3_ = float(request.GET['cislo3'])
@@ -433,14 +433,12 @@ def count_obdelnik(request):
                     'obvod': obvod,
                     'obsah': obsah,
                     'uhlopricka': uhlopricka,
-                    'username': username,
-                    'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    })
             else:
+                username = request.user.username
                 error_message = 'Musis zadat cislo'
                 return render(request, 'mathematic/index_obdelnik.html', {
-                    'error_message': error_message,
-                    'username': username,
-                    'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    'error_message': error_message,})
         elif request.GET['myfield'] == 'abso':
             if request.GET['cislo5'] and request.GET['cislo6']:
                 cislo5_ = float(request.GET['cislo6'])
@@ -458,9 +456,7 @@ def count_obdelnik(request):
                     'cislo6': cislo6,
                     'obvod': obvod,
                     'obsah': obsah,
-                    'uhlopricka': uhlopricka,
-                    'username': username,
-                    'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    'uhlopricka': uhlopricka, })
             else:
                 error_message = 'Musis zadat cislo'
                 return render(request, 'mathematic/index_obdelnik.html', {
