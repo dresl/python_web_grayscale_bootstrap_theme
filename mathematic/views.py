@@ -502,7 +502,7 @@ def schedule(request):
     ['4 .4. 2016 -  8.4. 2016', '4.4. 2016 - 8.4. 2016', 'Ch 1', 'F 2'],
     ['11.4. 2016 - 15.4. 2016', '11.4. 2016 - 15.4. 2016', 'F 1', 'Ch 2'],
     ['18.4. 2016 - 22.4. 2016', '18.4. 2016 - 22.4. 2016', 'Ch 1', 'F 2'],
-    ['25.4. 2016 - 29.4. 2016', '25.4. 2016 - 29.4. 2016', 'Ch 2', 'F 1'],
+    ['25.4. 2016 - 29.4. 2016', '25.4. 2016 - 29.4. 2016', 'F 1', 'Ch 2'],
     ['2 .5. 2016 -  6.5. 2016', '2.5. 2016 - 6.5. 2016', 'Ch 1', 'F 2'],
     ['9 .5. 2016 - 13.5. 2016', '9.5. 2016 - 13.5. 2016', 'F 1', 'Ch 2'],
     ['16.5. 2016 - 20.5. 2016', '16.5. 2016 - 20.5. 2016', 'Ch 1', 'F 2'],
@@ -515,10 +515,10 @@ def schedule(request):
     for week in weeks:
         for item in week[0:1]:
             day = str(item)
-            week.append(str(int(day[0:len(day)-21])+1)+day[2:6])
-            week.append(str(int(day[0:len(day)-21])+2)+day[2:6])
-            week.append(str(int(day[0:len(day)-21])+3)+day[2:6])
-            week.append(str(int(day[0:len(day)-21])+4)+day[2:6])
-            week.append(str(int(day[0:len(day)-21])+5)+day[2:6])
+            week.append(str(str(int(day[0:len(day)-21])+1)+day[2:6]).strip())
+            week.append(str(str(int(day[0:len(day)-21])+2)+day[2:6]).strip())
+            week.append(str(str(int(day[0:len(day)-21])+3)+day[2:6]).strip())
+            week.append(str(str(int(day[0:len(day)-21])+4)+day[2:6]).strip())
+            week.append(str(str(int(day[0:len(day)-21])+5)+day[2:6]).strip())
     args['weeks'] = weeks
     return render(request, 'mathematic/schedule.html', args)
