@@ -19,6 +19,7 @@ from mathematic.models import Brigade, Day
 from django.core.mail import send_mail
 from django.conf import settings
 from mathematic.forms import BrigadeForm
+from django.contrib.auth.models import User
 
 def index(request):
     args={}
@@ -37,16 +38,25 @@ def index_create_brigade(request):
 
 def create_brigade(request):
     brigade_title = request.POST['brigade_title']
+    owner = request.POST['owners']
+    user = User.objects.get(username=owner)
     rate = request.POST['rate']
     now = request.POST['now']
     a = Brigade(brigade_title=brigade_title, rate=rate, pub_date=now)
+    a.save()
+    a.owner.add(user)
     a.save()
     return HttpResponseRedirect('/math/brigade/')
 
 def index_create_day(request):
     args = {}
     list_ = []
-    brigades_title = Brigade.objects.all()
+    if request.user.is_authenticated():
+        user = User.objects.get(username=request.user.username)
+        brigades_title = Brigade.objects.filter(pub_date__lte=timezone.now(), owner=user)
+    else:
+        users = User.objects.all()
+        brigades_title = Brigade.objects.exclude(pub_date__lte=timezone.now(), owner=users)
     for i in brigades_title:
         q = Brigade.objects.get(brigade_title=i)
         if Day.objects.filter(brigade=q).count() == 0:
@@ -55,7 +65,7 @@ def index_create_day(request):
             last_days = q.day_set.order_by('-pub_date')[0:1].get()
             list_.append('%s: %s' % (q, last_days))
     args['last_days'] = ", ".join(list_)
-    args['brigades'] = Brigade.objects.all()
+    args['brigades'] = brigades_title
     return render(request, 'mathematic/day_create.html', args)
 
 def create_day(request):
@@ -73,7 +83,12 @@ def choose_brigade(request):
     if request.method == 'GET':
         args = {}
         list_ = []
-        brigades_title = Brigade.objects.all()
+        if request.user.is_authenticated():
+            user = User.objects.get(username=request.user.username)
+            brigades_title = Brigade.objects.filter(pub_date__lte=timezone.now(), owner=user)
+        else:
+            users = User.objects.all()
+            brigades_title = Brigade.objects.exclude(pub_date__lte=timezone.now(), owner=users)
         for i in brigades_title:
             q = Brigade.objects.get(brigade_title=i)
             if Day.objects.filter(brigade=q).count() == 0:
@@ -93,7 +108,7 @@ def choose_brigade(request):
             last_day_ = a.day_set.all().order_by('-pub_date')[0]
             last_day = str(last_day_)[5:len(str(last_day_))]
         args['last_day'] = int(last_day) + 1
-        args['brigades'] = Brigade.objects.all()
+        args['brigades'] = brigades_title
         return render(request, 'mathematic/day_create.html', args)
 
 
@@ -110,7 +125,12 @@ class BrigadeIndexView(generic.ListView):
         """
         Excludes any Brigades that aren't published yet.
         """
-        return Brigade.objects.filter(pub_date__lte=timezone.now())
+        if self.request.user.is_authenticated():
+            user = User.objects.get(username=self.request.user.username)
+            return Brigade.objects.filter(pub_date__lte=timezone.now(), owner=user)
+        else:
+            users = User.objects.all()
+            return Brigade.objects.exclude(pub_date__lte=timezone.now(), owner=users)
 
 def DetailView(request, pk):
     title_brigade = Brigade.objects.get(id=pk)
@@ -163,16 +183,36 @@ def DetailView(request, pk):
                 return round(total, 2)
             average_price = average_price(brigade)
 
-            return render(request, 'mathematic/brigade_detail.html', {
-                'brigade': brigade,
-                'sum_hours': sum_hours,
-                'average_hours': average_hours,
-                'title_brigade': title_brigade,
-                'sum_price': sum_price,
-                'average_price': average_price,
-                'rate': rate,
-                'sidebar': Sidebar.objects.filter(
-                    pub_date__lte=timezone.now()).order_by('-pub_date')[:50],})
+            owner_brigade = Brigade.objects.get(id=pk)
+            owner_b = owner_brigade.owner.all()
+            owner_list = []
+            for i in owner_b:
+                owner_list.append(i.username)
+            if request.user.username in owner_list:
+                return render(request, 'mathematic/brigade_detail.html', {
+                    'brigade': brigade,
+                    'sum_hours': sum_hours,
+                    'average_hours': average_hours,
+                    'title_brigade': title_brigade,
+                    'sum_price': sum_price,
+                    'average_price': average_price,
+                    'rate': rate,
+                    'sidebar': Sidebar.objects.filter(
+                        pub_date__lte=timezone.now()).order_by('-pub_date')[:50],})
+            else:
+                if str(title_brigade.pub_date)[0:19] == "1995-12-25 09:30:32":
+                    return render(request, 'mathematic/brigade_detail.html', {
+                        'brigade': brigade,
+                        'sum_hours': sum_hours,
+                        'average_hours': average_hours,
+                        'title_brigade': title_brigade,
+                        'sum_price': sum_price,
+                        'average_price': average_price,
+                        'rate': rate,
+                        'sidebar': Sidebar.objects.filter(
+                            pub_date__lte=timezone.now()).order_by('-pub_date')[:50],})
+                else:
+                    return render(request, 'mathematic/brigade_detail_error.html', {})
         else:
             return render(request, 'mathematic/brigade_index_error.html')
 

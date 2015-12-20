@@ -55,7 +55,7 @@
         </div>
         <div class="col-md-5">
             <h3>{{ blog.title }}</h3>
-            <h5>likes: {{blog.likes}} | {{ blog.pub_date.day }}. {{ blog.pub_date.month }}. {{ blog.pub_date.year }}</h5>
+            <h5>likes: {% if blog.users_like_it.count > 0 %} {{ blog.users_like_it.count }} {% else %} 0 {% endif %}| {{ blog.pub_date.day }}. {{ blog.pub_date.month }}. {{ blog.pub_date.year }}</h5>
             <p>{{ blog.body|truncatewords:"15" }}</p>
             <a class="btn btn-primary" href="{% url 'blog:detailb' blog.id %}">Zobrazit <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>

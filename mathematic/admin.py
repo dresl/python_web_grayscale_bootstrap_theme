@@ -12,8 +12,10 @@ class BrigadeAdmin(admin.ModelAdmin):
         ('Datum publikování', {'fields': ['pub_date'], #'classes': ['collapse']
         	}),
         ('Za hodinu', {'fields': ['rate']}),
+        ('Vlastník', {'fields': ['owner']}),
     ]
     inlines = [DayInline]
+    filter_horizontal = ('owner',)
     list_display = ('brigade_title', 'pub_date', 'was_published_recently')
     list_filter = ['pub_date','brigade_title']
     search_fields = ['brigade_title']

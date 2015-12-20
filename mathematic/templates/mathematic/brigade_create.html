@@ -11,6 +11,10 @@
 <form method="post" action="{% url 'math:create_brigade' %}">{% csrf_token %}
 	<label for="brigada">Název Brigády</label>
 	<input id="brigada" class="form-control" type="text" name="brigade_title" required>
+	<label for="brigada">Vlastník</label>
+	<select id="brigada" class="form-control" name="owners" required>
+		<option id="owner">{{ request.user.username }}</option>
+	</select>
 	<label for="den">Za hodinu (Kč)</label>
 	<input id="den" class="form-control" type="number" min="1" value="50" name="rate" required>
 	<label for="pub_date">Datum publikování</label>

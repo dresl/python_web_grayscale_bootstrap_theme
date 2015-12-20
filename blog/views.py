@@ -103,7 +103,7 @@ def blog(request, blog_id):
 def like_blog(request, blog_id):
     if blog_id:
         a = Blog.objects.get(id=blog_id)
-        user = user = User.objects.get(username=request.user.username)
+        user = User.objects.get(username=request.user.username)
         a.users_like_it.add(user)
         a.save()
         return HttpResponseRedirect('/blog/%s' % blog_id)

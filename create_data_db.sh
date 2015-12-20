@@ -41,9 +41,14 @@ q.choice_set.create(choice_text='great', votes=5);
 q.choice_set.create(choice_text='fantastic', votes=9);
 q.choice_set.create(choice_text='not bad', votes=1);
 a=Brigade(brigade_title='Brigada Pavlisov', pub_date=timezone.now(), rate=50); a.save();
-a=Brigade(brigade_title='Brigada Kaufland', pub_date=timezone.now()-timedelta(days=365), rate=65); a.save();
-a=Brigade(brigade_title='Brigada Stavba', pub_date=timezone.now()-timedelta(days=2*365), rate=82); a.save();
+a=Brigade(brigade_title='Brigada Kaufland', pub_date=timezone.now()-timedelta(days=20*365), rate=65); a.save();
+a=Brigade(brigade_title='Brigada Stavba', pub_date=timezone.now()-timedelta(days=20*365), rate=82); a.save();
 q=Brigade.objects.get(brigade_title='Brigada Pavlisov');
+q.save()
+user = User.objects.create_user('root', 'nikicresl@gmail.com', 'admin');
+user.first_name = 'Dominik'; user.last_name = 'Resl'; user.is_superuser=True; user.is_staff=True; user.save();
+q.owner.add(user)
+q.save()
 q.day_set.create(number_of_day='Den: 1', hours_per_day=9, pub_date=timezone.now()-timedelta(days=21));
 q.day_set.create(number_of_day='Den: 2', hours_per_day=10, pub_date=timezone.now()-timedelta(days=20));
 q.day_set.create(number_of_day='Den: 3', hours_per_day=9, pub_date=timezone.now()-timedelta(days=19));
@@ -102,6 +107,4 @@ user = User.objects.create_user('user3', 'userthree@userthree.com', 'userthreepa
 user.first_name = 'User'; user.last_name = 'Three'; user.save();
 user = User.objects.create_user('user4', 'userfour@userfour.com', 'userfourpass');
 user.first_name = 'User'; user.last_name = 'Four'; user.save();
-user = User.objects.create_user('root', 'nikicresl@gmail.com', 'admin');
-user.first_name = 'Dominik'; user.last_name = 'Resl'; user.is_superuser=True; user.is_staff=True; user.save();
 " | python manage.py shell
