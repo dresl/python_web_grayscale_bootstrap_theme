@@ -560,5 +560,6 @@ def schedule(request):
             week.append(str(str(int(day[0:len(day)-21])+3)+day[2:6]).strip())
             week.append(str(str(int(day[0:len(day)-21])+4)+day[2:6]).strip())
             week.append(str(str(int(day[0:len(day)-21])+5)+day[2:6]).strip())
+            week.append(str(str(int(day[0:len(day)-21])+6)+day[2:6]).strip())
     args['weeks'] = weeks
     return render(request, 'mathematic/schedule.html', args)
