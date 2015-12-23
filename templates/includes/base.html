@@ -136,6 +136,17 @@
                 {% endif %}
                     
 				{% endblock menu %}
+					{% if user.is_superuser and '/blog/' in request.path %}
+					<li style="padding-left: 25px;">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                        <i {% if '/math/' in request.path and '/brigade/' not in request.path%}style="color: #42DCA3"{% endif %} class="fa fa-cog"></i></i>
+	                    </a>
+	                    <ul class="dropdown-menu">
+	                        <li><a href="/admin/blog/blog/{{ blog.id }}/" style="cursor:pointer"><i {% if '/index-create_day/' in request.path %}style="color: rgb(73, 141, 116)"{% endif %} class="fa fa-plus-square"></i> edit this blog</a>
+	                        </li>
+	                    </ul>
+					</li>
+					{% endif %}
                     {% if '/brigade/' in request.path %}
                     {% block settings_brigade %}
                     <li style="padding-left: 25px;">
@@ -176,7 +187,7 @@
 	                        <i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-user fa-fw"></i><i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
-	                    	<li><a href="{% url 'userprofile:profile' %}"><i class="fa fa-user fa-fw"></i> {{ request.user.username }}</a>
+	                    	<li><a href="{% url 'userprofile:profile' user.id %}"><i class="fa fa-user fa-fw"></i> {{ request.user.username }}</a>
 	                        </li>
 	                        <li class="divider"></li>
 	                        <li><a href="/accounts/logout/"><i class="fa fa-sign-out fa-fw"></i> Odhlásit se</a>

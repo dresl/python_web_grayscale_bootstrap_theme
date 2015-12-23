@@ -72,6 +72,10 @@ q.day_set.create(number_of_day='Den: 20', hours_per_day=8, pub_date=timezone.now
 q.day_set.create(number_of_day='Den: 21', hours_per_day=9, pub_date=timezone.now()-timedelta(days=1));
 q.day_set.create(number_of_day='Den: 22', hours_per_day=8, pub_date=timezone.now());
 q=Brigade.objects.get(brigade_title='Brigada Kaufland');
+q.save()
+user = User.objects.create_user('user1', 'userone@userone.com', 'useronepass');
+user.first_name = 'User'; user.last_name = 'One'; user.save();
+q.owner.add(user)
 q.day_set.create(number_of_day='Den: 1', hours_per_day=8, pub_date=timezone.now()-timedelta(days=10));
 q.day_set.create(number_of_day='Den: 2', hours_per_day=8, pub_date=timezone.now()-timedelta(days=9));
 q.day_set.create(number_of_day='Den: 3', hours_per_day=8, pub_date=timezone.now()-timedelta(days=8));
@@ -84,6 +88,11 @@ q.day_set.create(number_of_day='Den: 9', hours_per_day=8, pub_date=timezone.now(
 q.day_set.create(number_of_day='Den: 10', hours_per_day=8, pub_date=timezone.now()-timedelta(days=1));
 q.day_set.create(number_of_day='Den: 11', hours_per_day=8, pub_date=timezone.now());
 q=Brigade.objects.get(brigade_title='Brigada Stavba');
+q.save()
+user = User.objects.create_user('user2', 'usertwo@usertwo.com', 'usertwopass');
+user.first_name = 'User'; user.last_name = 'Two'; user.save();
+q.owner.add(user)
+q.save()
 q.day_set.create(number_of_day='Den: 1', hours_per_day=9, pub_date=timezone.now()-timedelta(days=14));
 q.day_set.create(number_of_day='Den: 2', hours_per_day=8, pub_date=timezone.now()-timedelta(days=13));
 q.day_set.create(number_of_day='Den: 3', hours_per_day=10, pub_date=timezone.now()-timedelta(days=12));
@@ -99,10 +108,6 @@ q.day_set.create(number_of_day='Den: 12', hours_per_day=11, pub_date=timezone.no
 q.day_set.create(number_of_day='Den: 13', hours_per_day=9, pub_date=timezone.now()-timedelta(days=2));
 q.day_set.create(number_of_day='Den: 14', hours_per_day=9, pub_date=timezone.now()-timedelta(days=1));
 q.day_set.create(number_of_day='Den: 15', hours_per_day=8, pub_date=timezone.now());
-user = User.objects.create_user('user1', 'userone@userone.com', 'useronepass');
-user.first_name = 'User'; user.last_name = 'One'; user.save();
-user = User.objects.create_user('user2', 'usertwo@usertwo.com', 'usertwopass');
-user.first_name = 'User'; user.last_name = 'Two'; user.save();
 user = User.objects.create_user('user3', 'userthree@userthree.com', 'userthreepass');
 user.first_name = 'User'; user.last_name = 'Three'; user.save();
 user = User.objects.create_user('user4', 'userfour@userfour.com', 'userfourpass');

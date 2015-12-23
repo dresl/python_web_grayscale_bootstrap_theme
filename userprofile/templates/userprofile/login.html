@@ -54,15 +54,17 @@
 {% if form.errors %}
 	<p class="error">Vaše uživatelké jméno a heslo není správné</p>
 {% endif %}
-
+<div class="col-md-3"></div>
+<div class="col-md-6">
 <form method="post" action="/accounts/auth/">{% csrf_token %}
-	<p>Username: <input data-toggle="tooltip" data-placement="right" title="enter your username" type="text" name="username" value="" id="username" placeholder="your username"></p>
-	<p>Password: <input data-toggle="tooltip" data-placement="right" title="enter your password" type="password" name="password" value="" placeholder="your password" id="password"></p>
+	<p>Username: <input class="form-control" data-toggle="tooltip" data-placement="right" title="enter your username" type="text" name="username" value="" id="username" placeholder="your username"></p>
+	<p>Password: <input class="form-control" data-toggle="tooltip" data-placement="right" title="enter your password" type="password" name="password" value="" placeholder="your password" id="password"></p>
 
 	<input class="btn btn-primary" type="submit" value="login" />
 
 </form>
 
 <hr>
+</div>
 {% endif %}
 {% endblock %}

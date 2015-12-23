@@ -10,6 +10,6 @@ urlpatterns = patterns('',
     url(r'^invalid/$', views.invalid_login),
     url(r'^register/$', views.register_user, name='register_user'),
     url(r'^register_success/$', views.register_success, name='register_success'),
-    url(r'^profile/$', views.userprofile, name='profile'),
-    url(r'^edit_profile/$', views.edit_profile, name='edit_profile')
+    url(r'^profile/(?P<user_id>\d+)$', views.userprofile, name='profile'),
+    url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
 )

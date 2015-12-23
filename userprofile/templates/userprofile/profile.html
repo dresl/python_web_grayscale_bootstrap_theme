@@ -2,14 +2,21 @@
 
 {% block page_title %}
 {% if request.user.is_authenticated %}
-{{ request.user.get_full_name }}<b style='font-weight: normal!important; font-size: 14px!important;'> ({{ request.user.username }})</b>
+	{% if foreign_user.username == request.user.username %}
+	{{ request.user.get_full_name }}
+	<b style='font-weight: normal!important; font-size: 14px!important;'> ({{ request.user.username }})</b>
+	{% else %}
+	{{ foreign_user.get_full_name }}
+	<b style='font-weight: normal!important; font-size: 14px!important;'> ({{ foreign_user.username }})</b>
+	{% endif %}
+	<button style="font-size: 12px" class="btn-default" onclick="goBacks()">Vrátit se zpět</button>
 {% else %}
-Tato stránka není dostupná
+{{ foreign_user.get_full_name }}
 {% endif %}
+
 {% endblock page_title %}
 
 {% block content %}
-<button class="btn-default" onclick="goBacks()">Vrátit se zpět</button>
 
 <script>
 function goBacks() {
@@ -17,16 +24,18 @@ function goBacks() {
 }
 </script>
 
-{% if user.is_authenticated %}
+{% if request.user.is_authenticated and foreign_user.username == request.user.username %}
 <div class="text_left">
-{% if profile_picture %}
-<p class="profile_picture"><img src="/static/{{ profile_picture }}" /></p>
-{% endif %}
-<p>Záliby: {{ hobbies }}</p>
-</div>
-<!-- <a href="{% url 'userprofile:edit_profile' %}">upravit profil</a> -->
+	{% if profile_picture %}
+	<p class="profile_picture"><img src="/static/{{ profile_picture }}" /></p>
+	{% endif %}
+	<p>Záliby: {{ hobbies }}</p>
+	</div>
+	<!-- <a href="{% url 'userprofile:edit_profile' %}">upravit profil</a> -->
+{% elif request.user.is_authenticated and foreign_user.username != request.user.username %}
+	<p>Záliby: {{ foreign_user.profile.hobbies }}</p>
 {% else %}
-<p>Nelze zobrazit tutu stránku.<a href="/accounts/login/">Přihlašte se</a> nebo se zaregistrujte <a href="/accounts/register/">zde</a></p>
+<p>Nelze zobrazit další obsah. <a href="/accounts/login/">Přihlaste se</a> nebo se zaregistrujte <a href="/accounts/register/">zde</a></p>
 
 {% endif %}
 

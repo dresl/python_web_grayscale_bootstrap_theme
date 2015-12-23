@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.template import *
 from django.views import generic
 from django.utils import timezone
-from blog.models import Blog
+from blog.models import Blog, Comment
 from polls.models import Sidebar
 from django.contrib.auth.models import User
 from django import forms
@@ -87,6 +87,7 @@ def blogs(request):
 def blog(request, blog_id):
     args = {}
     args.update(csrf(request))
+    args['comments'] = Comment.objects.filter(blog__pk=blog_id).order_by('pub_date')
     args['blogs'] = Blog.objects.all().order_by('-pub_date')
     args['blog'] = Blog.objects.get(id=blog_id)
     a = Blog.objects.get(id=blog_id)
@@ -114,6 +115,14 @@ def unlike_blog(request, blog_id):
         user = user = User.objects.get(username=request.user.username)
         a.users_like_it.remove(user)
         a.save()
+        return HttpResponseRedirect('/blog/%s' % blog_id)
+
+def add_comment(request):
+    if request.method == "POST":
+        user = User.objects.get(username=request.user.username)
+        blog_id = request.POST['blog_id']
+        a = Blog.objects.get(id=blog_id)
+        a.comment_set.create(owner=user, comment=request.POST['comment'], pub_date=timezone.now())
         return HttpResponseRedirect('/blog/%s' % blog_id)
 
 ######### SEARCH AJAX ####################################################

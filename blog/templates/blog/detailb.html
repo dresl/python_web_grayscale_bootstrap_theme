@@ -7,6 +7,37 @@
 
 {% block content %}
 
+<style type="text/css">
+.thumbnail {
+    padding:0px;
+}
+.panel {
+  position:relative;
+}
+.panel>.panel-heading:after,.panel>.panel-heading:before{
+  position:absolute;
+  top:11px;left:-16px;
+  right:100%;
+  width:0;
+  height:0;
+  display:block;
+  content:" ";
+  border-color:transparent;
+  border-style:solid solid outset;
+  pointer-events:none;
+}
+.panel>.panel-heading:after{
+  border-width:7px;
+  border-right-color:#f7f7f7;
+  margin-top:1px;
+  margin-left:2px;
+}
+.panel>.panel-heading:before{
+  border-right-color:#ddd;
+  border-width:8px;
+}
+</style>
+
 <script type="text/javascript">
 window.onbeforeunload = function () {
 var scrollPos;
@@ -32,13 +63,10 @@ document.body.scrollTop = parseInt(arr[1]);
 }
 </script>
 
-{% if user.is_superuser %}
-<a style="font-size: 15px; text-decoration: none;" href="/admin/blog/blog/{{ blog.id }}/">[edit]</a>
-{% endif %}
-
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#blog"><i style="padding-right: 10px;" class="fa fa-calendar-o"></i>Obsah</a></li>
     <li><a data-toggle="tab" href="#info"><i style="padding-right: 10px;" class="fa fa-info-circle"></i>Informace</a></li>
+    <li><a data-toggle="tab" href="#comments"><i style="padding-right: 10px;" class="fa fa-comments"></i>Komentáře</a></li>
 </ul>
 
 <div style="padding-top: 20px;" class="tab-content">
@@ -49,22 +77,97 @@ document.body.scrollTop = parseInt(arr[1]);
       <p><img style="border: 1px solid black" src="/static/{{ blog.thumbnail }}" width="350px"/></p>
       {% endif %}
       {% if request.user.is_authenticated %}
+      <div id="likes">
       <p>Likes: {{ likes.count }} <b style="font-weight: normal; font-size: 14px"> (
-      {% if username in likes_list %}
+      {% if request.user.username in likes_list %}
         <a href="{% url 'blog:unlike' blog.id %}">Unlike <i class="fa fa-thumbs-o-down"></i></a>
       {% else %}
         <a href="{% url 'blog:like' blog.id %}">Like <i class="fa fa-thumbs-o-up"></i></a>
       {% endif %}
       )</b></p>
+      </div>
       {% else %}
-      <p>likes: {{ likes.count }} <span style="font-size: 10px;"> (Jestli chcete dát "like" tomuto blogu, <a style="cursor: pointer" id="myBtna">přihlašte se</a>)</span></p>
+      <p>likes: {{ likes.count }} <span style="font-size: 10px;"> (Jestli chcete dát "like" tomuto blogu, <a style="cursor: pointer" id="myBtna">přihlaste se</a>)</span></p>
+      {% endif %}
+      </div>
+      <hr>
+      {% for comment in comments %}
+      <div class="row">
+      <div class="col-sm-1 col-md-1">
+      <div class="thumbnail">
+      <a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.id %}">
+      <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
+      </div><!-- /thumbnail -->
+      </div><!-- /col-sm-1 -->
+
+      <div class="col-sm-5 col-md-8">
+      <div class="panel panel-default">
+      <div style="text-align: left" class="panel-heading">
+      <strong><a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.id %}">{{ comment.owner.username }}</a></strong><span class="text-muted"> ... ({{ comment.pub_date }})</span>
+      </div>
+      <div style="color: black; text-align: left" class="panel-body">
+      {{ comment.comment }}
+      </div><!-- /panel-body -->
+      </div><!-- /panel panel-default -->
+      </div><!-- /col-sm-5 -->
+      </div>
+      {% endfor %}
+      {% if request.user.is_authenticated %}
+      <hr>
+      <div class="row">
+      <div class="col-sm-1 col-md-1">
+      <div class="thumbnail">
+      <a style="color: #333333" href="">
+      <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
+      </div><!-- /thumbnail -->
+      </div><!-- /col-sm-1 -->
+
+      <div class="col-sm-5 col-md-8">
+      <div class="panel panel-default">
+      <div style="text-align: left" class="panel-heading">
+      <strong>Vy ({{ request.user.username }}) - Napište komentář</strong><span class="text-muted"></span>
+      </div>
+      <div style="color: black; text-align: left" class="panel-body">
+      <form action="{% url 'blog:add_comment' %}" method="post">{% csrf_token %}
+        <textarea name="comment" rows="3" cols="45" required></textarea>
+        <input class="visibility: hidden" type="text" name="blog_id" value="{{ blog.id }}" readonly>
+      </div><!-- /panel-body -->
+      </div><!-- /panel panel-default -->
+        <button type="submit" class="btn">Přidat komentář</button>
+      </form>
+      </div><!-- /col-sm-5 -->
+      </div>
+      {% else %}
+      <hr>
+      <p>Chcete-li přidat komentář, <a style="cursor: pointer" id="myBtnab">přihlaste se</a></p>
       {% endif %}
     </div>
-    </div>
     <div id="info" class="tab-pane fade">
-      <p>Publication date: {{ blog.pub_date }}</p>
+      <p>Zveřejněno: {{ blog.pub_date }}</p>
       <p>Likes: {{ likes.count }}</p>
-      
+    </div>
+    <div id="comments" class="tab-pane fade">
+      {% for comment in comments %}
+      <div class="row">
+      <div class="col-sm-1 col-md-1">
+      <div class="thumbnail">
+      <a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.id %}">
+      <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
+      </div><!-- /thumbnail -->
+      </div><!-- /col-sm-1 -->
+
+      <div class="col-sm-5 col-md-8">
+      <div class="panel panel-default">
+      <div style="text-align: left" class="panel-heading">
+      <strong><a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.id %}">{{ comment.owner.username }}</a></strong><span class="text-muted"> ... ({{ comment.pub_date }})</span>
+      </div>
+      <div style="color: black; text-align: left" class="panel-body">
+      {{ comment.comment }}
+      </div><!-- /panel-body -->
+      </div><!-- /panel panel-default -->
+      </div><!-- /col-sm-5 -->
+      </div>
+      {% endfor %}
     </div>
 </div>
 
@@ -111,5 +214,12 @@ document.body.scrollTop = parseInt(arr[1]);
       });
   });
 </script>
+<script>
+  $(document).ready(function(){
+      $("#myBtnab").click(function(){
+          $("#myModala").modal();
+      });
+  });
+</script>
 
-{% endblock %}
+{% endblock content %}
