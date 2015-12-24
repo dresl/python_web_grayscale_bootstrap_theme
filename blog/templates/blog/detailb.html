@@ -69,6 +69,7 @@ document.body.scrollTop = parseInt(arr[1]);
       <li class="active"><a data-toggle="tab" href="#blog"><i style="padding-right: 10px;" class="fa fa-calendar-o"></i>Obsah</a></li>
       <li><a data-toggle="tab" href="#info"><i style="padding-right: 10px;" class="fa fa-info-circle"></i>Informace</a></li>
       <li><a data-toggle="tab" href="#comments"><i style="padding-right: 10px;" class="fa fa-comments"></i>Komentáře</a></li>
+      <!-- <li><a href="{% url 'blog:detailb' blog.id %}#add-comment"><i style="padding-right: 10px;" class="fa fa-comment"></i>| Přidat komentář</a></li> -->
   </ul>
 </div>
 
@@ -93,7 +94,12 @@ document.body.scrollTop = parseInt(arr[1]);
       <p>likes: {{ likes.count }} <span style="font-size: 10px;"> (Jestli chcete dát "like" tomuto blogu, <a style="cursor: pointer" id="myBtna">přihlaste se</a>)</span></p>
       {% endif %}
       </div>
+      {% if comments.count == 0 %}
       <hr>
+      <p>K tomuto blogu ještě nebyl přidán komentář.</p>
+      {% else %}
+      <hr>
+      {% endif %}
       {% for comment in comments %}
       <div class="row">
       <div class="col-sm-1 col-md-1">
@@ -107,6 +113,13 @@ document.body.scrollTop = parseInt(arr[1]);
       <div class="panel panel-default">
       <div style="text-align: left" class="panel-heading">
       <strong><a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.id %}">{{ comment.owner.username }}</a></strong><span class="text-muted"> ... ({{ comment.pub_date }})</span>
+      {% if comment.owner.username == request.user.username %}
+      <form method="post" action="{% url 'blog:delete_comment' %}">{% csrf_token %}
+      <input style="visibility: hidden" type="number" name="comment_id" value="{{ comment.id }}" readonly>
+      <input style="visibility: hidden" type="number" name="blog_id" value="{{ blog.id }}" readonly>
+      <input type="submit" value="smazat">
+      </form>
+      {% endif %}
       </div>
       <div style="color: black; text-align: left" class="panel-body">
       {{ comment.comment }}
@@ -130,9 +143,9 @@ document.body.scrollTop = parseInt(arr[1]);
       <div style="text-align: left" class="panel-heading">
       <strong>Vy ({{ request.user.username }}) - Napište komentář</strong><span class="text-muted"></span>
       </div>
-      <div style="color: black; text-align: left" class="panel-body">
+      <div id="add-comment" style="color: black; text-align: left" class="panel-body">
       <form action="{% url 'blog:add_comment' %}" method="post">{% csrf_token %}
-        <textarea name="comment" rows="3" cols="45" required></textarea>
+        <textarea placeholder="Napište komentář" name="comment" rows="3" cols="45" required></textarea>
         <input class="visibility: hidden" type="text" name="blog_id" value="{{ blog.id }}" readonly>
       </div><!-- /panel-body -->
       </div><!-- /panel panel-default -->

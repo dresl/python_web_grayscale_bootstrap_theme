@@ -23,4 +23,4 @@ class Comment(models.Model):
 	comment = models.CharField(max_length=500, verbose_name="Komentář", blank=True, null=True)
 	pub_date = models.DateTimeField(verbose_name="Zveřejněno", default=datetime.datetime.now(), blank=True, null=True)
 	def __unicode__(self):
-		return str(self.blog)
+		return str(self.owner)
