@@ -545,7 +545,7 @@ body {
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
     color: white;
-    font-weight: bold;
+    font-weight: normal;
     cursor: default;
     background-color: #000;
     border-bottom: 4px solid rgb(5, 150, 88);

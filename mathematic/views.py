@@ -20,6 +20,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from mathematic.forms import BrigadeForm
 from django.contrib.auth.models import User
+import locale
 
 def index(request):
     args={}
@@ -244,15 +245,16 @@ def choose_circle(request):
             return render(request, 'mathematic/index_circle.html', {'myfield': myfield})
 
 def count_circle(request):
+    locale.setlocale(locale.LC_NUMERIC, 'cs_CZ.utf_8')
     if request.method == 'GET':
         if request.GET['myfield'] == 'rk':
             if request.GET['cislo1']:
                 cislo1_ = float(request.GET['cislo1'])
-                cislo1 = str(cislo1_)
+                cislo1 = str(locale.format('%.8f', cislo1_, True))
                 obvod_ = 2*3.14*cislo1_
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.8f', obvod_, True))
                 obsah_ = 3.14*pow(cislo1_, 2)
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.8f', obsah_, True))
                 return render(request, 'mathematic/index_circle.html', {
                     'cislo1': cislo1, 'obvod': obvod, 'obsah': obsah,
                     'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
@@ -267,11 +269,11 @@ def count_circle(request):
         elif request.GET['myfield'] == 'ok':
             if request.GET['cislo2']:
                 obvod_ = float(request.GET['cislo2'])
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.8f', obvod_, True))
                 cislo2_ = obvod_ / (2*3.14)
-                cislo2 = str(cislo2_)
+                cislo2 = str(locale.format('%.8f', cislo2_, True))
                 obsah_ = 3.14*pow(cislo2_, 2)
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.8f', obsah_, True))
                 return render(request, 'mathematic/index_circle.html', {
                     'cislo2': cislo2, 'obvod': obvod, 'obsah': obsah,
                     'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
@@ -286,11 +288,11 @@ def count_circle(request):
         elif request.GET['myfield'] == 'sk':
             if request.GET['cislo3']:
                 obsah_ = float(request.GET['cislo3'])
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.8f', obsah_, True))
                 cislo3_ = sqrt(obsah_/3.14)
-                cislo3 = str(cislo3_)
+                cislo3 = str(locale.format('%.8f', cislo3_, True))
                 obvod_ = 2*3.14*cislo3_
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.8f', obvod_, True))
                 return render(request, 'mathematic/index_circle.html', {
                     'cislo3': cislo3, 'obvod': obvod, 'obsah': obsah,
                     'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:50],
@@ -326,17 +328,18 @@ def choose_ctverec(request):
             return render(request, 'mathematic/index_ctverec.html', {'myfield': myfield})
 
 def count_ctverec(request):
+    locale.setlocale(locale.LC_NUMERIC, 'cs_CZ.utf_8')
     if request.method == 'GET':
         if request.GET['myfield'] == 'ac':
             if request.GET['cislo1']:
                 cislo1_ = float(request.GET['cislo1'])
-                cislo1 = str(cislo1_)
+                cislo1 = str(locale.format('%.8f', cislo1_, True))
                 obvod_ = 4*cislo1_
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.8f', obvod_, True))
                 obsah_ = pow(cislo1_, 2)
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.8f', obsah_, True))
                 uhlopricka_ = cislo1_*sqrt(2)
-                uhlopricka = str(uhlopricka_)
+                uhlopricka = str(locale.format('%.8f', uhlopricka_, True))
                 return render(request, 'mathematic/index_ctverec.html', {
                     'cislo1': cislo1,
                     'obvod': obvod,
@@ -351,13 +354,13 @@ def count_ctverec(request):
         elif request.GET['myfield'] == 'oc':
             if request.GET['cislo2']:
                 obvod_ = float(request.GET['cislo2'])
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.8f', obvod_, True))
                 cislo2_ = obvod_/4
-                cislo2 = str(cislo2_)
+                cislo2 = str(locale.format('%.8f', cislo2_, True))
                 obsah_ = pow(cislo2_, 2)
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.8f', obsah_, True))
                 uhlopricka_ = cislo2_*sqrt(2)
-                uhlopricka = str(uhlopricka_)
+                uhlopricka = str(locale.format('%.8f', uhlopricka_, True))
                 return render(request, 'mathematic/index_ctverec.html', {
                     'cislo2': cislo2,
                     'obvod': obvod,
@@ -372,13 +375,13 @@ def count_ctverec(request):
         elif request.GET['myfield'] == 'sc':
             if request.GET['cislo3']:
                 obsah_ = float(request.GET['cislo3'])
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.8f', obsah_, True))
                 cislo3_ = sqrt(obsah_)
-                cislo3 = str(cislo3_)
+                cislo3 = str(locale.format('%.8f', cislo3_, True))
                 obvod_ = 4*cislo3_
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.8f', obvod_, True))
                 uhlopricka_ = cislo3_*sqrt(2)
-                uhlopricka = str(uhlopricka_)
+                uhlopricka = str(locale.format('%.8f', uhlopricka_, True))
                 return render(request, 'mathematic/index_ctverec.html', {
                     'cislo3': cislo3,
                     'obvod': obvod,
@@ -393,13 +396,13 @@ def count_ctverec(request):
         elif request.GET['myfield'] == 'uc':
             if request.GET['cislo4']:
                 uhlopricka_ = float(request.GET['cislo4'])
-                uhlopricka = str(uhlopricka_)
+                uhlopricka = str(locale.format('%.8f', uhlopricka_, True))
                 cislo4_ = uhlopricka_/sqrt(2)
-                cislo4 = str(cislo4_)
+                cislo4 = str(locale.format('%.8f', cislo4_, True))
                 obvod_ = 4*cislo4_
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.8f', obvod_, True))
                 obsah_ = pow(cislo4_, 2)
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.8f', obsah_, True))
                 return render(request, 'mathematic/index_ctverec.html', {
                     'cislo4': cislo4,
                     'obvod': obvod,
@@ -428,45 +431,45 @@ def choose_obdelnik(request):
             return render(request, 'mathematic/index_obdelnik.html', {'myfield': myfield})
 
 def count_obdelnik(request):
+    locale.setlocale(locale.LC_NUMERIC, 'cs_CZ.utf_8')
     if request.method == 'GET':
         if request.GET['myfield'] == 'abo':
             if request.GET['cislo1'] and request.GET['cislo2']:
                 cislo1_ = float(request.GET['cislo1'])
-                cislo1 = str(cislo1_)
+                cislo1 = str(locale.format('%.8f', cislo1_, True))
                 cislo2_ = float(request.GET['cislo2'])
-                cislo2 = str(cislo2_)
+                cislo2 = str(locale.format('%.8f', cislo2_, True))
                 obvod_ = 2*(cislo1_+cislo2_)
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.8f', obvod_, True))
                 obsah_ = cislo1_*cislo2_
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.8f', obsah_, True))
                 uhlopricka_ = sqrt(pow(cislo1_, 2)+pow(cislo2_, 2))
-                uhlopricka = str(uhlopricka_)
+                uhlopricka = str(locale.format('%.10f', uhlopricka_, True))
                 return render(request, 'mathematic/index_obdelnik.html', {
                     'cislo1': cislo1,
                     'cislo2': cislo2,
                     'obvod': obvod,
                     'obsah': obsah,
                     'uhlopricka': uhlopricka,
-                    'username': username })
+                     })
             else:
                 error_message = 'Musis zadat cislo'
-                username = request.user.username
                 return render(request, 'mathematic/index_obdelnik.html', {
                     'error_message': error_message,
-                    'username': username,
                     })
+
         elif request.GET['myfield'] == 'aboo':
             if request.GET['cislo3'] and request.GET['cislo4']:
                 cislo3_ = float(request.GET['cislo3'])
-                cislo3 = str(cislo3_)
+                cislo3 = str(locale.format('%.10f', cislo3_, True))
                 obvod_ = float(request.GET['cislo4'])
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.10f', obvod_, True))
                 cislo4_ = (obvod_/2)-cislo3_
-                cislo4 = str(cislo4_)
+                cislo4 = str(locale.format('%.10f', cislo4_, True))
                 obsah_ = cislo3_*cislo4_
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.10f', obsah_, True))
                 uhlopricka_ = sqrt(pow(cislo3_, 2)+pow(cislo4_, 2))
-                uhlopricka = str(uhlopricka_)
+                uhlopricka = str(locale.format('%.10f', uhlopricka_, True))
                 return render(request, 'mathematic/index_obdelnik.html', {
                     'cislo3': cislo3,
                     'cislo4': cislo4,
@@ -475,34 +478,31 @@ def count_obdelnik(request):
                     'uhlopricka': uhlopricka,
                     })
             else:
-                username = request.user.username
                 error_message = 'Musis zadat cislo'
                 return render(request, 'mathematic/index_obdelnik.html', {
                     'error_message': error_message,})
         elif request.GET['myfield'] == 'abso':
             if request.GET['cislo5'] and request.GET['cislo6']:
                 cislo5_ = float(request.GET['cislo6'])
-                cislo5 = str(cislo5_)
+                cislo5 = str(locale.format('%.10f', cislo5_, True))
                 obsah_ = float(request.GET['cislo5'])
-                obsah = str(obsah_)
+                obsah = str(locale.format('%.10f', obsah_, True))
                 cislo6_ = obsah_/cislo5_
-                cislo6 = str(cislo6_)
+                cislo6 = str(locale.format('%.10f', cislo6_, True))
                 obvod_ = 2*(cislo5_+cislo6_)
-                obvod = str(obvod_)
+                obvod = str(locale.format('%.10f', obvod_, True))
                 uhlopricka_ = sqrt(pow(cislo5_, 2)+pow(cislo6_, 2))
-                uhlopricka = str(uhlopricka_)
+                uhlopricka = str(locale.format('%.10f', uhlopricka_, True))
                 return render(request, 'mathematic/index_obdelnik.html', {
                     'cislo5': cislo5,
                     'cislo6': cislo6,
                     'obvod': obvod,
                     'obsah': obsah,
-                    'uhlopricka': uhlopricka, })
+                    'uhlopricka': uhlopricka})
             else:
                 error_message = 'Musis zadat cislo'
                 return render(request, 'mathematic/index_obdelnik.html', {
-                    'error_message': error_message,
-                    'username': username,
-                    'full_name': request.user.first_name + ' ' + request.user.last_name})
+                    'error_message': error_message})
 
 def schedule(request):
     args = {}

@@ -36,6 +36,7 @@
   border-right-color:#ddd;
   border-width:8px;
 }
+
 </style>
 
 <script type="text/javascript">
@@ -63,11 +64,13 @@ document.body.scrollTop = parseInt(arr[1]);
 }
 </script>
 
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#blog"><i style="padding-right: 10px;" class="fa fa-calendar-o"></i>Obsah</a></li>
-    <li><a data-toggle="tab" href="#info"><i style="padding-right: 10px;" class="fa fa-info-circle"></i>Informace</a></li>
-    <li><a data-toggle="tab" href="#comments"><i style="padding-right: 10px;" class="fa fa-comments"></i>Komentáře</a></li>
-</ul>
+<div class="tabs_nonfixed">
+  <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#blog"><i style="padding-right: 10px;" class="fa fa-calendar-o"></i>Obsah</a></li>
+      <li><a data-toggle="tab" href="#info"><i style="padding-right: 10px;" class="fa fa-info-circle"></i>Informace</a></li>
+      <li><a data-toggle="tab" href="#comments"><i style="padding-right: 10px;" class="fa fa-comments"></i>Komentáře</a></li>
+  </ul>
+</div>
 
 <div style="padding-top: 20px;" class="tab-content">
     <div id="blog" class="tab-pane fade in active">
@@ -170,8 +173,6 @@ document.body.scrollTop = parseInt(arr[1]);
       {% endfor %}
     </div>
 </div>
-
-
 
 <div class="modal fade" id="myModala" role="dialog">
       <div class="modal-dialog">
