@@ -113,33 +113,25 @@ def choose_brigade(request):
         return render(request, 'mathematic/day_create.html', args)
 
 
-class BrigadeIndexView(generic.ListView):
-    template_name = 'mathematic/brigade_index.html'
-    context_object_name = 'latest_brigade_list'
+def brigade_index_view(request):
+    if request.user.is_authenticated():
+        args = {}
+        args['user'] = User.objects.get(username=request.user.username)
+        args['brigade_list'] = Brigade.objects.filter(pub_date__lte=timezone.now(), owner=args['user'])
+        return render(request, 'mathematic/brigade_index.html', args)
+    else:
+        args = {}
+        args['users'] = User.objects.all()
+        args['brigade_list'] = Brigade.objects.exclude(pub_date__lte=timezone.now(), owner=args['users'])
+        return render(request, 'mathematic/brigade_index.html', args)
 
-    def get_context_data(self, *args, **kwargs):
-        
-        context = super(BrigadeIndexView, self).get_context_data(*args, **kwargs)
-        return context
-
-    def get_queryset(self):
-        """
-        Excludes any Brigades that aren't published yet.
-        """
-        if self.request.user.is_authenticated():
-            user = User.objects.get(username=self.request.user.username)
-            return Brigade.objects.filter(pub_date__lte=timezone.now(), owner=user)
-        else:
-            users = User.objects.all()
-            return Brigade.objects.exclude(pub_date__lte=timezone.now(), owner=users)
-
-def DetailView(request, pk):
-    title_brigade = Brigade.objects.get(id=pk)
+def brigade_detail_view(request, brigade_id):
+    title_brigade = Brigade.objects.get(id=brigade_id)
     rate = str(title_brigade.rate)
-    if Day.objects.filter(brigade__pk=pk).count() == 0:
+    if Day.objects.filter(brigade__id=brigade_id).count() == 0:
         return render(request, 'mathematic/brigade_detail.html', {})
     else:
-        brigade = Day.objects.filter(brigade__pk=pk).order_by('pub_date')
+        brigade = Day.objects.filter(brigade__id=brigade_id).order_by('pub_date')
         def sum_hours(hours):
             total = 0
             for item in hours:
@@ -184,7 +176,7 @@ def DetailView(request, pk):
                 return round(total, 2)
             average_price = average_price(brigade)
 
-            owner_brigade = Brigade.objects.get(id=pk)
+            owner_brigade = Brigade.objects.get(id=brigade_id)
             owner_b = owner_brigade.owner.all()
             owner_list = []
             for i in owner_b:
@@ -534,7 +526,7 @@ def schedule(request):
     ['8 .2. 2016 - 12.2. 2016', '8.2. 2016 - 12.2. 2016', '__ _', '__ _'],
     ['15.2. 2016 - 19.2. 2016', '15.2. 2016 - 19.2. 2016', 'F 1', 'Ch 2'],
     ['22.2. 2016 - 26.2. 2016', '22.2. 2016 - 26.2. 2016', 'Ch 1', 'F 2'],
-    ['29.2. 2016 -  4.3. 2016', '29.2. 2016 - 4.3. 2016', 'F 1', 'Ch 2'],
+    ['29.2. 2016 -  4.3. 2016', '29.2. 2016 - 4.3. 2016', 'F 1', 'Ch 2', '1.3.', '2.3.', '3.3.'],
     ['7 .3. 2016 - 11.3. 2016', '7.3. 2016 - 11.3. 2016', 'Ch 1', 'F 2'],
     ['14.3. 2016 - 18.3. 2016', '14.3. 2016 - 18.3. 2016', 'F 1', 'Ch 2'],
     ['21.3. 2016 - 25.3. 2016', '21.3. 2016 - 25.3. 2016', 'Ch 1', 'F 2'],

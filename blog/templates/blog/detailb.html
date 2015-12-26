@@ -104,7 +104,7 @@ document.body.scrollTop = parseInt(arr[1]);
       <div class="row">
       <div class="col-sm-1 col-md-1">
       <div class="thumbnail">
-      <a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.id %}">
+      <a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.username comment.owner.id %}">
       <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
       </div><!-- /thumbnail -->
       </div><!-- /col-sm-1 -->
@@ -112,7 +112,7 @@ document.body.scrollTop = parseInt(arr[1]);
       <div class="col-sm-5 col-md-8">
       <div class="panel panel-default">
       <div style="text-align: left" class="panel-heading">
-      <strong><a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.id %}">{{ comment.owner.username }}</a></strong><span class="text-muted"> ... ({{ comment.pub_date }})</span>
+      <strong><a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.username comment.owner.id %}">{{ comment.owner.username }}</a></strong><span class="text-muted"> ... ({{ comment.pub_date }})</span>
       {% if comment.owner.username == request.user.username %}
       <form method="post" action="{% url 'blog:delete_comment' %}">{% csrf_token %}
       <input style="visibility: hidden" type="number" name="comment_id" value="{{ comment.id }}" readonly>
@@ -167,7 +167,7 @@ document.body.scrollTop = parseInt(arr[1]);
       <div class="row">
       <div class="col-sm-1 col-md-1">
       <div class="thumbnail">
-      <a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.id %}">
+      <a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.username comment.owner.id %}">
       <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
       </div><!-- /thumbnail -->
       </div><!-- /col-sm-1 -->
@@ -175,7 +175,7 @@ document.body.scrollTop = parseInt(arr[1]);
       <div class="col-sm-5 col-md-8">
       <div class="panel panel-default">
       <div style="text-align: left" class="panel-heading">
-      <strong><a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.id %}">{{ comment.owner.username }}</a></strong><span class="text-muted"> ... ({{ comment.pub_date }})</span>
+      <strong><a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.username comment.owner.id %}">{{ comment.owner.username }}</a></strong><span class="text-muted"> ... ({{ comment.pub_date }})</span>
       </div>
       <div style="color: black; text-align: left" class="panel-body">
       {{ comment.comment }}

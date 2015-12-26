@@ -32,10 +32,10 @@ def edit_profile(request):
     args['sidebar'] = Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
     return render(request, 'userprofile/edit_profile.html', args)
 
-def userprofile(request, user_id):
+def userprofile(request, user_slug, user_id):
     args = {}
     args.update(csrf(request))
-    args['foreign_user'] = User.objects.get(id=user_id)
+    args['foreign_user'] = User.objects.get(username=user_slug, id=user_id)
     if request.user.is_authenticated():
         args['hobbies'] = request.user.profile.hobbies
         args['profile_picture'] = request.user.profile.profile_picture
@@ -54,7 +54,7 @@ def auth_view(request):
     user = auth.authenticate(username=username, password=password)
     if user is not None:
         auth.login(request, user)
-        return HttpResponseRedirect('/accounts/profile/%s' % (user.id))
+        return HttpResponseRedirect('/accounts/profile/%s-%s' % (user.username, user.id))
     else:
         return HttpResponseRedirect('/accounts/invalid/')
 

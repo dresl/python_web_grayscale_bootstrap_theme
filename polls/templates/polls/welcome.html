@@ -45,7 +45,7 @@
                         <h3>
                             <a href="{% url 'blog:detailb' blog.id %}">{{ blog.title }}</a>
                         </h3>
-                        <i>{{ blog.pub_date.day }}. {{ blog.pub_date.month }}. {{ blog.pub_date.year }} | likes: {{blog.likes}}</i>
+                        <i>{{ blog.pub_date.day }}. {{ blog.pub_date.month }}. {{ blog.pub_date.year }} | likes: {% if blog.users_like_it.count > 0 %} {{ blog.users_like_it.count }} {% else %} 0 {% endif %}</i>
                         <p>{{ blog.body|truncatewords:"15" }}</p>
                     </div>
                 {% endfor %}
