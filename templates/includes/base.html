@@ -92,6 +92,28 @@
 	    }
 	});
 	</script>
+	<!-- Auto reload image -->
+	<script type="text/javascript">
+	<!--//--><![CDATA[//><!--
+		var images = new Array()
+		function preload() {
+			for (i = 0; i < preload.arguments.length; i++) {
+				images[i] = new Image()
+				images[i].src = preload.arguments[i]
+			}
+		}
+		preload(
+			"{% static 'img/icons_math/kruh/kruh_hover.png' %}",
+			"{% static 'img/icons_math/kruh/kruh.png' %}",
+			"{% static 'img/icons_math/calc/calc_hover.png' %}",
+			"{% static 'img/icons_math/calc/calc.png' %}",
+			"{% static 'img/icons_math/ctverec/ctverec_hover.png' %}",
+			"{% static 'img/icons_math/ctverec/ctverec.png' %}",
+			"{% static 'img/icons_math/obdelnik/obdelnik_hover.png' %}",
+			"{% static 'img/icons_math/obdelnik/obdelnik.png' %}"
+		)
+	//--><!]]>
+	</script>
 	<title>{% block title %}Django site {{ greeting.title }} {{ question.question_text }}{% endblock %}</title>
 </head>
 <body onload="start()" id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">

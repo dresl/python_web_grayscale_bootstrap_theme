@@ -6,12 +6,14 @@
 {% block page_title %}<i class="fa fa-book page_icon"></i>Blog{% endblock page_title %}
 
 {% block content %}
-
+<button class="btn-default" id="myButton">Zobrazit podrobnosti vyhledávání</button>
+<br/><br/>
+<div style="display:none;" id="content">
 <div class="row">
     <div class="col-md-6">
     <form action="{% url 'blog:choose_order_blog_by_age' %}" method="get">{% csrf_token %}
         <label>Podle stáří:</label>
-        <select name="myfield">
+        <select class="btn-default" name="myfield">
             {% if myfield == 'newest' %}
             <option selected="selected" value="newest">od nejnovějších</option>
             <option value="oldest">od nejstarších</option>
@@ -23,24 +25,25 @@
             <option value="oldest">od nejstarších</option>
             {% endif %}
         </select>
-        <input type="submit" value="potvrdit">
+        <input class="btn-default" type="submit" value="potvrdit">
     </form>
     </div>
     <div class="col-md-6">
     <form action="{% url 'blog:choose_order_blog_by_year' %}" method="get">{% csrf_token %}
         <label>Podle roku:</label>
-        <select name="myfield">
-        {% if full_date %}
-        <option>{{ full_date }}</option>
-        {% endif %}
-        <option disabled>-------</option>
-        {% for i in blog_counter %}
+        <select class="btn-default" name="myfield">
+            {% if full_date %}
+            <option>{{ full_date }}</option>
+            {% endif %}
+            <option disabled>-------</option>
+            {% for i in blog_counter %}
             <option>{{ i }}</option>
-        {% endfor %}
+            {% endfor %}
         </select>
-        <input type="submit" value="potvrdit">
+        <input class="btn-default" type="submit" value="potvrdit">
     </form>
     </div>
+</div>
 </div>
 <hr>
 
@@ -69,4 +72,11 @@
 
 {% endif %}
 
+<script >
+  $('#myButton').click(function() {
+  $('#content').toggle('slow', function() {
+    // Animation complete.
+  });
+});
+</script>
 {% endblock %}
