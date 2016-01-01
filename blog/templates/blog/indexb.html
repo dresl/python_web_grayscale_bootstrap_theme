@@ -3,11 +3,9 @@
 
 {% block title %}Blog{% endblock %}
 
-{% block page_title %}<i class="fa fa-book page_icon"></i>Blog{% endblock page_title %}
+{% block page_title %}<div class="col-md-2"></div><div class="col-md-6"><i class="fa fa-book page_icon"></i>Blog</div><div class="col-md-4"><button style="font-size: 12px" class="btn-default" id="myButton">Zobrazit podrobnosti vyhledávání</button></div><br>{% endblock page_title %}
 
 {% block content %}
-<button class="btn-default" id="myButton">Zobrazit podrobnosti vyhledávání</button>
-<br/><br/>
 <div style="display:none;" id="content">
 <div class="row">
     <div class="col-md-6">
@@ -44,8 +42,8 @@
     </form>
     </div>
 </div>
-</div>
 <hr>
+</div>
 
 {% if blogs.count > 0 %}
 

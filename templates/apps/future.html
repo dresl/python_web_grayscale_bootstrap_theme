@@ -1,7 +1,9 @@
-{% extends "includes/base.html" %}
+<h1>Future time</h1>
+<hr>
+<h3 style="text-align: center;">Search</h3>
+	{% csrf_token %}
+	<input style="width: 150px; margin-left: 21px;" type="text" id="search" placeholder="search" name="search"/>
 
-{% block title %}Future time{% endblock %}
-
-{% block content %}
-<p>In {{ hour_offset }} hour(s), it will be {{ next_time }}. And you are in {{ path }}</p>
-{% endblock %}
+	<ul id="search-results">
+		
+	</ul>

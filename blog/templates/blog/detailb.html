@@ -69,32 +69,45 @@ document.body.scrollTop = parseInt(arr[1]);
       <hr>
       {% endif %}
       {% for comment in comments %}
-      <div class="row">
-      <div class="col-sm-1 col-md-1">
-      <div class="thumbnail">
-      <a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.username comment.owner.id %}">
-      <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
-      </div><!-- /thumbnail -->
-      </div><!-- /col-sm-1 -->
+        <div class="row">
+        <div class="col-sm-1 col-md-1">
+        <div class="thumbnail">
+        <a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.username comment.owner.id %}">
+        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
+        </div><!-- /thumbnail -->
+        </div><!-- /col-sm-1 -->
 
-      <div class="col-sm-5 col-md-8">
-      <div class="panel panel-default">
-      <div style="text-align: left" class="panel-heading">
-      <strong><a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.username comment.owner.id %}">{{ comment.owner.username }}</a></strong><span class="text-muted"> ... ({{ comment.pub_date }})</span>
-      {% if comment.owner.username == request.user.username %}
-      <form method="post" action="{% url 'blog:delete_comment' %}">{% csrf_token %}
-      <input style="visibility: hidden" type="number" name="comment_id" value="{{ comment.id }}" readonly>
-      <input style="visibility: hidden" type="number" name="blog_id" value="{{ blog.id }}" readonly>
-      <input type="submit" value="smazat">
-      </form>
-      {% endif %}
-      </div>
-      <div style="color: black; text-align: left" class="panel-body">
-      {{ comment.comment }}
-      </div><!-- /panel-body -->
-      </div><!-- /panel panel-default -->
-      </div><!-- /col-sm-5 -->
-      </div>
+        <div class="col-sm-5 col-md-8">
+        <div class="panel panel-default">
+        <div style="text-align: left" class="panel-heading">
+        <div style="width: 85%; display:inline-block"><strong><a style="color: #333333" href="{% url 'userprofile:profile' comment.owner.username comment.owner.id %}">{{ comment.owner.username }}</a></strong><span class="text-muted"> ... ({{ comment.pub_date }})</span></div>
+        {% if comment.owner.username == request.user.username %}
+        <div style="width: 13%; display:inline-block">
+          <ul style="list-style-type: none;">
+            <li>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i style="color: #545454" onmouseout="this.bgColor='black'; this.style.color='#545454'" onmouseover="this.bgColor='#545454'; this.style.color='black'" class="fa fa-cog"></i></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li data-toggle="modal" id="smazat" data-target="#smazat_modal" style="width: 100%; cursor:pointer">
+                      <form style="margin-left: 5px" method="post" action="{% url 'blog:delete_comment' %}">{% csrf_token %}
+                        <input type="hidden" name="comment_id" value="{{ comment.id }}" readonly>
+                        <input type="hidden" name="blog_id" value="{{ blog.id }}" readonly>
+                        <input style="width: 95%; text-align: left" class="btn-danger" type="submit" value="smazat">
+                      </form>
+                    </li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+        {% endif %}
+        </div>
+        <div style="color: black; text-align: left" class="panel-body">
+        {{ comment.comment }}
+        </div><!-- /panel-body -->
+        </div><!-- /panel panel-default -->
+        </div><!-- /col-sm-5 -->
+        </div>
       {% endfor %}
       {% if request.user.is_authenticated %}
       <hr>
@@ -188,17 +201,9 @@ document.body.scrollTop = parseInt(arr[1]);
         
       </div>
 </div>
-
 <script>
   $(document).ready(function(){
       $("#myBtna").click(function(){
-          $("#myModala").modal();
-      });
-  });
-</script>
-<script>
-  $(document).ready(function(){
-      $("#myBtnab").click(function(){
           $("#myModala").modal();
       });
   });

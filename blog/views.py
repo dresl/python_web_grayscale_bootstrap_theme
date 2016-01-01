@@ -100,7 +100,6 @@ def blog(request, blog_id):
     args['likes_list'] = likes_list
     return render(request, 'blog/detailb.html', args)
 
-
 def like_blog(request, blog_id):
     if blog_id:
         a = Blog.objects.get(id=blog_id)
@@ -140,5 +139,11 @@ def search_titles(request):
         search_text = request.POST['search_text']
     else:
         search_text = ''
-    blogs = Blog.objects.filter(title__icontains=search_text)
-    return render(request, 'blog/ajax_search.html', {'blogs': blogs})
+
+    if request.user.is_authenticated():
+        blogs = Blog.objects.filter(title__icontains=search_text)
+        return render(request,'blog/ajax_search.html', {'blogs': blogs,'username': request.user.username, 
+                                                     'full_name': request.user.first_name + ' ' + request.user.last_name})
+    else:
+        blogs = Blog.objects.filter(title__icontains=search_text)
+        return render(request,'blog/ajax_search.html', {'blogs': blogs})

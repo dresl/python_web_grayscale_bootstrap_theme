@@ -77,14 +77,6 @@ def search(request):
     return render(request, 'apps/search_form.html', {'errors': errors, 'username': request.user.username,
                                                      'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
 
-def hours_ahead(request, offset):
-    try:
-        offset = int(offset)
-    except ValueError:
-        raise Http404()
-    futuretime = datetime.datetime.now() + datetime.timedelta(hours=offset)
-    path = request.path
-    return render(request, 'apps/future.html', {'next_time': futuretime, 
-                                                'hour_offset': offset,
-                                                'path': path,
-                                                'sidebar': Sidebar.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')})
+def hours_ahead(request):
+    args = {}
+    return render(request, 'apps/future.html', args)
