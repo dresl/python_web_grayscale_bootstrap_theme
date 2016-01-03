@@ -35,8 +35,16 @@ function goBacks() {
 {% elif request.user.is_authenticated and foreign_user.username != request.user.username %}
 	<p>Záliby: {{ foreign_user.profile.hobbies }}</p>
 {% else %}
-<p>Nelze zobrazit další obsah. <a href="/accounts/login/">Přihlaste se</a> nebo se zaregistrujte <a href="/accounts/register/">zde</a></p>
+<p>Nelze zobrazit další obsah. <a style="cursor: pointer" id="login">Přihlaste se</a> nebo se zaregistrujte <a href="/accounts/register/">zde</a></p>
 
 {% endif %}
+
+<script>
+    $(document).ready(function(){
+        $("#login").click(function(){
+            $("#modal_login").modal();
+        });
+    });
+    </script>
 
 {% endblock %}

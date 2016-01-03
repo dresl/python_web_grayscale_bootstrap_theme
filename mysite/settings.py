@@ -128,7 +128,6 @@ MEDIA_ROOT = '/srv/bootstrap_sites/grayscale/python_web_grayscale_bootstrap_them
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
-ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

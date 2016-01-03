@@ -17,7 +17,7 @@ class UserProfile(models.Model):
     #other fields here
 
     def __unicode__(self):  
-          return "%s's profile" % self.user  
+          return "%s's profile" % self.user
 
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:  

@@ -126,6 +126,7 @@ def brigade_index_view(request):
         return render(request, 'mathematic/brigade_index.html', args)
 
 def brigade_detail_view(request, brigade_id):
+    locale.setlocale(locale.LC_NUMERIC, 'cs_CZ.utf_8')
     title_brigade = Brigade.objects.get(id=brigade_id)
     rate = str(title_brigade.rate)
     if Day.objects.filter(brigade__id=brigade_id).count() == 0:
@@ -160,7 +161,7 @@ def brigade_detail_view(request, brigade_id):
                 for item in hours:
                     total += float(item.hours_per_day) * int(title_brigade.rate)
                 return total
-            sum_price = sum_price(brigade)
+            sum_price = str(locale.format('%.2f', sum_price(brigade), True))
 
             def average_price(hours):
                 total = 0
@@ -174,7 +175,7 @@ def brigade_detail_view(request, brigade_id):
                         average += len(str(item.hours_per_day))
                 total = total / float(average)
                 return round(total, 2)
-            average_price = average_price(brigade)
+            average_price = str(locale.format('%.2f', average_price(brigade), True))
 
             owner_brigade = Brigade.objects.get(id=brigade_id)
             owner_b = owner_brigade.owner.all()
@@ -517,7 +518,7 @@ def schedule(request):
     ['7 .12. 2015-11.12. 2015', '7.12. 2015 - 11.12. 2015', 'Ch 1', 'Bi 2'],
     ['14.12. 2015-18.12. 2015', '14.12. 2015 - 18.12. 2015', 'F 1', 'Ch 2'],
     ['21.12. 2015-25.12. 2015', '21.12. 2015 - 25.12. 2015', 'Bi 1', 'Ch 2'],
-    ['28.12. 2015 - 1.1. 2016', '28.12. 2015 - 1.1. 2016', '__ _', '__ _'],
+    ['28.12. 2015 - 1.1. 2016', '28.12. 2015 - 1.1. 2016', '__ _', '__ _', '3.1.'],
     ['4 .1. 2016 -  8.1. 2016', '4.1. 2016 - 8.1. 2016', 'Ch 1', 'F 2'],
     ['11.1. 2016 - 15.1. 2016', '11.1. 2016 - 15.1. 2016', 'Ch 1', 'Bi 2'],
     ['18.1. 2016 - 22.1. 2016', '18.1. 2016 - 22.1. 2016', 'F 1', 'Ch 2'],
