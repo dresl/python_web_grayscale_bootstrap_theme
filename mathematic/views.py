@@ -548,6 +548,7 @@ def schedule(request):
     for week in weeks:
         for item in week[0:1]:
             day = str(item)
+            week.append(str(str(int(day[0:len(day)-21]))+day[2:6]).strip())
             week.append(str(str(int(day[0:len(day)-21])+1)+day[2:6]).strip())
             week.append(str(str(int(day[0:len(day)-21])+2)+day[2:6]).strip())
             week.append(str(str(int(day[0:len(day)-21])+3)+day[2:6]).strip())
