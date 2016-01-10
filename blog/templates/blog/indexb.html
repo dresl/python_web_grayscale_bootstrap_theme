@@ -45,6 +45,23 @@
 <hr>
 </div>
 
+{% if 'age' in request.path %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div style="height: 35px;" class="col-md-6">
+        <p>Podle stáří: {% if myfield == 'newest' %}nejnovější | {% elif myfield == 'oldest' %}nejstarší | {% endif %} <button style="font-size: 12px" class="btn-default" id="myButton2">Změnit zadání</button></p>
+    </div>
+</div>
+<hr>
+{% elif 'year' in request.path %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div style="height: 35px;" class="col-md-6">
+        <p>Podle roku: {{ full_date|truncatewords:"1" }} <button style="font-size: 12px" class="btn-default" id="myButton2">Změnit zadání</button></p>
+    </div>
+</div>
+<hr>
+{% endif %}
 {% if blogs.count > 0 %}
 
     {% for blog in blogs %}
@@ -72,6 +89,13 @@
 
 <script >
   $('#myButton').click(function() {
+  $('#content').toggle('slow', function() {
+    // Animation complete.
+  });
+});
+</script>
+<script >
+  $('#myButton2').click(function() {
   $('#content').toggle('slow', function() {
     // Animation complete.
   });

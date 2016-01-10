@@ -144,6 +144,9 @@ document.body.scrollTop = parseInt(arr[1]);
       <p>Likes: {{ likes.count }}</p>
     </div>
     <div id="comments" class="tab-pane fade">
+      {% if comments.count == 0 %}
+      <p>K tomuto blogu ještě nebyl přidán komentář.</p>
+      {% else %}
       {% for comment in comments %}
       <div class="row">
       <div class="col-sm-1 col-md-1">
@@ -165,6 +168,7 @@ document.body.scrollTop = parseInt(arr[1]);
       </div><!-- /col-sm-5 -->
       </div>
       {% endfor %}
+      {% endif %}
     </div>
 </div>
 <script>
