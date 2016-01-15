@@ -80,14 +80,19 @@ myselect.selectmenu('refresh');
 </div>
 
 {% endif %}
-
-<div class="col-md-3">
-<p style="font-size: 13px"><b>Poslední dny:</b> <br>{{ last_days }}</p>
+<div class="col-md-12">
+<table border="2px" cellpadding="5px" cellspacing="0" bordercolor="black" style="margin: 0 auto">
+	<caption>Poslední hodiny</caption>
+	{% for last_day in last_days %}
+	<tr>
+		<th width="50%">{{ last_day }}</th>
+	</tr>
+	{% endfor %}
+</table>
 </div>
 {% else %}
     <p>Chcete si vytvořit brigádu? <a style="cursor: pointer" id="myBtna">Přihlaste se</a></p>
 {% endif %}
-
 <div class="modal fade" id="myModala" role="dialog">
       <div class="modal-dialog">
       

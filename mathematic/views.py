@@ -61,11 +61,11 @@ def index_create_day(request):
     for i in brigades_title:
         q = Brigade.objects.get(brigade_title=i)
         if Day.objects.filter(brigade=q).count() == 0:
-            list_.append('%s: Den 0' % (q))
+            list_.append('%s: Den: 0' % (q))
         else:
             last_days = q.day_set.order_by('-pub_date')[0:1].get()
             list_.append('%s: %s' % (q, last_days))
-    args['last_days'] = ", ".join(list_)
+    args['last_days'] = list_
     args['brigades'] = brigades_title
     return render(request, 'mathematic/day_create.html', args)
 
@@ -97,7 +97,7 @@ def choose_brigade(request):
             else:
                 last_days = q.day_set.order_by('-pub_date')[0:1].get()
                 list_.append('%s: %s' % (q, last_days))
-        args['last_days'] = ", ".join(list_)
+        args['last_days'] = list_
         args['brigade'] = request.GET['myfield']
         args['now'] = str(timezone.now().year) + '-' + str(datetime.datetime.now().month) + '-' + \
         str(timezone.now().day) + ' ' + str(timezone.now().hour) + ':' + \
