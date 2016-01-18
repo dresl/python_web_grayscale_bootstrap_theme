@@ -196,7 +196,7 @@
 					<li style="padding-left: 15px;">						
 	                    {% if not user.is_authenticated %}
 	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                        <i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-users fa-fw"></i><i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-caret-down"></i>
+	                        <i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-users fa-fw"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
 	                        <li><a style="cursor:pointer" id="myBtn"><i class="fa fa-user fa-fw"></i> Přihlásit se</a>
@@ -207,7 +207,7 @@
 	                    {% endif %}
 	                    {% if user.is_authenticated %}
 	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                        <i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-user fa-fw"></i><i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-caret-down"></i>
+	                        <i {% if '/accounts/' in request.path %}style="color: #42DCA3"{% endif %} class="fa fa-user fa-fw"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
 	                    	<li><a href="{% url 'userprofile:profile' user.username user.id %}"><i class="fa fa-user fa-fw"></i> {{ request.user.username }}</a>
